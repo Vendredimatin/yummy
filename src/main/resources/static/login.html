@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="js/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="login-panel">
+    <input v-model="account" ref="account" placeholder="输入用户名">
+    <input v-model="password" placeholder="输入用户名">
+    <button v-on:click="submit"></button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#login-panel",
+        data:{
+            account:"",
+            password:""
+        },
+        methods:{
+            submit: function () {
+                console.log(this.account,this.password);
+                console.log(this.$refs.account.value);
+            }
+        }
+    })
+</script>
+</body>
+</html>

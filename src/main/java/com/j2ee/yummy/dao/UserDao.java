@@ -12,6 +12,6 @@ public class UserDao {
     UserRepository userRepository;
 
     public User findOne(Integer id){
-        return userRepository.getOne(id);
+        return userRepository.getOne(Long.valueOf(id));
     }
 }

@@ -5,19 +5,45 @@
     <title>Title</title>
 
     <script src="js/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
+
 <body>
-    <div id="app">
-        {{message}}
-    </div>
+
+<input id="account">
+<input id="password">
+<button id="submit" onclick="interact()">提交</button>
+<div id="app">
+    {{message}}
+</div>
 
 <script>
     var app = new Vue({
-        el:'#app',
-        data:{
-            message:'Hello Vue!',
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
         }
     })
+
+    function interact() {
+        var account = document.getElementById("account").value;
+        var password = document.getElementById("password").value;
+
+        axios.post('/hello', {
+            account: account,
+            password: password
+        }).then(function (data) {
+            alert("success");
+            console.log(data);
+            console.log(data['data']);
+        })
+            .catch(function (reason) {
+                alert(reason);
+            })
+    }
+
+
 </script>
 
 </body>

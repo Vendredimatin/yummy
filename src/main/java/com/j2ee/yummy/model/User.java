@@ -2,72 +2,41 @@ package com.j2ee.yummy.model;
 
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Proxy;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Entity
-@Proxy(lazy = false)
-@Table(name = "User")
+@Getter
+@Setter
 public class User {
     @Id
-    @GeneratedValue
-    int id;
-    String account;
-    double balance;
-    String password;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected long id;
+    protected String password;
+    protected String name;
 
     public User() {
     }
 
-    public User(String account, double balance, String password) {
-        this.account = account;
-        this.balance = balance;
+    public User(String password, String name) {
         this.password = password;
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public User(long id,String password, String name) {
         this.id = id;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", account='" + account + '\'' +
-                ", balance=" + balance +
                 ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
