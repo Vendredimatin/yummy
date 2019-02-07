@@ -2,42 +2,42 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>登录</title>
 
     <script src="js/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<div id="login-panel">
-    <input v-model="account" ref="account" placeholder="输入用户名">
-    <input v-model="password" placeholder="输入用户名">
+<h1>注册</h1>
+<div id="register-panel">
+    <input v-model="email" ref="email" placeholder="输入邮箱">
+    <input v-model="password" placeholder="输入密码">
     <button v-on:click="submit"></button>
 </div>
 
 <script>
     var vm = new Vue({
-        el: "#login-panel",
-        data: {
-            account: "",
-            password: ""
+        el:"#register-panel",
+        data:{
+            email:"",
+            password:"",
         },
         methods: {
             submit: function () {
-                axios.post("/login", {
-                    email: this.account,
+                axios.post("/register", {
+                    email: this.email,
                     password: this.password
                 }).then(function (data) {
                     alert("success");
                     console.log(data);
                     console.log(data['data']);
-
-                    window.location.href = "/member/info";
                 }).catch(function (reason) {
-                        alert(reason);
+                    alert(reason);
                 });
             }
         }
-    })
+    });
 </script>
+
 </body>
 </html>

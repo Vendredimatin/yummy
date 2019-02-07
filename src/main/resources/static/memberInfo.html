@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/member/memberInfo.css">
+    <link rel="stylesheet" href="css/member/header.css">
+    <script src="js/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/member/memberInfo.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="container clearfix">
+        <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
+        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        </a>
+
+        <a href="/profile/order" class="topbar-item">我的订单</a>
+        <a href="/profile/order" class="topbar-item">个人信息</a>
+
+        <span class="topbar-member-area">
+            <span class="topbar-member-name">111</span>
+            <span class="caret"></span>
+            <ul class="user-menu" style="display: none;">
+                    <li><a href="javascript:void 0">查看天气</a></li>
+                    <li><a href="javascript:void 0">退出</a></li>
+                </ul>
+        </span>
+    </div>
+</header>
+
+<div class="main-area">
+
+    <ul class="profile-sidebar" role="navigation">
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的订单</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">近三个月订单</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">个人资料</a></li>
+                <li><a href="/profile/address">地址管理</a></li>
+            </ul>
+        </li>
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资产</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">我的余额</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="profile-panel" role="main">
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">个人资料</span>
+        </h3>
+        <div class="profile-panelcontent" id="profile-panelcontent">
+            <div class="profileinfo">
+                <p class="profileinfo-item">
+                    <span class="profileinfo-label">头像
+                    </span>
+                    <span class="profileinfo-face"><img
+                            ng-src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"
+                            alt="313db18c6"
+                            src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"></span>
+                </p>
+                <p class="profileinfo-item"><span class="profileinfo-label">用户名</span>
+                    <input v-model="name" class="profileinfo-value" :disabled="name_disabled"/></p>
+                <p class="profileinfo-item"><span class="profileinfo-label">电子邮箱</span>
+                    <input v-model="email" class="profileinfo-value" :disabled="email_disabled"/></p>
+                <p class="profileinfo-item"><span class="profileinfo-label">电话</span>
+                    <input v-model="phone" class="profileinfo-value" :disabled="phone_disabled"/></p>
+                <p class="profileinfo-item"><span class="profileinfo-label">会员等级</span>
+                    <input v-model="memberLevel" class="profileinfo-value" disabled/></p>
+            </div>
+
+            <div class="profile-panel-btn">
+                <button class="modify" v-on:click="modify">修改</button>
+                <button class="submit" v-on:click="submit">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

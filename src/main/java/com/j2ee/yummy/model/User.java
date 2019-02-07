@@ -4,18 +4,18 @@ package com.j2ee.yummy.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Proxy;
+
 
 import javax.persistence.*;
-
+@MappedSuperclass
 @Getter
 @Setter
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected String password;
-    protected String name;
+    protected String name = "";
 
     public User() {
     }

@@ -1,5 +1,6 @@
 package com.j2ee.yummy.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 

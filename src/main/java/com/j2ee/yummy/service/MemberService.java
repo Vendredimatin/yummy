@@ -4,9 +4,11 @@ import com.j2ee.yummy.model.Member;
 
 public interface MemberService {
 
-    public boolean login(String email, String password);
+    public Member login(String email, String password);
 
-    public boolean update(Member member);
+    public String update(Member member);
 
-    public boolean register(Member member);
+    public String register(String email,String password);
+
+    public Member getMemberByID(long id);
 }

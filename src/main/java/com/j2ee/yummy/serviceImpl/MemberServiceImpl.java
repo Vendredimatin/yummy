@@ -1,5 +1,7 @@
 package com.j2ee.yummy.serviceImpl;
 
+import com.j2ee.yummy.PO.MemberPO;
+import com.j2ee.yummy.POVOChanger.POVOChanger;
 import com.j2ee.yummy.dao.MemberDao;
 import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.service.MemberService;
@@ -20,18 +22,31 @@ public class MemberServiceImpl implements MemberService {
     MemberDao memberDao;
 
     @Override
-    public boolean login(String email, String password) {
-        Member member = memberDao.login(email,password);
-        return Objects.isNull(member);
+    public Member login(String email, String password) {
+        MemberPO member = memberDao.login(email, password);
+        System.out.println(member);
+        return POVOChanger.toMember(member);
     }
 
     @Override
-    public boolean update(Member member) {
-        return memberDao.update(member);
+    public String update(Member member) {
+        MemberPO memberPO = POVOChanger.toMemberPO(member);
+        return memberDao.update(memberPO) ? "success" : "fail";
     }
 
     @Override
-    public boolean register(Member member) {
-        return memberDao.insert(member);
+    public String register(String email, String password) {
+        MemberPO member = new MemberPO();
+        member.setEmail(email);
+        member.setPassword(password);
+        return memberDao.insert(member) ? "success" : "fail";
+    }
+
+    @Override
+    public Member getMemberByID(long id) {
+        MemberPO memberPO = memberDao.getMemberByID(id);
+        Member member = POVOChanger.toMember(memberPO);
+
+        return member;
     }
 }

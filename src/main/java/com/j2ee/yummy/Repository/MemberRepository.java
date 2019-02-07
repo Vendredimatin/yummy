@@ -1,9 +1,9 @@
 package com.j2ee.yummy.Repository;
 
-import com.j2ee.yummy.model.Member;
+import com.j2ee.yummy.PO.MemberPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository extends JpaRepository<Member,Long> {
+public interface MemberRepository extends JpaRepository<MemberPO,Long> {
 
-    public Member findByEmailAndPassword(String email,String passowrd);
+    public MemberPO findByEmailAndPassword(String email,String passowrd);
 }
