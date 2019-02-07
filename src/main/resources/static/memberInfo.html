@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/profile-sidebar.css">
     <link rel="stylesheet" href="css/member/memberInfo.css">
-    <link rel="stylesheet" href="css/member/header.css">
     <script src="js/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/member/memberInfo.js"></script>
@@ -73,9 +74,14 @@
                             src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"></span>
                 </p>
                 <p class="profileinfo-item"><span class="profileinfo-label">用户名</span>
-                    <input v-model="name" class="profileinfo-value" :disabled="name_disabled"/></p>
+
+                    <input v-model="name" class="profileinfo-value" :disabled="name_disabled"/>
+
+                </p>
                 <p class="profileinfo-item"><span class="profileinfo-label">电子邮箱</span>
-                    <input v-model="email" class="profileinfo-value" :disabled="email_disabled"/></p>
+                    <input v-model="email" class="profileinfo-value" :disabled="email_disabled"/>
+                    <p>email是：{{email}}</p>
+                </p>
                 <p class="profileinfo-item"><span class="profileinfo-label">电话</span>
                     <input v-model="phone" class="profileinfo-value" :disabled="phone_disabled"/></p>
                 <p class="profileinfo-item"><span class="profileinfo-label">会员等级</span>

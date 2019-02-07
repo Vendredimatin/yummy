@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/profile-sidebar.css">
+    <link rel="stylesheet" href="css/member/address.css">
+    <link rel="stylesheet" href="css/member/address-dialog.css">
+    <script src="js/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/member/address.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="container clearfix">
+        <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
+        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        </a>
+
+        <a href="/profile/order" class="topbar-item">我的订单</a>
+        <a href="/profile/order" class="topbar-item">个人信息</a>
+
+        <span class="topbar-member-area">
+            <span class="topbar-member-name">111</span>
+            <span class="caret"></span>
+            <ul class="user-menu" style="display: none;">
+                    <li><a href="javascript:void 0">查看天气</a></li>
+                    <li><a href="javascript:void 0">退出</a></li>
+                </ul>
+        </span>
+    </div>
+</header>
+
+<div class="main-area">
+
+    <ul class="profile-sidebar" role="navigation">
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的订单</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">近三个月订单</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">个人资料</a></li>
+                <li><a href="/profile/address">地址管理</a></li>
+            </ul>
+        </li>
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资产</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">我的余额</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="profile-panel" role="main">
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">地址管理</span>
+        </h3>
+        <div class="profile-panelcontent" id="profile-panelcontent">
+            <div class="desktop-addresslist">
+                <div class="desktop-addressblock">
+                    <div class="desktop-addressblock-buttons">
+                        <button class="desktop-addressblock-button">修改</button>
+                        <button class="desktop-addressblock-button">删除</button>
+                    </div>
+                    <div class="desktop-addressblock-name">卢思宇 <span class="ng-binding">女士</span></div>
+                    <div class="desktop-addressblock-address"
+                         ng-bind="address.address + ' ' + address.address_detail">海伦江南风艺术酒店(广州大学城店) 303
+                    </div>
+                    <div class="desktop-addressblock-mobile ng-binding">16600250641</div>
+
+                </div>
+
+
+                <button class="desktop-addressblock desktop-addressblock-addblock"><i
+                        class="icon-plus"></i>添加新地址
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="addressdialog" style="z-index: 1009; left: 276.5px; top: 0px;">
+        <div class="addressdialog-close"></div>
+        <div class="addressdialog-header">添加新地址</div>
+        <div class="addressdialog-content">
+            <div class="addressform">
+                <div>
+                    <div class="addressformfield"><label>姓名</label><input placeholder="请输入您的姓名">
+                    </div>
+                    <div class="addressformfield sexfield"><label>性别</label>
+                        <div><input id="sexfield-1-male" name="sex" type="radio" value="1"><label for="sexfield-1-male">先生</label><input
+                                id="sexfield-1-female" type="radio" name="sex" value="2"><label for="sexfield-1-female">女士</label>
+                        </div>
+                    </div>
+                    <div class="addressformfield addressfield"><label>位置</label>
+                        <input placeholder="请输入小区、大厦或学校">
+                    </div>
+                    <div class="addressformfield"><label>详细地址</label><input placeholder="单元、门牌号">
+                        <div class="addressformfield-hint"><span></span></div>
+                    </div>
+                    <div class="addressformfield phonefield"><label>手机号</label><input placeholder="请输入您的手机号">
+                        <div class="addressformfield-hint"><span></span></div>
+                    </div>
+                </div>
+                <div class="addressform-buttons">
+                    <button>保存</button>
+                    <button>取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

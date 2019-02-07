@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="js/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/canteen/register.js"></script>
+</head>
+<body>
+<h1>餐厅注册申请</h1>
+<div id="canteen-register-panel">
+<p class="profileinfo-item"><span class="profileinfo-label">餐厅名</span>
+    <input v-model="canteenName" class="profileinfo-value" :disabled="name_disabled"/>
+</p>
+<p class="profileinfo-item"><span class="profileinfo-label">密码</span>
+    <input v-model="password" class="profileinfo-value" :disabled="name_disabled"/>
+</p>
+<p class="profileinfo-item"><span class="profileinfo-label">联系人姓名</span>
+    <input v-model="landlordName" class="profileinfo-value" :disabled="name_disabled"/>
+</p>
+<p class="profileinfo-item"><span class="profileinfo-label">联系电话</span>
+    <input v-model="phone" class="profileinfo-value" :disabled="name_disabled"/>
+</p>
+<p class="profileinfo-item"><span class="profileinfo-label">门店分类</span>
+    <input v-model="category" class="profileinfo-value" :disabled="name_disabled"/>
+</p>
+<p class="profileinfo-item"><span class="profileinfo-label">地址</span>
+    <input v-model="address" class="profileinfo-value" :disabled="name_disabled"/>
+</p>
+</div>
+
+</body>
+</html>

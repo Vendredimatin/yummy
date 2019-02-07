@@ -1,0 +1,98 @@
+
+.addressdialog {
+    position: fixed;
+    background: #fff;
+    padding: 0;
+}
+
+
+.addressdialog-close {
+    display: inline-block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    background: url("/static/icon/close.png") center center no-repeat;
+}
+
+.addressdialog-header {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px;
+    color: #333;
+}
+
+.addressdialog-content {
+    padding: 15px 15px 30px;
+    overflow-x: hidden;
+}
+
+.addressform {
+    width: 760px;
+}
+
+.addressfield, .addressform {
+    position: relative;
+}
+
+.addressformfield {
+    position: relative;
+    padding-bottom: 25px;
+    font-size: 14px;
+}
+
+.addressformfield>label {
+    float: left;
+    display: inline-block;
+    width: 65px;
+    height: 38px;
+    margin-right: 20px;
+    line-height: 38px;
+    text-align: right;
+    color: #666;
+}
+
+.addressformfield>input, .addressformfield>input[type=text] {
+    vertical-align: baseline;
+    border: 1px solid #dedede;
+    box-sizing: border-box;
+    width: 300px;
+    height: 42px;
+    line-height: 38px;
+    padding-left: 10px;
+    border-radius: 2px;
+}
+
+.phonefield input, .phonefield input[type=text] {
+    width: 180px;
+}
+
+.addressform-buttons {
+    margin-left: 84px;
+}
+
+.addressform-buttons button:first-child {
+    margin-right: 10px;
+    border: 1px solid #0089dc;
+    background-color: #0089dc;
+    color: #fff;
+    width: 160px;
+}
+
+.addressform-buttons button {
+    font-size: 14px;
+    box-sizing: border-box;
+    background: 0 0;
+    border: none;
+    padding: 0 20px;
+    color: #9f9f9f;
+    height: 42px;
+    border-radius: 2px;
+    cursor: pointer;
+}

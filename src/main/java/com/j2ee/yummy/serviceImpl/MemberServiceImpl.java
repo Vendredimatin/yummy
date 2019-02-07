@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member login(String email, String password) {
         MemberPO member = memberDao.login(email, password);
-        System.out.println(member);
+
         return POVOChanger.toMember(member);
     }
 

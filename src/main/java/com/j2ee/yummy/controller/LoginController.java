@@ -3,6 +3,7 @@ package com.j2ee.yummy.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Member;
+import com.j2ee.yummy.service.CancelledMemberService;
 import com.j2ee.yummy.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ import java.util.Objects;
 public class LoginController {
     @Autowired
     MemberService memberService;
+    @Autowired
+    CancelledMemberService cancelledMemberService;
 
     @GetMapping(value = "/login")
     public String init(){
@@ -41,7 +44,12 @@ public class LoginController {
         String password = (String) jsonObject.get("password");
 
         Member member = memberService.login(email,password);
-        session.setAttribute("userID",member.getId());
+
+        //已注销的用户无法再登录，但是保留数据库中的数据
+        if (cancelledMemberService.isCancelled(member.getId()))
+            return "已注销！";
+
+        session.setAttribute("memberID",member.getId());
 
         return Objects.isNull(member)?"fail":"success";
     }

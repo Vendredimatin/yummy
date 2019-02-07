@@ -11,18 +11,16 @@
 
 <body>
 
-<input id="account">
-<input id="password">
-<button id="submit" onclick="interact()">提交</button>
-<div id="app">
-    {{message}}
+<div id="app1">
+    <input v-model="message" placeholder="编辑">
+    <p>message是：{{ message }}</p>
 </div>
 
 <script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello Vue!',
+    var app1 = new Vue({
+        el:'#app1',
+        data:{
+            message:null
         }
     })
 

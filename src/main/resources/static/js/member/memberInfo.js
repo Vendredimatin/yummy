@@ -14,7 +14,12 @@ window.onload = function (ev) {
         mounted () {
             console.log('开始加载会员信息');
             axios.post("/member/info").then(function (data) {
-                console.log(data);
+                var member = data['data'];
+                this.name = member['name'];
+                this.email = member['email'];
+                this.phone = member['phone'];
+                this.memberLevel = member['memberLevel'];
+                console.log(this.email);
             })
         },
         methods:{
