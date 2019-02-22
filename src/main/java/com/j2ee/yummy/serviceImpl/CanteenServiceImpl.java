@@ -2,6 +2,7 @@ package com.j2ee.yummy.serviceImpl;
 
 import com.j2ee.yummy.dao.CanteenDao;
 import com.j2ee.yummy.model.canteen.Canteen;
+import com.j2ee.yummy.model.canteen.UnauditedCanInfo;
 import com.j2ee.yummy.service.CanteenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,10 @@ public class CanteenServiceImpl implements CanteenService {
     }
 
     @Override
-    public boolean modify(Canteen canteen) {
-        return canteenDao.update(canteen);
+    public boolean modify(UnauditedCanInfo canteen) {
+        //这里要提供给经理审批，由经理调用modify
+        canteen.notify(canteen);
+        return true;
     }
 
     private long getID(){

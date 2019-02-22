@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.canteen.Canteen;
+import com.j2ee.yummy.model.canteen.UnauditedCanInfo;
 import com.j2ee.yummy.service.CanteenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,15 +66,15 @@ public class CanteenController {
         //地址
         Address address = (Address) jsonObject.get("address");
 
-        Canteen canteen = new Canteen();
-        canteen.setId(id);
-        canteen.setPassword(password);
-        canteen.setCanteenName(canteenName);
-        canteen.setLandlordName(landlordName);
-        canteen.setPhone(phone);
-        canteen.setAddress(address);
+        UnauditedCanInfo unauditedCanInfo = new UnauditedCanInfo();
+        unauditedCanInfo.setId(id);
+        unauditedCanInfo.setPassword(password);
+        unauditedCanInfo.setCanteenName(canteenName);
+        unauditedCanInfo.setLandlordName(landlordName);
+        unauditedCanInfo.setPhone(phone);
+        unauditedCanInfo.setAddress(address);
 
         //观察者模式，提供给经理审批
-        return canteenService.modify(canteen)?"success":"fail";
+        return canteenService.modify(unauditedCanInfo)?"success":"fail";
     }
 }
