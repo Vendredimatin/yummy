@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
  * @create: 2019-02-07 22:05
  **/
 
+
 @Service
 public class CanteenServiceImpl implements CanteenService {
     @Autowired
@@ -21,29 +22,43 @@ public class CanteenServiceImpl implements CanteenService {
 
     private static final long START = 1000000L;
     @Override
-    public boolean register(String password) {
-        Canteen canteen = new Canteen();
-        long id = getID();
-        canteen.setId(id);
-        canteen.setPassword(password);
-
-        return canteenDao.insert(canteen);
+    public Canteen register(Canteen canteen) {
+        canteen = canteenDao.insert(canteen);
+        canteen.setId(getID());
+        return canteen;
     }
 
     @Override
     public Canteen login(long id, String password) {
+        id = offID(id);
         return canteenDao.login(id,password);
     }
 
     @Override
     public boolean modify(UnauditedCanInfo canteen) {
         //这里要提供给经理审批，由经理调用modify
-        canteen.notify(canteen);
+        //canteen.notify(canteen);
+        canteenDao.update(canteen);
         return true;
+    }
+
+    @Override
+    public Canteen getCanteenByID(long id) {
+        Canteen canteen = canteenDao.getCanteenByID(id);
+        canteen.setId(getID(id));
+        return canteen;
+    }
+
+    private long getID(long id) {
+        return id+START;
     }
 
     private long getID(){
         long currentNum = canteenDao.getExistNum();
         return START+currentNum;
+    }
+
+    private long offID(long id){
+        return id-START;
     }
 }

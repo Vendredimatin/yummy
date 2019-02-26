@@ -6,12 +6,12 @@ import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @program: yummy
@@ -25,17 +25,30 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
-    @GetMapping(value = "/member/address")
+    @GetMapping(value = "/memberAddress")
     public String init(){
         return "address.html";
     }
 
+    @PostMapping(value = "/member/address/get")
+    @ResponseBody
+    public JSONObject getAddress(HttpSession session){
+        System.out.println("进入 getAddress ...........");
+
+        long memberID = (long) session.getAttribute("memberID");
+
+        List<Address> addresses = addressService.getAddressesByMemberID(memberID);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("addresses",addresses);
+
+        return jsonObject;
+    }
+
     @PostMapping(value = "/member/address/add")
     @ResponseBody
-    public String addAddress(@RequestBody String json, HttpSession session){
+    public Object addAddress(@RequestBody JSONObject jsonObject, HttpSession session){
         System.out.println("进入 addAddress ...........");
-
-        JSONObject jsonObject = JSON.parseObject(json);
 
         long memberID = (long) session.getAttribute("memberID");
         String name = jsonObject.getString("name");
@@ -46,18 +59,24 @@ public class AddressController {
         String detail = jsonObject.getString("detail");
 
         Address address = new Address(memberID,name,phone,city,province,district,detail);
+        long addressID = addressService.add(address).getId();
 
-        return addressService.add(address)?"success":"fail";
+        System.out.println(addressID);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("success",true);
+        map.put("message","新建成功了！");
+        map.put("addressID",addressID);
+        return map;
 
     }
 
     @PostMapping(value = "/member/address/modify")
     @ResponseBody
-    public String modifyAddress(@RequestBody String json){
+    public Object modifyAddress(@RequestBody JSONObject jsonObject){
         System.out.println("进入 modifyAddress ...........");
 
-        JSONObject jsonObject = JSON.parseObject(json);
-        long id = Long.parseLong(jsonObject.getString("id"));
+        long id = Long.parseLong(jsonObject.getString("addressID"));
         String name = jsonObject.getString("name");
         String phone = jsonObject.getString("phone");
         String province = jsonObject.getString("province");
@@ -73,18 +92,26 @@ public class AddressController {
         address.setDistrict(district);
         address.setDetail(detail);
 
-        return addressService.update(address)?"success":"fail";
+        addressService.update(address);
+        System.out.println(address);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("success",true);
+        map.put("message","修改成功了！");
+        return map;
     }
 
     @PostMapping(value = "/member/address/delete")
     @ResponseBody
-    public String deleteAddress(@RequestBody String json){
+    public Object deleteAddress(@RequestBody JSONObject jsonObject){
         System.out.println("进入 deleteAddress ...........");
-
-        JSONObject jsonObject = JSON.parseObject(json);
         long id = Long.parseLong(jsonObject.getString("id"));
 
-        return addressService.delete(id)?"success":"fail";
+        addressService.delete(id);
+        Map<String,Object> map = new HashMap<>();
+        map.put("success",true);
+        map.put("message","删除成功了！");
+        return map;
     }
 
 

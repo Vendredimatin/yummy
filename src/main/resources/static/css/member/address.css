@@ -1,4 +1,4 @@
-ol, ul{
+ol, ul {
     list-style: none;
 }
 
@@ -76,6 +76,7 @@ body {
 .desktop-addressblock-name span {
     margin-left: 5px;
 }
+
 .desktop-addressblock-address, .desktop-addressblock-mobile {
     color: #666;
 }
@@ -101,7 +102,7 @@ body {
     border: 1px solid #ddd;
 }
 
-.desktop-addressblock-addblock>i {
+.desktop-addressblock-addblock > i {
     font-size: 20px;
     margin-right: 4px;
     display: inline-block;

@@ -1,3 +1,4 @@
+/*
 package com.j2ee.yummy.serviceImpl;
 
 import com.j2ee.yummy.dao.ManagerDao;
@@ -9,12 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+*/
 /**
  * @program: yummy
  * @description: manager 的业务逻辑实现类
  * @author: Liu Hanyi
  * @create: 2019-02-22 22:53
- **/
+ **//*
+
 
 @Service
 public class ManagerServiceImpl {
@@ -31,3 +34,4 @@ public class ManagerServiceImpl {
 
 
 }
+*/

@@ -5,6 +5,8 @@ import com.j2ee.yummy.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: address的dao类
@@ -21,9 +23,13 @@ public class AddressDao {
         return addressRepository.getOne(id);
     }
 
+    public List<Address> getAddressesByMemID(long memberID){
+        return addressRepository.findAddressesByMemberID(memberID);
+    }
+
     public boolean update(Address address){
         try{
-            addressRepository.save(address);
+            addressRepository.saveAndFlush(address);
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -32,15 +38,8 @@ public class AddressDao {
         return true;
     }
 
-    public boolean addAddress(Address address){
-        try {
-            addressRepository.save(address);
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+    public Address addAddress(Address address){
+        return addressRepository.save(address);
     }
 
     public boolean deleteAddress(long id){

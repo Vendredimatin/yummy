@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author: Liu Hanyi
  * @create: 2019-02-07 22:09
  **/
+
 @Repository
 public class CanteenDao {
     @Autowired
@@ -20,16 +21,8 @@ public class CanteenDao {
         return canteenRepository.count();
     }
 
-    public boolean insert(Canteen canteen){
-        try{
-
-            canteenRepository.save(canteen);
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+    public Canteen insert(Canteen canteen){
+       return canteenRepository.save(canteen);
     }
 
     public Canteen login(long id, String password){
@@ -45,5 +38,9 @@ public class CanteenDao {
         }
 
         return true;
+    }
+
+    public Canteen getCanteenByID(long id){
+        return canteenRepository.getOne(id);
     }
 }

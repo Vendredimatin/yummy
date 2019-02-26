@@ -1,15 +1,15 @@
 package com.j2ee.yummy.model.canteen;
 
 import com.j2ee.yummy.model.Address;
-import com.j2ee.yummy.model.Manager;
+import com.j2ee.yummy.model.converter.EntityConverter;
+import com.j2ee.yummy.model.converter.ListConverter;
 import com.j2ee.yummy.observer.Observer;
-import com.j2ee.yummy.observer.Subject;
-import com.j2ee.yummy.serviceImpl.ManagerServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.annotations.Proxy;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -18,54 +18,60 @@ import java.util.List;
  * @author: Liu Hanyi
  * @create: 2019-02-07 20:53
  **/
+
 @Getter
 @Setter
-public class Canteen implements Subject {
+@Entity
+@Proxy(lazy = false)
+@Table(name = "canteen")
+public class Canteen{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected String password;
     protected String canteenName;
     protected String landlordName;
     protected String phone;
+    @Convert(converter = EntityConverter.class)
     protected Address address;
-    private long menuID;
-    private String profile;
+    private String profile = "";
+    @Convert(converter = ListConverter.class)
     private List<CanteenCategory> categories;
     //存入数据库时，这个需要被忽略
-
+    @Transient
     private List<Observer> observers;
 
+   /* @Transient
     @Autowired
-    ManagerServiceImpl managerService;
+    ManagerServiceImpl managerService;*/
 
     public Canteen() {
-        attachAll();
+        //attachAll();
     }
 
-    public Canteen(long id, String password, String canteenName, String landlordName, String phone, Address address, long menuID, String profile,List<CanteenCategory> canteenCategories) {
+    public Canteen(long id, String password, String canteenName, String landlordName, String phone, Address address, String profile,List<CanteenCategory> canteenCategories) {
         this.id = id;
         this.password = password;
         this.canteenName = canteenName;
         this.landlordName = landlordName;
         this.phone = phone;
         this.address = address;
-        this.menuID = menuID;
         this.profile = profile;
         this.categories = canteenCategories;
 
-        attachAll();
+        //attachAll();
     }
 
-    public Canteen(String password, String canteenName, String landlordName, String phone, Address address, long menuID, String profile,List<CanteenCategory> canteenCategories) {
+    public Canteen(String password, String canteenName, String landlordName, String phone, Address address, String profile,List<CanteenCategory> canteenCategories) {
         this.password = password;
         this.canteenName = canteenName;
         this.landlordName = landlordName;
         this.phone = phone;
         this.address = address;
-        this.menuID = menuID;
         this.profile = profile;
         this.categories = canteenCategories;
 
-        attachAll();
+       // attachAll();
     }
 
     @Override
@@ -77,12 +83,12 @@ public class Canteen implements Subject {
                 ", landlordName='" + landlordName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address=" + address +
-                ", menuID=" + menuID +
                 ", profile='" + profile + '\'' +
+                ", categories=" + categories.toString() +
                 '}';
     }
 
-    public void attachAll(){
+    /* public void attachAll(){
         //这里的话应该能在数据库层优化自动实现，多对多
         List<Manager> managers = managerService.getAllMs();
         observers.addAll(managers);
@@ -99,5 +105,6 @@ public class Canteen implements Subject {
         for (Observer observer:observers) {
             observer.update(canteenInfo);
         }
-    }
+    }*/
 }
+

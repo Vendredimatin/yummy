@@ -1,50 +1,56 @@
 
 window.onload = function (ev) {
-    var vm1 = new Vue({
-        el:"#profile-panelcontent",
-        data:{
-            name:"",
-            email:"",
-            phone:"",
-            memberLevel:"",
-            name_disabled: true,
-            email_disabled: true,
-            phone_disabled: true,
-        },
-        mounted () {
-            console.log('开始加载会员信息');
-            axios.post("/member/info").then(function (data) {
-                var member = data['data'];
-                this.name = member['name'];
-                this.email = member['email'];
-                this.phone = member['phone'];
-                this.memberLevel = member['memberLevel'];
-                console.log(this.email);
-            })
-        },
-        methods:{
-            modify: function(){
-                this.name_disabled = !this.name_disabled;
-                this.email_disabled = !this.email_disabled;
-                this.phone_disabled = !this.phone_disabled;
+    init();
+
+    $(".modify").click(function () {
+        $(".profileinfo-value.name").attr("disabled",false);
+        $(".profileinfo-value.email").attr("disabled",false);
+        $(".profileinfo-value.phone").attr("disabled",false);
+    });
+
+    $(".submit").click(function () {
+        var d = {};
+        d.name = $(".profileinfo-value.name").val();
+        d.email = $(".profileinfo-value.email").val();
+        d.phone = $(".profileinfo-value.phone").val();
+
+        $.ajax({
+            url: "/member/modifyInfo",
+            type: "post",
+            data: JSON.stringify(d),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                alert(data["message"]);
+                $(".profileinfo-value.name").attr("disabled",true);
+                $(".profileinfo-value.email").attr("disabled",true);
+                $(".profileinfo-value.phone").attr("disabled",true);
             },
-
-            submit:function () {
-                axios.post("/member/modifyInfo",{
-                    name:this.name,
-                    email:this.email,
-                    phone:this.phone
-                }).then(function (data) {
-                    alert("success");
-                    console.log(data);
-                    console.log(data['data']);
-                }).catch(function (reason) {
-                    alert(reason);
-                });
-            },
-
-        }
-
-
+            fail:function (data) {
+                alert("fail");
+            }
+        });
     });
 };
+
+function init() {
+    $.ajax({
+        url:"/member/info",
+        type:"post",
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+            console.log(data);
+            console.log(data['id']);
+            var name = data['name'];
+            var email = data['email'];
+            var phone = data['phone'];
+            var memberLevel = data['memberLevel'];
+            $(".profileinfo-value.name").val(name);
+            $(".profileinfo-value.email").val(email);
+            $(".profileinfo-value.phone").val(phone);
+            $(".profileinfo-value.memberLevel").val(memberLevel);
+        },
+        fail:function (data) {
+            alert("fail");
+        }
+    })
+}

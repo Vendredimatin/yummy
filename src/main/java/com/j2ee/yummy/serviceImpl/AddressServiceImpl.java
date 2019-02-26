@@ -6,6 +6,8 @@ import com.j2ee.yummy.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: addressService的实现类
@@ -29,12 +31,17 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public boolean add(Address address) {
+    public Address add(Address address) {
         return addressDao.addAddress(address);
     }
 
     @Override
     public boolean delete(long id) {
         return addressDao.deleteAddress(id);
+    }
+
+    @Override
+    public List<Address> getAddressesByMemberID(long memberID) {
+        return addressDao.getAddressesByMemID(memberID);
     }
 }

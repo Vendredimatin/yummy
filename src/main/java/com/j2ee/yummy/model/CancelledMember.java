@@ -1,7 +1,6 @@
 package com.j2ee.yummy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @program: yummy
@@ -12,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cancelledMember")
 public class CancelledMember {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public CancelledMember() {

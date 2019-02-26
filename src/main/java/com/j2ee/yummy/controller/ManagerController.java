@@ -19,12 +19,13 @@ public class ManagerController {
 
     @PostMapping(value = "/manager/login")
     @ResponseBody
-    public JSONObject login(@RequestBody String json){
+    public void login(@RequestBody String json){
         System.out.println("进入 manger login....................");
 
         JSONObject jsonObject = JSON.parseObject(json);
         long id = (long) jsonObject.get("id");
         String password = (String) jsonObject.get("password");
+
 
     }
 }

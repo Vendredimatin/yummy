@@ -3,8 +3,21 @@
     position: fixed;
     background: #fff;
     padding: 0;
+    z-index: 1009;
+    left: 276.5px;
+    top: 0px;
+    display: none;
 }
 
+.addressdialog-modify {
+    position: fixed;
+    background: #fff;
+    padding: 0;
+    z-index: 1009;
+    left: 276.5px;
+    top: 0px;
+    display: none;
+}
 
 .addressdialog-close {
     display: inline-block;

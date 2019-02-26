@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<input class="canteen-id" placeholder="id">
+<input class="canteen-password" placeholder="密码">
+<button class="canteen-login">登录</button>
+</body>
+<script>
+    window.onload=function () {
+        $(".canteen-login").click(function () {
+            var d = {};
+            d.id = $(".canteen-id").val();
+            d.password = $(".canteen-password").val();
+
+            $.ajax({
+               url:"/canteen/login",
+               type:"post",
+               data:JSON.stringify(d),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    alert(data["message"]);
+                    window.location.href = "canteenInfo.html";
+                },
+                fail:function (data) {
+                    alert("fail")
+                }
+            });
+        });
+    }
+</script>
+</html>

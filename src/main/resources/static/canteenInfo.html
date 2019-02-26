@@ -6,9 +6,9 @@
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/profile-sidebar.css">
-    <link rel="stylesheet" href="css/member/memberInfo.css">
+    <link rel="stylesheet" href="css/canteen/canteenInfo.css">
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/member/memberInfo.js"></script>
+    <script type="text/javascript" src="js/canteen/canteenInfo.js"></script>
 </head>
 <body>
 <header class="topbar">
@@ -45,8 +45,7 @@
         <li class="profile-sidebar-section">
             <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
             <ul>
-                <li class="active"><a href="/member/info">个人资料</a></li>
-                <li><a href="/memberAddress">地址管理</a></li>
+                <li class="active"><a href="/canteen/info">餐厅资料</a></li>
             </ul>
         </li>
 
@@ -72,23 +71,29 @@
                             alt="313db18c6"
                             src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"></span>
                 </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">用户名</span>
+                <p class="profileinfo-item"><span class="profileinfo-label">餐厅名</span>
 
                     <input class="profileinfo-value name" disabled/>
 
                 </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">电子邮箱</span>
-                    <input  class="profileinfo-value email" disabled/>
+                <p class="profileinfo-item"><span class="profileinfo-label">联系人</span>
+                    <input  class="profileinfo-value landlordName" disabled/>
                 </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">电话</span>
+                <p class="profileinfo-item"><span class="profileinfo-label">联系电话</span>
                     <input class="profileinfo-value phone" disabled/></p>
-                <p class="profileinfo-item"><span class="profileinfo-label">会员等级</span>
-                    <input class="profileinfo-value memberLevel" disabled/></p>
+                <p class="profileinfo-item"><span class="profileinfo-label">门店分类</span>
+                    <input class="profileinfo-value category" disabled/>
+                </p>
+                <p class="profileinfo-item"><span class="profileinfo-label">地址</span>
+                    <input class="profileinfo-value province" placeholder="省份" disabled/>
+                    <input class="profileinfo-value city" placeholder="城市" disabled/>
+                    <input class="profileinfo-value district" placeholder="区／县" disabled/>
+                </p>
             </div>
 
             <div class="profile-panel-btn">
-                <button class="modify">修改</button>
-                <button class="submit">提交</button>
+                <button class="canteen-info-modify">修改</button>
+                <button class="canteen-info-submit">提交</button>
             </div>
         </div>
     </div>

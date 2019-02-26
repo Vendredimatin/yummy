@@ -41,13 +41,12 @@ public class MemberController {
 
     @PostMapping(value = "/member/modifyInfo")
     @ResponseBody
-    public String modifyInfo(@RequestBody String json,HttpSession session){
+    public String modifyInfo(@RequestBody JSONObject jsonObject,HttpSession session){
         System.out.println("进入 modifyInfo............");
-        JSONObject jsonObject = JSONObject.parseObject(json);
 
-        String email = (String) jsonObject.get("email");
-        String name = (String) jsonObject.get("name");
-        String phone = (String) jsonObject.get("phone");
+        String email = jsonObject.getString("email");
+        String name = jsonObject.getString("name");
+        String phone = jsonObject.getString("phone");
 
         long userID = (long) session.getAttribute("memberID");
         Member member = memberService.getMemberByID(userID);
@@ -55,6 +54,7 @@ public class MemberController {
         member.setEmail(email);
         member.setPhone(phone);
         member.setName(name);
+        System.out.println(member);
 
         return memberService.update(member);
     }

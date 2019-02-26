@@ -1,3 +1,4 @@
+/*
 package com.j2ee.yummy.model;
 
 import com.j2ee.yummy.model.canteen.Canteen;
@@ -10,18 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+*/
 /**
  * @program: yummy
  * @description: 管理员类
  * @author: Liu Hanyi
  * @create: 2019-02-04 09:40
- **/
+ **//*
+
 @Entity
 @Table(name = "manager")
 @Getter
 @Setter
 public class Manager extends User implements Observer {
+    @Transient
     @Autowired
     ManagerServiceImpl managerService;
 
@@ -31,3 +36,4 @@ public class Manager extends User implements Observer {
         managerService.saveUnauditedCanInfo(canteenInfo);
     }
 }
+*/

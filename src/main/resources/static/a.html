@@ -1,48 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-
-    <script src="js/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="utf-8">
+    <title>vue点击切换显示隐藏</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
 </head>
-
-
 <body>
-
-<div id="app1">
-    <input v-model="message" placeholder="编辑">
-    <p>message是：{{ message }}</p>
+<div id="app">
+    <button v-on:click="addNewElement()">Add Element</button>
+    <br />
 </div>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            sampleElement: '<com></com>'
+        },
+        methods:{
+            addNewElement: function(){
 
-<script>
-    var app1 = new Vue({
-        el:'#app1',
-        data:{
-            message:null
-        }
-    })
+                var element = $('#app').append(this.sampleElement);
 
-    function interact() {
-        var account = document.getElementById("account").value;
-        var password = document.getElementById("password").value;
+                var tmp = Vue.extend({
+                    template: '<button v-on:click="test()">Hello!</button>',
+                    methods:{
+                        test: function(){
+                            alert('Test');
+                        }
+                    }
 
-        axios.post('/hello', {
-            account: account,
-            password: password
-        }).then(function (data) {
-            alert("success");
-            console.log(data);
-            console.log(data['data']);
-        })
-            .catch(function (reason) {
-                alert(reason);
-            })
-    }
+                })
+                new tmp().$mount('com');
 
 
+            },
+
+        },
+
+    });
 </script>
-
 </body>
 </html>

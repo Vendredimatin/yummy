@@ -10,6 +10,7 @@ import lombok.Setter;
  * @create: 2019-02-22 23:09
  **/
 
+
 @Getter
 @Setter
 public class UnauditedCanInfo extends Canteen{
