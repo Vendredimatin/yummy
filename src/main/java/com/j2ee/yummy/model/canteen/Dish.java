@@ -19,8 +19,7 @@ public class Dish {
     private DishCategory dishCategory;
     private String name;
     private double price;
-    private int monthSale;
-    private String profile;
+    private String description;
     private int remnants;
 
     public Dish() {

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/profile-sidebar.css">
+    <link rel="stylesheet" href="css/canteen/canteenMenuCreate.css">
+    <link rel="stylesheet" href="css/canteen/menu-dialog.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/canteen/canteenMenuCreate.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="container clearfix">
+        <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
+        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        </a>
+
+        <a href="/profile/order" class="topbar-item">我的订单</a>
+        <a href="/profile/order" class="topbar-item">个人信息</a>
+
+        <span class="topbar-member-area">
+            <span class="topbar-member-name">111</span>
+            <span class="caret"></span>
+            <ul class="user-menu" style="display: none;">
+                    <li><a href="javascript:void 0">查看天气</a></li>
+                    <li><a href="javascript:void 0">退出</a></li>
+                </ul>
+        </span>
+    </div>
+</header>
+
+<div class="main-area">
+
+    <ul class="profile-sidebar" role="navigation">
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的订单</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">近三个月订单</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
+            <ul>
+                <li class="active"><a href="/canteen/info">餐厅资料</a></li>
+            </ul>
+        </li>
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>菜单管理</h2>
+            <ul>
+                <li class="active"><a href="/canteen/menu">发布菜单</a></li>
+            </ul>
+        </li>
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资产</h2>
+            <ul>
+                <li class="active"><a href="/profile/info">我的余额</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="profile-panel" role="main">
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">发布餐厅菜单</span>
+        </h3>
+        <div class="profile-panelcontent" id="profile-panelcontent">
+            <div class="desktop-menulist" id="menulist">
+                <div class="desktop-menublock">
+                    <div class="desktop-menublock-buttons">
+                        <button class="desktop-menublock-button delete">删除</button>
+                    </div>
+                    <div class="desktop-menublock-id" style="display: none">0</div>
+                    <div class="desktop-menublock-name">卢思宇 <span class="ng-binding">女士</span></div>
+                    <div class="desktop-menublock-menu"
+                         ng-bind="menu.menu + ' ' + menu.menu_detail">海伦江南风艺术酒店(广州大学城店) 303</div>
+                    <div class="desktop-menublock-mobile ng-binding">16600250641</div>
+
+                </div>
+
+
+
+                <button class="desktop-menublock desktop-menublock-addblock" id="addblock">
+                    <i class="icon-plus"></i>添加新菜
+                </button>
+            </div>
+
+
+        </div>
+
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">发布餐厅套餐</span>
+        </h3>
+
+
+        <div class="menudialog">
+            <div class="menudialog-close"></div>
+            <div class="menudialog-header">添加新菜</div>
+            <hr>
+            <div class="menudialog-content">
+                <div class="menuform">
+                    <div>
+                        <div class="menuformfield"><label>菜名</label><input class="dish-name" placeholder="请输入菜名">
+                        </div>
+                        <div class="menuformfield sexfield"><label>菜的类别</label>
+                            <input list="dishCategories" name="dishCategory">
+                            <datalist id="dishCategories">
+                                <option value="小食">
+                                <option value="饮料">
+                                <option value="素食类">
+                                <option value="炒饭类">
+                                <option value="豆腐类">
+                            </datalist>
+                        </div>
+                        <div class="menuformfield menufield"><label>价格</label>
+                            <input class="dish-price" placeholder="单价">
+                        </div>
+                        <div class="menuformfield phonefield"><label>数量</label>
+                            <input class="dish-remnants" placeholder="数量">
+                        </div>
+                        <div class="menuformfield"><label>详细描述</label>
+                            <input class="dish-description" placeholder="详细描述">
+                        </div>
+
+                    </div>
+                    <div class="menuform-buttons">
+                        <button class="dish_create">添加</button>
+                        <button class="dish_cancel">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menudialog-modify">
+            <div class="menudialog-close"></div>
+            <div class="menudialog-header">修改地址</div>
+            <div class="menudialog-content">
+                <div class="menuform">
+                    <div>
+                        <input class="modify-id" type="hidden">
+                        <div class="menuformfield"><label>姓名</label><input class="modify-name" placeholder="请输入您的姓名">
+                        </div>
+                        <div class="menuformfield sexfield"><label>性别</label>
+                        </div>
+                        <div class="menuformfield menufield"><label>位置</label>
+                            <input class="modify-province" placeholder="省份">
+                            <input class="modify-city" placeholder="城市">
+                            <input class="modify-district" placeholder="区/县">
+                        </div>
+                        <div class="menuformfield"><label>详细地址</label>
+                            <input class="modify-detail" placeholder="单元、门牌号">
+                            <div class="menuformfield-hint"><span></span></div>
+                        </div>
+                        <div class="menuformfield phonefield"><label>手机号</label>
+                            <input class="modify-phone" placeholder="请输入您的手机号">
+                            <div class="menuformfield-hint"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="menuform-buttons">
+                        <button class="modify_create">修改</button>
+                        <button class="modify_cancel">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

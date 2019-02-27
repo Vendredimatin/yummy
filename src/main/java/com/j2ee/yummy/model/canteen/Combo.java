@@ -19,6 +19,7 @@ public class Combo {
     private String name;
     private double price;
     private List<String> dishName;
+    private List<Integer> dishRemnants;
     private String profile;
     private int remnants;
 

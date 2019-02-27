@@ -1,0 +1,164 @@
+article, aside, blockquote, body, button, code, dd, details, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hr, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.shopnav {
+    line-height: 57px;
+    background-color: #fff;
+}
+
+.container, body.hidesidebar .container {
+    width: 1180px;
+}
+
+.container {
+    overflow: hidden;
+    font-size: 14px;
+    width: 960px;
+    margin: 0 auto;
+}
+
+.shopnav-left {
+    float: left;
+    width: 75%;
+}
+
+.shopnav-tab {
+    width: 112px;
+}
+
+.shopmenu-main.grid .shopmenu-food {
+    position: relative;
+    float: left;
+    margin-right: 2%;
+    padding-right: 10px;
+    width: 48%;
+}
+
+.shopmenu-food {
+    margin-bottom: 12px;
+    font-size: 12px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    height: 102px;
+}
+
+.shopmenu-main.grid .shopmenu-food-name {
+    margin-top: 10px;
+}
+
+.shopmenu-food-name, .shopmenu-food-price {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ui-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.color-mute {
+    color: #999;
+}
+
+.shopnav-tab {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    color: #333;
+    font-size: 16px;
+    width: 102px;
+    text-align: center;
+}
+
+.shopnav-tab.active {
+    color: #0089dc;
+}
+
+a, ins {
+    text-decoration: none;
+}
+
+.shopmain {
+    margin-top: 20px;
+}
+
+.shopinfo, .shopmenu, .shoprate {
+    float: left;
+    width: 75%;
+}
+
+.shopmenu-nav {
+    padding: 10px 15px 5px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    z-index: 101;
+}
+
+.shopmenu-nav a.active {
+    color: #fff;
+}
+
+.shopmenu-nav a.active, .shopmenu-nav a.active:hover {
+    background-color: #0089dc;
+}
+.shopmenu-nav a {
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 10px;
+    width: 18%;
+    border-radius: 2px;
+    color: #666;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.shopmenu-main.grid .shopmenu-list {
+    width: 102%;
+}
+
+.shopmenu-title {
+    padding: 20px 0 10px 15px;
+    font-size: 20px;
+}
+
+.shopmenu-main.grid .shopmenu-food-price {
+    position: absolute;
+}
+
+.color-stress {
+    color: #f74342;
+}
+
+shopmenu-food-price small {
+    margin-left: 3px;
+    font-size: 12px;
+}
+.typo-small, figcaption, small {
+    font-size: .9em;
+    color: #888;
+}
+
+.shop-cartbutton {
+    display: inline-block;
+    background-color: #0089dc;
+    color: #fff;
+}
+.shop-cartbutton, .shop-cartctrl {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: 0;
+    cursor: pointer;
+    width: 90px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 20px;
+    text-align: center;
+    outline: 0;
+}
