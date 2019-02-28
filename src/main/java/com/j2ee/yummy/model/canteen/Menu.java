@@ -3,10 +3,13 @@ package com.j2ee.yummy.model.canteen;
 import com.j2ee.yummy.yummyEnum.DishCategory;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @program: yummy
@@ -16,14 +19,38 @@ import java.util.Map;
  **/
 @Getter
 @Setter
+@Entity
+@Proxy(lazy = false)
+@Table(name = "menu")
 public class Menu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "canteenID",nullable = false)
     private long canteenID;
+    @Column(name = "time",nullable = false)
     private LocalDate time;
-    private Map<DishCategory, List<Dish>> dishes;
-    private List<Combo> combos;
+    @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Dish> dishes;
+    @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Combo> combos;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "preferenceID",referencedColumnName = "id")
     private Preference preference;
 
     public Menu() {
+    }
+
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", canteenID=" + canteenID +
+                ", time=" + time +
+                ", dishes=" + dishes +
+                ", combos=" + combos +
+                ", preference=" + preference +
+                '}';
     }
 }

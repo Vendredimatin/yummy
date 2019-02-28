@@ -9,7 +9,7 @@
     display: none;
 }
 
-.menudialog-modify {
+.combodialog {
     position: fixed;
     background: #fff;
     padding: 0;
@@ -63,7 +63,7 @@
 .menuformfield>label {
     float: left;
     display: inline-block;
-    width: 65px;
+    width: 70px;
     height: 38px;
     margin-right: 20px;
     line-height: 38px;
