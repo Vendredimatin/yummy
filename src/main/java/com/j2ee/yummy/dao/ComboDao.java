@@ -27,4 +27,12 @@ public class ComboDao {
     public List<Combo> insert(List<Combo> combos){
         return comboRepository.saveAll(combos);
     }
+
+    public List<Combo> getCombosByIDs(List<Long> ids){
+        return comboRepository.findAllById(ids);
+    }
+
+    public Combo getComboByID(long id){
+        return comboRepository.getOne(id);
+    }
 }

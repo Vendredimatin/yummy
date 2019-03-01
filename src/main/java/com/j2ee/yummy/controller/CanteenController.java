@@ -44,6 +44,11 @@ public class CanteenController {
         return "canteenInfo.html";
     }
 
+    @GetMapping(value = "/canteenDisplay")
+    public String initDisplay(){
+        return "canteenDisplay.html";
+    }
+
     @PostMapping(value = "/canteen/register")
     @ResponseBody
     public Object register(@RequestBody JSONObject jsonObject) {
@@ -100,6 +105,16 @@ public class CanteenController {
         map.put("success", true);
         map.put("message", "登录成功");
         return map;
+    }
+
+    @PostMapping(value = "/canteen/display")
+    @ResponseBody
+    public List<Canteen> display(){
+        System.out.println("进入　CanteenController display.............");
+
+        List<Canteen> canteens = canteenService.getAll();
+
+        return canteens;
     }
 
     @PostMapping(value = "/canteen/info/get")

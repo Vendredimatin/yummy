@@ -1,14 +1,12 @@
 package com.j2ee.yummy.model.canteen;
 
-import com.j2ee.yummy.yummyEnum.DishCategory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -31,8 +29,10 @@ public class Menu {
     @Column(name = "time",nullable = false)
     private LocalDate time;
     @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("menu")
     private Set<Dish> dishes;
     @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("menu")
     private Set<Combo> combos;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "preferenceID",referencedColumnName = "id")

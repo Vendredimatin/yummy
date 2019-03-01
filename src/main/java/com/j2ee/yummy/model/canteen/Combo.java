@@ -1,5 +1,6 @@
 package com.j2ee.yummy.model.canteen;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j2ee.yummy.model.converter.ListConverter2;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @program: yummy
@@ -45,9 +47,23 @@ public class Combo {
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},optional = false)
     @JoinColumn(name = "menuID")
+    @JsonIgnoreProperties("combos")
     private Menu menu;
 
     public Combo() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Combo combo = (Combo) o;
+        return id == combo.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
@@ -59,7 +75,7 @@ public class Combo {
                 ", dishNames=" + dishNames +
                 ", dishRemnants=" + dishRemnants +
                 ", remnants=" + remnants +
-                ", menu=" + menu.getId() +
+                /*", menu=" + menu.getId() +*/
                 '}';
     }
 }

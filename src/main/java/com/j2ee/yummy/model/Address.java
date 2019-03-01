@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * @program: yummy
@@ -63,5 +64,25 @@ public class Address {
                 ", district='" + district + '\'' +
                 ", detail='" + detail + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return id == address.id &&
+                memberID == address.memberID &&
+                Objects.equals(name, address.name) &&
+                Objects.equals(phone, address.phone) &&
+                Objects.equals(city, address.city) &&
+                Objects.equals(province, address.province) &&
+                Objects.equals(district, address.district) &&
+                Objects.equals(detail, address.detail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, memberID, name, phone, city, province, district, detail);
     }
 }

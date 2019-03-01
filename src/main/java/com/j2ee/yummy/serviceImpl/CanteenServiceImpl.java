@@ -7,6 +7,8 @@ import com.j2ee.yummy.service.CanteenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: 餐厅的业务逻辑实现类
@@ -24,7 +26,7 @@ public class CanteenServiceImpl implements CanteenService {
     @Override
     public Canteen register(Canteen canteen) {
         canteen = canteenDao.insert(canteen);
-        canteen.setId(getID());
+        canteen.setId(getID(canteen.getId()));
         return canteen;
     }
 
@@ -47,6 +49,11 @@ public class CanteenServiceImpl implements CanteenService {
         Canteen canteen = canteenDao.getCanteenByID(id);
         canteen.setId(getID(id));
         return canteen;
+    }
+
+    @Override
+    public List<Canteen> getAll() {
+        return canteenDao.getAll();
     }
 
     private long getID(long id) {

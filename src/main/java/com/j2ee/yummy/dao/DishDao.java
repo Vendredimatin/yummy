@@ -27,4 +27,12 @@ public class DishDao {
     public List<Dish> insert(List<Dish> dishes){
         return dishRepository.saveAll(dishes);
     }
+
+    public Dish getDishByID(long id){
+        return dishRepository.getOne(id);
+    }
+
+    public List<Dish> getDishesByIDs(List<Long> ids){
+        return dishRepository.findAllById(ids);
+    }
 }

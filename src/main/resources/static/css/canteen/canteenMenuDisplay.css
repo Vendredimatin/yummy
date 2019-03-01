@@ -38,18 +38,18 @@ article, aside, blockquote, body, button, code, dd, details, dl, dt, fieldset, f
 
 .shopmenu-food {
     margin-bottom: 12px;
-    font-size: 12px;
+    font-size: 15px;
     background-color: #fff;
     border: 1px solid #eee;
     height: 102px;
 }
 
 .shopmenu-main.grid .shopmenu-food-name {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
-.shopmenu-food-name, .shopmenu-food-price {
-    font-size: 14px;
+.shopmenu-food-name, .shopmenu-food-price, .shopmenu-food-remnants {
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -57,6 +57,7 @@ article, aside, blockquote, body, button, code, dd, details, dl, dt, fieldset, f
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-top: 3px;
 }
 
 .color-mute {
@@ -119,14 +120,20 @@ a, ins {
 
 .shopmenu-main.grid .shopmenu-list {
     width: 102%;
+    overflow: hidden;
 }
 
 .shopmenu-title {
-    padding: 20px 0 10px 15px;
+    padding: 10px 0 5px 15px;
     font-size: 20px;
 }
 
-.shopmenu-main.grid .shopmenu-food-price {
+.shopmenu-food-id, .shopmenu-food-kind{
+    display: none;
+}
+
+
+.shopmenu-main.grid .shopmenu-food-price, .shopmenu-main.grid .shopmenu-food-remnants {
     position: absolute;
 }
 
@@ -161,4 +168,14 @@ shopmenu-food-price small {
     border-radius: 20px;
     text-align: center;
     outline: 0;
+}
+
+.shop-cart {
+    z-index: 102;
+    position: fixed;
+    right: 0;
+    top:60px;
+    width: 320px;
+    height: 46px;
+    font-size: 14px;
 }

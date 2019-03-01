@@ -1,12 +1,11 @@
 package com.j2ee.yummy.model.canteen;
 
-import com.j2ee.yummy.model.converter.EnumConverter;
-import com.j2ee.yummy.yummyEnum.DishCategory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * @program: yummy
@@ -44,6 +43,7 @@ public class Dish {
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},optional = false)
     @JoinColumn(name = "menuID")
+    @JsonIgnoreProperties("dishes")
     private Menu menu;
 
     public Dish() {
@@ -58,7 +58,20 @@ public class Dish {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", remnants=" + remnants +
-                ", menu=" + menu.getId() +
+               /* ", menu=" + menu.getId() +*/
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dish dish = (Dish) o;
+        return id == dish.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

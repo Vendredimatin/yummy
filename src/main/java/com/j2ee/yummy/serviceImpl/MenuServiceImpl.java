@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * @program: yummy
  * @description: 菜单的逻辑实现类
@@ -21,5 +24,9 @@ public class MenuServiceImpl {
 
     public Menu save(Menu menu){
         return menuDao.insert(menu);
+    }
+
+    public List<Menu> getMenusByCanteenID(long canteenID){
+        return menuDao.getMenusByCanID(canteenID);
     }
 }

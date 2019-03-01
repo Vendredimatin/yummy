@@ -5,6 +5,8 @@ import com.j2ee.yummy.model.canteen.Canteen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: 餐厅的dao类
@@ -43,4 +45,6 @@ public class CanteenDao {
     public Canteen getCanteenByID(long id){
         return canteenRepository.getOne(id);
     }
+
+    public List<Canteen> getAll(){ return canteenRepository.findAll();}
 }

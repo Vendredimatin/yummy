@@ -39,6 +39,9 @@ public class MenuController {
         return "canteenMenuCreate.html";
     }
 
+    @GetMapping(value = "/canteenMenuDisplay")
+    public String initDisplay() { return "canteenMenuDisplay.html";}
+
     @PostMapping(value = "/canteen/menu/create")
     @ResponseBody
     public Object createMenu(@RequestBody JSONObject jsonObject, HttpSession session){
@@ -77,6 +80,19 @@ public class MenuController {
         Map<String,Object> map = new HashMap<>();
         map.put("success",true);
         map.put("message","新建成功了！");
+        return map;
+    }
+
+    @PostMapping(value = "/canteen/menu/display")
+    @ResponseBody
+    public Object displayMenu(HttpSession session){
+        System.out.println("进入 MenuController displayMenu...............");
+
+        long canteenID = (long) session.getAttribute("scanCanteenID");
+        List<Menu> menus = menuService.getMenusByCanteenID(canteenID);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("menus",menus);
         return map;
     }
 }

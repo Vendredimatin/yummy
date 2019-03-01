@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: yummy
@@ -57,5 +59,17 @@ public class MemberController {
         System.out.println(member);
 
         return memberService.update(member);
+    }
+
+    @PostMapping(value = "/member/scanCanteen")
+    @ResponseBody
+    public Object scanCanteen(@RequestBody JSONObject jsonObject,HttpSession session){
+        System.out.println("进入 MemberController scanCanteen..........");
+
+        long canteenID = jsonObject.getLong("canteenID");
+        session.setAttribute("scanCanteenID",canteenID);
+
+        Map<String,Object> map = new HashMap<>();
+        return map;
     }
 }
