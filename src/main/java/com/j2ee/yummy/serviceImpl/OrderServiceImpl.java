@@ -5,6 +5,8 @@ import com.j2ee.yummy.model.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: 订单的业务逻辑类
@@ -21,4 +23,7 @@ public class OrderServiceImpl {
         return orderDao.insert(order);
     }
 
+    public List<Order> getOrdersByMemID(long memberID){
+        return orderDao.getOrdersByMemID(memberID);
+    }
 }

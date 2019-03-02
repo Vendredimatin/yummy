@@ -16,6 +16,7 @@ import com.j2ee.yummy.yummyEnum.ItemCategory;
 import com.j2ee.yummy.yummyEnum.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,6 +43,11 @@ public class OrderController {
     ComboServiceImpl comboService;
     @Autowired
     OrderServiceImpl orderService;
+
+    @GetMapping(value = "/memberOrderDisplay")
+    public String init(){
+        return "memberOrder.html";
+    }
 
     @PostMapping(value = "/member/order/checkout")
     @ResponseBody
@@ -118,5 +124,17 @@ public class OrderController {
         map.put("success", true);
         map.put("message", "下单成功");
         return map;
+    }
+
+    @PostMapping(value = "/member/order/history")
+    @ResponseBody
+    public List<Order> history(HttpSession session){
+        System.out.println("进入 OrderController history....................");
+
+        long memberID = (long) session.getAttribute("memberID");
+
+        List<Order> orders = orderService.getOrdersByMemID(memberID);
+
+        return orders;
     }
 }

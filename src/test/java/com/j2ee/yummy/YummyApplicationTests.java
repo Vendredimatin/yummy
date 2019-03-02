@@ -1,12 +1,10 @@
 package com.j2ee.yummy;
 
-import com.j2ee.yummy.dao.AddressDao;
-import com.j2ee.yummy.dao.CanteenDao;
-import com.j2ee.yummy.dao.MenuDao;
-import com.j2ee.yummy.dao.UserDao;
+import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.Menu;
+import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +26,8 @@ public class YummyApplicationTests {
     CanteenDao canteenDao;
     @Autowired
     MenuDao menuDao;
+    @Autowired
+    OrderDao orderDao;
 
     @Test
     public void contextLoads() {
@@ -78,5 +78,13 @@ public class YummyApplicationTests {
         List<Menu> menus = menuDao.getMenusByCanID(1);
         System.out.println(menus);
     }
+
+    @Test
+    public void getOrders(){
+        long memberID = 4;
+        List<Order> orders = orderDao.getOrdersByMemID(4);
+        System.out.println(orders);
+    }
 }
+
 
