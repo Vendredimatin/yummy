@@ -2,11 +2,13 @@ package com.j2ee.yummy.model.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j2ee.yummy.model.Address;
+import com.j2ee.yummy.model.converter.EntityConverter;
 import com.j2ee.yummy.model.converter.EnumConverter;
 import com.j2ee.yummy.model.converter.OrderStateConverter;
 import com.j2ee.yummy.yummyEnum.OrderState;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,7 +25,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "order")
+@Proxy(lazy = false)
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +39,8 @@ public class Order {
     protected String memberName;
     @Column(nullable = false)
     protected String memberPhone;
-    @Convert(converter = EnumConverter.class)
     @Column(length = 1000,nullable = false)
+    @Convert(converter = EntityConverter.class)
     protected Address memberAddress;
     @Column(nullable = false)
     protected LocalDateTime time;

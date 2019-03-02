@@ -11,6 +11,7 @@ import com.j2ee.yummy.service.AddressService;
 import com.j2ee.yummy.service.MemberService;
 import com.j2ee.yummy.serviceImpl.ComboServiceImpl;
 import com.j2ee.yummy.serviceImpl.DishServiceImpl;
+import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.ItemCategory;
 import com.j2ee.yummy.yummyEnum.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,8 @@ public class OrderController {
     DishServiceImpl dishService;
     @Autowired
     ComboServiceImpl comboService;
+    @Autowired
+    OrderServiceImpl orderService;
 
     @PostMapping(value = "/member/order/checkout")
     @ResponseBody
@@ -108,6 +111,8 @@ public class OrderController {
 
         order.setOrderItems(new HashSet<>(orderItems));
         System.out.println(order);
+
+        orderService.save(order);
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);

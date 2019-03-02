@@ -2,6 +2,7 @@ package com.j2ee.yummy.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
+@Proxy(lazy = false)
 @Table(name = "address")
 public class Address {
     @Id
