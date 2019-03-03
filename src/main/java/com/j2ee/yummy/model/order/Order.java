@@ -44,6 +44,8 @@ public class Order {
     protected Address memberAddress;
     @Column(nullable = false)
     protected LocalDateTime time;
+    @Column
+    protected int deliveringTime;
     @Column(scale = 2,nullable = false)
     protected double totalPrice;
     @Column(nullable = false)

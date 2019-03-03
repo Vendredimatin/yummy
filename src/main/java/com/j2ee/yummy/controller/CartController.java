@@ -95,7 +95,7 @@ public class CartController {
         System.out.println("进入 CartController cartDisplay.............");
 
         long scanCanteenID = (long) session.getAttribute("scanCanteenID");
-
+        session.setAttribute("checkoutCanID",scanCanteenID);
         Set<Cart> carts = (Set<Cart>) session.getAttribute("carts");
 
         Cart cart = null;

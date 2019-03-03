@@ -1,10 +1,12 @@
 package com.j2ee.yummy.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.j2ee.yummy.SpringTaskDemo;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.model.canteen.Combo;
 import com.j2ee.yummy.model.canteen.Dish;
+import com.j2ee.yummy.model.order.MessageOrder;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.OrderItem;
 import com.j2ee.yummy.service.AddressService;
@@ -43,6 +45,8 @@ public class OrderController {
     ComboServiceImpl comboService;
     @Autowired
     OrderServiceImpl orderService;
+    @Autowired
+    SpringTaskDemo springTaskDemo;
 
     @GetMapping(value = "/memberOrderDisplay")
     public String init(){
@@ -55,7 +59,8 @@ public class OrderController {
         System.out.println("进入 OrderController checkcout.......");
 
         long memberID = (long) httpSession.getAttribute("memberID");
-        long canteenID = (long) httpSession.getAttribute("scanCanteenID");
+        long canteenID = (long) httpSession.getAttribute("checkoutCanID");
+        int deliveringTime = 2;
 
         Member member = memberService.getMemberByID(memberID);
         String memberName = member.getName();
@@ -66,7 +71,7 @@ public class OrderController {
 
         LocalDateTime time = LocalDateTime.now();
         double totalPrice = jsonObject.getDouble("totalPrice");
-        OrderState orderState = OrderState.派送中;
+        OrderState orderState = OrderState.未支付;
 
         Order order = new Order();
         order.setMemberID(memberID);
@@ -77,6 +82,7 @@ public class OrderController {
         order.setTime(time);
         order.setTotalPrice(totalPrice);
         order.setOrderState(orderState);
+        order.setDeliveringTime(deliveringTime);
 
         List<Long> dishIDs = jsonObject.getJSONArray("dishIDs").toJavaList(Long.class);
         List<Long> comboIDs = jsonObject.getJSONArray("dishIDs").toJavaList(Long.class);
@@ -116,9 +122,12 @@ public class OrderController {
         }
 
         order.setOrderItems(new HashSet<>(orderItems));
-        System.out.println(order);
 
-        orderService.save(order);
+        order = orderService.checkout(order);
+        System.out.println(order);
+        springTaskDemo.appendOrder(order);
+
+        httpSession.setAttribute("unpayedOrderID",order.getId());
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
@@ -137,4 +146,24 @@ public class OrderController {
 
         return orders;
     }
+
+
+    @PostMapping(value = "/member/order/pay")
+    @ResponseBody
+    public Object pay(@RequestBody JSONObject jsonObject,HttpSession session){
+        System.out.println("进入 OrderController pay....................");
+
+        long unpayedOrderID = (long) session.getAttribute("unpayedOrderID");
+        springTaskDemo.changeOrderState(unpayedOrderID,OrderState.派送中);
+        orderService.pay(unpayedOrderID);
+
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "支付成功");
+        return map;
+    }
+
+
+
 }

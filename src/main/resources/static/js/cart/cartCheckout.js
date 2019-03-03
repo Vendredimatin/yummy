@@ -70,6 +70,7 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                alert(data['message']);
+               $(".pay-dialog").css('display','block');
             },
             fail: function (data) {
                 alert("fail");
@@ -78,6 +79,27 @@ window.onload = function () {
 
 
     });
+
+    $(".pay-btn").click(function () {
+        let d = {};
+        d.password = $(".pay-password").val();
+        d.totalPrice = $(".num").text();
+
+        $.ajax({
+            url:"/member/order/pay",
+            type:"post",
+            data: JSON.stringify(d),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                alert(data['message']);
+                $(".pay-dialog").css('display','none');
+            },
+            fail: function (data) {
+                alert("fail");
+            }
+        })
+    });
+
 
     function caculateTotal() {
         let totals = 0.0;

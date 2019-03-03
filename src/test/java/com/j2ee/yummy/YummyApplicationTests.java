@@ -4,8 +4,11 @@ import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.Menu;
+import com.j2ee.yummy.model.order.MessageOrder;
 import com.j2ee.yummy.model.order.Order;
+import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
+import com.j2ee.yummy.yummyEnum.OrderState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,10 @@ public class YummyApplicationTests {
     MenuDao menuDao;
     @Autowired
     OrderDao orderDao;
-
+    @Autowired
+    SpringTaskDemo springTaskDemo;
+    @Autowired
+    OrderServiceImpl orderService;
     @Test
     public void contextLoads() {
     }
@@ -84,6 +90,20 @@ public class YummyApplicationTests {
         long memberID = 4;
         List<Order> orders = orderDao.getOrdersByMemID(4);
         System.out.println(orders);
+    }
+
+    @Test
+    public void testTask(){
+        MessageOrder messageOrder1 = new MessageOrder(1, OrderState.未支付,2);
+        MessageOrder messageOrder2 = new MessageOrder(1, OrderState.派送中,3);
+
+        springTaskDemo.appendOrder(messageOrder1);
+        springTaskDemo.appendOrder(messageOrder2);
+    }
+
+    @Test
+    public void pay(){
+        orderService.pay(1);
     }
 }
 
