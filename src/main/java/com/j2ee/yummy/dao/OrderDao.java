@@ -27,6 +27,10 @@ public class OrderDao {
         return orderRepository.findAllByMemberID(memberID);
     }
 
+    public List<Order> getOrdersByCanID(long canteenID){
+        return orderRepository.findAllByCanteenID(canteenID);
+    }
+
     public boolean updateOrderState(OrderState orderState,long orderID){
         orderRepository.updateOrderState(orderState,orderID);
         return true;

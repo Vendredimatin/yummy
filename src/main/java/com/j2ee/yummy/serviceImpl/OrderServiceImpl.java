@@ -35,6 +35,10 @@ public class OrderServiceImpl {
         return orderDao.getOrdersByMemID(memberID);
     }
 
+    public List<Order> getOrdersByCanID(long canteenID){
+        return orderDao.getOrdersByCanID(canteenID);
+    }
+
     public boolean pay(long orderID) {
 
         return orderDao.updateOrderState(OrderState.派送中, orderID);
@@ -65,5 +69,10 @@ public class OrderServiceImpl {
         //yummy结算
         balanceDao.updateBalance(memberBalance);
         balanceDao.updateBalance(canteenBalance);*/
+    }
+
+    public void unsubscribe(long orderID){
+        Order order = orderDao.getOrderByID(orderID);
+
     }
 }

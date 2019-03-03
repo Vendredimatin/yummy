@@ -13,6 +13,8 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
 
     public List<Order> findAllByMemberID(long memberID);
 
+    public List<Order> findAllByCanteenID(long canteenID);
+
     @Transactional
     @Modifying
     @Query("update Order o set o.orderState = ?1 where o.id = ?2")

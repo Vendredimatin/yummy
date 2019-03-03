@@ -233,10 +233,10 @@ ordertimeline-time-icon.finish {
     color: #333;
 }
 
-.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status {
+.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status, .ordertimeline-unsubscribe {
     width: 13%;
 }
-.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status {
+.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status, .ordertimeline-unsubscribe {
     border-bottom: 1px #eee dashed;
     color: #999;
 }
@@ -254,4 +254,9 @@ ordertimeline-time-icon.finish {
     font-weight: 700;
     font-size: 14px;
     color: #333;
+}
+
+.ordertimeline-unsubscribe button{
+    background-color: red;
+    color: white;
 }

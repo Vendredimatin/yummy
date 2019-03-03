@@ -53,6 +53,9 @@ public class OrderController {
         return "memberOrder.html";
     }
 
+    @GetMapping(value = "/canteenOrderHistory")
+    public String intiCanteenOrder(){ return "canteenOrder.html";}
+
     @PostMapping(value = "/member/order/checkout")
     @ResponseBody
     public Object checkout(@RequestBody JSONObject jsonObject, HttpSession httpSession){
@@ -137,12 +140,24 @@ public class OrderController {
 
     @PostMapping(value = "/member/order/history")
     @ResponseBody
-    public List<Order> history(HttpSession session){
+    public List<Order> memberHistory(HttpSession session){
         System.out.println("进入 OrderController history....................");
 
         long memberID = (long) session.getAttribute("memberID");
 
         List<Order> orders = orderService.getOrdersByMemID(memberID);
+
+        return orders;
+    }
+
+    @PostMapping(value = "/canteen/order/history")
+    @ResponseBody
+    public List<Order> canteenHistory(HttpSession session){
+        System.out.println("进入 OrderController canteenHistory....................");
+
+        long canteenID = (long) session.getAttribute("canteenID");
+
+        List<Order> orders = orderService.getOrdersByCanID(canteenID);
 
         return orders;
     }
@@ -164,6 +179,21 @@ public class OrderController {
         return map;
     }
 
+
+    @PostMapping(value = "/member/order/unsubscribe")
+    @ResponseBody
+    public Object unsubscribe(@RequestBody JSONObject jsonObject){
+        System.out.println("进入 OrderController unsubscribe....................");
+
+        long orderID = jsonObject.getLong("orderID");
+
+        orderService.unsubscribe(orderID);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "退订成功");
+        return map;
+    }
 
 
 }
