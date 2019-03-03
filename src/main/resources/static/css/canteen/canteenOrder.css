@@ -1,0 +1,257 @@
+article, aside, blockquote, body, button, code, dd, details, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hr, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+body {
+    background: #f7f7f7;
+    padding-right: 35px;
+}
+
+.profile-panel {
+    margin-left: 170px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    min-height: 680px;
+    padding: 20px 18px;
+}
+
+.profile-paneltitle {
+    border-bottom: 2px solid #f4f4f4;
+    padding: 0 20px 11px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.profile-panelcontent {
+    display: inline-block;
+    width: 100%;
+}
+
+.profileinfo {
+    margin-top: 39px;
+    margin-left: 42px;
+}
+
+.profileinfo-item {
+    margin-bottom: 20px;
+}
+
+.profileinfo-label {
+    margin-right: 15px;
+    width: 65px;
+    text-align: right;
+}
+
+.profileinfo-label, .profileinfo-value {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.profileinfo-face {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+}
+
+.profileinfo-face > img {
+    width: 100%;
+}
+
+.profile-panel-btn {
+    margin-left: 150px;
+}
+
+.order-list {
+    width: 100%;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.timeline td.ordertimeline-time {
+    text-align: right;
+    padding-right: 18px;
+}
+
+.timeline td {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.ordertimeline-time {
+    position: relative;
+    width: 8%;
+    color: #999;
+    border-right: 1px #eee solid;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+.ordertimeline-time p:first-child {
+    font-size: 12px;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.order-list tr:first-child {
+    height: 10px;
+}
+
+.order-list thead tr {
+    line-height: 30px;
+    background-color: #eee;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.order-list td, .order-list th {
+    text-align: center;
+    font-size: 12px;
+}
+
+caption, th {
+    text-align: left;
+}
+
+address, caption, cite, code, dfn, em, th, var {
+    font-style: normal;
+    font-weight: 400;
+}
+
+.order-list thead tr th.order-list-infoth {
+    text-align: left;
+    padding-left: 26px;
+}
+
+ordertimeline-time-icon.finish {
+    font-size: 12px;
+    color: #ccc;
+    right: -7px;
+}
+
+.ordertimeline-time-icon {
+    position: absolute;
+    right: -8px;
+    font-size: 15px;
+    line-height: 22px;
+    background-color: #fff;
+    top: 39%;
+}
+
+[class*=" icon-"], [class^=icon-] {
+    font-family: eleme;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    -webkit-font-feature-settings: normal;
+    font-feature-settings: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.timeline td.ordertimeline-info {
+    text-align: left;
+}
+
+.timeline td {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.ordertimeline-info a {
+    color: inherit;
+}
+
+.ordertimeline-food, .ordertimeline-info-food span {
+    vertical-align: middle;
+}
+
+.ordertimeline-food {
+    max-width: 300px;
+}
+
+.ordertimeline-food {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    word-wrap: normal;
+}
+
+.ordertimeline-info-productnum {
+    font-weight: 700;
+    color: #666;
+}
+
+.ordertimeline-status h3.end {
+    color: #999;
+}
+
+.ordertimeline-handle {
+    border-bottom: 1px #eee dashed;
+}
+
+.ordertimeline-handle a {
+    display: inline-block;
+    width: 78px;
+    line-height: 24px;
+    margin: 5px 0;
+    color: #333;
+}
+
+.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status {
+    width: 13%;
+}
+.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status {
+    border-bottom: 1px #eee dashed;
+    color: #999;
+}
+
+.ordertimeline-title.ordertimeline-price {
+    font-size: 16px;
+}
+
+.ui-arial {
+    font-family: arial;
+}
+
+.ordertimeline-title {
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+}
