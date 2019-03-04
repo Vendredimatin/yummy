@@ -55,9 +55,11 @@ public class Order {
     public Order() {
     }
 
-//    public double unsubscribe(){
-//        return orderState.unsubscribe(totalPrice);
-//    }
+    public double unsubscribe(){
+        if (orderState.equals(OrderState.派送中))
+            return totalPrice*0.8;
+        else return 0;
+    }
 
     @Override
     public String toString() {

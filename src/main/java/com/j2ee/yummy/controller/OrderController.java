@@ -62,11 +62,12 @@ public class OrderController {
 
         long memberID = (long) httpSession.getAttribute("memberID");
         long canteenID = (long) httpSession.getAttribute("checkoutCanID");
-        int deliveringTime = 2;
 
         Member member = memberService.getMemberByID(memberID);
         String memberName = member.getName();
         String memberPhone = member.getPhone();
+
+        int deliveringTime = 2;//jsonObject.getInteger("deliveringTime");
 
         long addressID = jsonObject.getLong("addressID");
         Address address = addressService.getAddressByID(addressID);
@@ -186,11 +187,12 @@ public class OrderController {
 
         long orderID = jsonObject.getLong("orderID");
 
-        orderService.unsubscribe(orderID);
+        double returnFee = orderService.unsubscribe(orderID);
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("message", "退订成功");
+        map.put("returnFee", returnFee);
         return map;
     }
 

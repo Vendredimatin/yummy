@@ -2,6 +2,7 @@ package com.j2ee.yummy;
 
 import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
+import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.Menu;
 import com.j2ee.yummy.model.order.MessageOrder;
@@ -9,6 +10,7 @@ import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
+import com.j2ee.yummy.yummyEnum.UserType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ public class YummyApplicationTests {
     SpringTaskDemo springTaskDemo;
     @Autowired
     OrderServiceImpl orderService;
+    @Autowired
+    BalanceDao balanceDao;
     @Test
     public void contextLoads() {
     }
@@ -104,6 +108,26 @@ public class YummyApplicationTests {
     @Test
     public void pay(){
         orderService.pay(1);
+    }
+
+    @Test
+    public void insertYummy(){
+        Balance balance = new Balance();
+        balance.setUserID(0);
+        balance.setBalance(0);
+        balance.setPassword("123");
+        balance.setUserType(UserType.Yummy);
+        balanceDao.insert(balance);
+    }
+
+    @Test
+    public void insertBalance(){
+        Balance balance = new Balance();
+        balance.setUserID(4);
+        balance.setPassword("123");
+        balance.setBalance(1000);
+        balance.setUserType(UserType.Canteen);
+        balanceDao.insert(balance);
     }
 }
 

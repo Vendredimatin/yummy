@@ -23,10 +23,14 @@ public class BalanceDao {
     }
 
     public Balance getBalance(long userID){
-        return balanceRepository.getOne(userID);
+        return balanceRepository.findBalanceByUserID(userID);
     }
 
     public void updateBalance(Balance balance){
         balanceRepository.saveAndFlush(balance);
+    }
+
+    public Balance insert(Balance balance){
+        return balanceRepository.save(balance);
     }
 }

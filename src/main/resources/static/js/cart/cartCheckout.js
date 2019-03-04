@@ -4,6 +4,7 @@ window.onload = function () {
     let maxTime = 60;
     let canteenAddress;
     let addresses;
+    let deliveringTime;
     init();
 
     $(document).on('click', '.minus', function () {
@@ -71,8 +72,10 @@ window.onload = function () {
 
                         if (time > maxTime)
                             alert("距离太远，无法送到，请更换地址");
-                        else
+                        else{
+                            deliveringTime = time;
                             alert("距离为" + distance + "米,需要时间" + time + "分钟");
+                        }
                     }
                 }, memAddrCity);
             } else {
@@ -113,12 +116,14 @@ window.onload = function () {
         let d = {};
         d.addressID = addressID;
         d.totalPrice = totalPrice;
+        d.deliveringTime = deliveringTime;
         d.dishIDs = dishIDs;
         d.comboIDs = comboIDs;
         d.dishQuantities = dishQuantities;
         d.comboQuantities = comboQuantities;
         d.dishSubtotals = dishSubtotals;
         d.comboSubtotals = comboSubtotals;
+
 
         console.log(d);
         $.ajax({
