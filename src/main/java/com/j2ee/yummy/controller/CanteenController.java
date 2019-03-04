@@ -3,10 +3,13 @@ package com.j2ee.yummy.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Address;
+import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.UnauditedCanInfo;
 import com.j2ee.yummy.service.CanteenService;
+import com.j2ee.yummy.serviceImpl.BalanceServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
+import com.j2ee.yummy.yummyEnum.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,8 @@ public class CanteenController {
 
     @Autowired
     CanteenService canteenService;
+    @Autowired
+    BalanceServiceImpl balanceService;
 
     @GetMapping(value = "/canteenRegister")
     public String initRegister() {
@@ -53,6 +58,11 @@ public class CanteenController {
     @GetMapping(value = "/canteenDisplay")
     public String initDisplay(){
         return "canteenDisplay.html";
+    }
+
+    @GetMapping("/canteenBalance")
+    public String initBalance() {
+        return "canteenBalance.html";
     }
 
     @PostMapping(value = "/canteen/register")
@@ -167,5 +177,20 @@ public class CanteenController {
 
         //观察者模式，提供给经理审批
         return canteenService.modify(unauditedCanInfo) ? "success" : "fail";
+    }
+
+    @PostMapping(value = "/canteen/balance/get")
+    @ResponseBody
+    public Object getBalance(HttpSession session) {
+        System.out.println("进入 CanteenController getBalance..........");
+
+        long canteenID = (long) session.getAttribute("canteenID");
+
+        Balance balance = balanceService.getBalance(canteenID, UserType.Canteen);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "获取成功");
+        map.put("balance", balance);
+        return map;
     }
 }

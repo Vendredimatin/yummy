@@ -6,20 +6,19 @@
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/profile-sidebar.css">
-    <link rel="stylesheet" href="css/canteen/canteenOrder.css">
+    <link rel="stylesheet" href="css/balance.css">
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/canteen/canteenOrder.js"></script>
+    <script type="text/javascript" src="js/canteen/canteenBalance.js"></script>
 </head>
 <body>
-
 <header class="topbar">
     <div class="container clearfix">
         <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
-        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        <a href="/canteenDisplay" hardjump="" class="topbar-item topbar-homepage focus">首页
         </a>
 
         <a href="/memberOrderDisplay" class="topbar-item">我的订单</a>
-        <a href="/member/info" class="topbar-item">个人信息</a>
+        <a href="/memberInfo" class="topbar-item">个人信息</a>
 
         <span class="topbar-member-area">
             <span class="topbar-member-name">111</span>
@@ -66,49 +65,13 @@
 
     <div class="profile-panel" role="main">
         <h3 class="profile-paneltitle">
-            <span class="ng-binding">近三个月订单</span>
+            <span class="ng-binding">账户余额</span>
         </h3>
         <div class="profile-panelcontent" id="profile-panelcontent">
-            <table class="order-list">
-                <thead>
-                <tr>
-                    <th>下单时间</th>
-                    <th class="order-list-infoth">订单内容</th>
-                    <th>支付金额（元）</th>
-                    <th>状态</th>
-                    <th>操作</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <tr></tr>
-                <tr class="timeline">
-                    <td class="ordertimeline-time"><p class="ng-binding">2019-02-28 11:50</p>
-                        <i class="ordertimeline-time-icon icon-uniE65E finish ng-scope"></i>
-                    </td>
-
-                    <td class="ordertimeline-info">
-                        <p class="ordertimeline-info-food">
-                            <a>
-                                <span class="ordertimeline-food">大份黄焖鸡（含米饭）1份</span>
-                                <span class="ordertimeline-info-productnum">1</span>
-                                <span>个菜品</span>
-                            </a>
-                        </p>
-                    </td>
-                    <td class="ordertimeline-amount">
-                        <h3 class="ordertimeline-title ordertimeline-price ui-arial">13.90</h3>
-                    </td>
-                    <td class="ordertimeline-status">
-                        <h3 class="end">订单已完成</h3>
-                    </td>
-                    <td class="ordertimeline-handle">
-                        <a class="ordertimeline-handle-detail">订单详情</a>
-                    </td>
-
-                </tr>
-                </tbody>
-            </table>
+            <div class="balance-summary index">
+                <p class="balance-tip"><span class="balance-summary-title">当前账户余额：</span>
+                    <b class="balance-number">0</b>元</p>
+            </div>
         </div>
     </div>
 </div>

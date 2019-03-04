@@ -1,8 +1,11 @@
 package com.j2ee.yummy.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.service.MemberService;
+import com.j2ee.yummy.serviceImpl.BalanceServiceImpl;
+import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,16 +28,27 @@ import java.util.Map;
 public class MemberController {
     @Autowired
     MemberService memberService;
+    @Autowired
+    BalanceServiceImpl balanceService;
 
     @GetMapping("/member/info")
-    public String init(){return "memberInfo.html";}
+    public String init() {
+        return "memberInfo.html";
+    }
 
     @GetMapping("/memberInfo")
-    public String initInfo(){return "memberInfo.html";}
+    public String initInfo() {
+        return "memberInfo.html";
+    }
+
+    @GetMapping("/memberBalance")
+    public String initBalance() {
+        return "memberBalance.html";
+    }
 
     @PostMapping(value = "/member/info")
     @ResponseBody
-    public Member getInfo(HttpSession session){
+    public Member getInfo(HttpSession session) {
         System.out.println("进入 getInfo............");
 
         long userID = (long) session.getAttribute("memberID");
@@ -45,7 +59,7 @@ public class MemberController {
 
     @PostMapping(value = "/member/modifyInfo")
     @ResponseBody
-    public String modifyInfo(@RequestBody JSONObject jsonObject,HttpSession session){
+    public String modifyInfo(@RequestBody JSONObject jsonObject, HttpSession session) {
         System.out.println("进入 modifyInfo............");
 
         String email = jsonObject.getString("email");
@@ -65,13 +79,28 @@ public class MemberController {
 
     @PostMapping(value = "/member/scanCanteen")
     @ResponseBody
-    public Object scanCanteen(@RequestBody JSONObject jsonObject,HttpSession session){
+    public Object scanCanteen(@RequestBody JSONObject jsonObject, HttpSession session) {
         System.out.println("进入 MemberController scanCanteen..........");
 
         long canteenID = jsonObject.getLong("canteenID");
-        session.setAttribute("scanCanteenID",canteenID);
+        session.setAttribute("scanCanteenID", canteenID);
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        return map;
+    }
+
+    @PostMapping(value = "/member/balance/get")
+    @ResponseBody
+    public Object getBalance(HttpSession session) {
+        System.out.println("进入 MemberController getBalance..........");
+
+        long memberID = (long) session.getAttribute("memberID");
+
+        Balance balance = balanceService.getBalance(memberID, UserType.Member);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "获取成功");
+        map.put("balance", balance);
         return map;
     }
 }

@@ -6,9 +6,9 @@
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/profile-sidebar.css">
-    <link rel="stylesheet" href="css/member/memberInfo.css">
+    <link rel="stylesheet" href="css/balance.css">
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/member/memberInfo.js"></script>
+    <script type="text/javascript" src="js/member/memberBalance.js"></script>
 </head>
 <body>
 <header class="topbar">
@@ -59,35 +59,12 @@
 
     <div class="profile-panel" role="main">
         <h3 class="profile-paneltitle">
-            <span class="ng-binding">个人资料</span>
+            <span class="ng-binding">账户余额</span>
         </h3>
         <div class="profile-panelcontent" id="profile-panelcontent">
-            <div class="profileinfo">
-                <p class="profileinfo-item">
-                    <span class="profileinfo-label">头像
-                    </span>
-                    <span class="profileinfo-face"><img
-                            ng-src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"
-                            alt="313db18c6"
-                            src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"></span>
-                </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">用户名</span>
-
-                    <input class="profileinfo-value name" disabled/>
-
-                </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">电子邮箱</span>
-                    <input  class="profileinfo-value email" disabled/>
-                </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">电话</span>
-                    <input class="profileinfo-value phone" disabled/></p>
-                <p class="profileinfo-item"><span class="profileinfo-label">会员等级</span>
-                    <input class="profileinfo-value memberLevel" disabled/></p>
-            </div>
-
-            <div class="profile-panel-btn">
-                <button class="modify">修改</button>
-                <button class="submit">提交</button>
+            <div class="balance-summary index">
+                <p class="balance-tip"><span class="balance-summary-title">当前账户余额：</span>
+                <b class="balance-number">0</b>元</p>
             </div>
         </div>
     </div>
