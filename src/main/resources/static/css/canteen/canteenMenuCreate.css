@@ -112,3 +112,47 @@ body {
 .profile-panel-btn{
     margin-left: 150px;
 }
+
+.add-preference{
+    width: 100px;
+    height: 25px;
+    border-width: 0px;
+    border-radius: 3px;
+    background: #1E90FF;
+    cursor: pointer;
+    outline: none;
+    font-family: Microsoft YaHei;
+    color: white;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.preference-list{
+    margin-top: 15px;
+}
+
+.preference-pair{
+    margin-bottom: 10px;
+}
+
+.preference-pair span{
+    margin-right: 10px;
+}
+
+.targetSum{
+    margin-left: 10px;
+}
+
+.menu-submit{
+    width: 100px;
+    height: 25px;
+    border-width: 0px;
+    border-radius: 3px;
+    /* background: green; */
+    cursor: pointer;
+    outline: none;
+    font-family: Microsoft YaHei;
+    /* color: white; */
+    font-size: 17px;
+    margin-top: 10px;
+}

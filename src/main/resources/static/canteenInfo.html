@@ -6,8 +6,10 @@
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/profile-sidebar.css">
+    <link rel="stylesheet" href="css/zcity.css">
     <link rel="stylesheet" href="css/canteen/canteenInfo.css">
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/zcity.js"></script>
     <script type="text/javascript" src="js/canteen/canteenInfo.js"></script>
 </head>
 <body>
@@ -45,7 +47,7 @@
         <li class="profile-sidebar-section">
             <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
             <ul>
-                <li class="active"><a href="/canteen/info">餐厅资料</a></li>
+                <li class="active"><a href="/canteenInfo">餐厅资料</a></li>
             </ul>
         </li>
 
@@ -84,18 +86,26 @@
 
                 </p>
                 <p class="profileinfo-item"><span class="profileinfo-label">联系人</span>
-                    <input  class="profileinfo-value landlordName" disabled/>
+                    <input class="profileinfo-value landlordName" disabled/>
                 </p>
                 <p class="profileinfo-item"><span class="profileinfo-label">联系电话</span>
                     <input class="profileinfo-value phone" disabled/></p>
                 <p class="profileinfo-item"><span class="profileinfo-label">门店分类</span>
                     <input class="profileinfo-value category" disabled/>
                 </p>
-                <p class="profileinfo-item"><span class="profileinfo-label">地址</span>
+                <p class="profileinfo-item select" style="display: none;">
+                    <span class="profileinfo-label">地址</span>
+                    <select class="form-control" id="cmbProvince" name="cmbProvince" ></select>
+                    <select class="form-control" id="cmbCity" name="cmbCity" ></select>
+                    <select class="form-control" id="cmbArea" name="cmbArea" ></select>
+                </p>
+                <p class="profileinfo-item display">
+                    <span class="profileinfo-label">地址</span>
                     <input class="profileinfo-value province" placeholder="省份" disabled/>
                     <input class="profileinfo-value city" placeholder="城市" disabled/>
                     <input class="profileinfo-value district" placeholder="区／县" disabled/>
                 </p>
+
             </div>
 
             <div class="profile-panel-btn">
@@ -105,6 +115,10 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+    })
+</script>
 </body>
 </html>

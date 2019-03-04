@@ -24,8 +24,9 @@ window.onload = function () {
             }
         })
     });
-    
-    $(".cart-display").click(function () {
+
+    //进入购物车
+    $(".toolbar-cartbtn").click(function () {
         window.location.href = "cartCheckout.html";
     });
 
@@ -123,7 +124,7 @@ window.onload = function () {
                     '                    <h3 class="shopmenu-food-id ui-ellipsis">' + dish['id'] + '</h3>\n' +
                     '                    <h3 class="shopmenu-food-name ui-ellipsis">' + dish['name'] + '</h3>\n' +
                     '                    <p class="color-mute ui-ellipsis">' + dish['description'] + '</p>\n' +
-                    '                    <span>￥</span>\n' +
+                    '                    <span style="color: red">￥</span>\n' +
                     '                    <span class="shopmenu-food-price color-stress ui-ellipsis">' + dish['price'] + '</span>\n' +
                     '<p></p>\n' +
                     '                    <span>剩余 </span>\n' +

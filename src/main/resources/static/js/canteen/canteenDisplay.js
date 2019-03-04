@@ -29,7 +29,6 @@ function init() {
         type:"post",
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            alert("success");
             console.log(data);
             addCanteen(data);
         },

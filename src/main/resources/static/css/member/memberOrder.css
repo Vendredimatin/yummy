@@ -30,6 +30,7 @@ body {
 .profile-panelcontent {
     display: inline-block;
     width: 100%;
+    margin-top: 40px;
 }
 
 .profileinfo {
@@ -110,7 +111,7 @@ td, th {
 }
 
 .ordertimeline-time p:first-child {
-    font-size: 12px;
+    font-size: 15px;
 }
 
 thead {
@@ -136,7 +137,7 @@ tr {
 
 .order-list td, .order-list th {
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 caption, th {
@@ -233,6 +234,10 @@ ordertimeline-time-icon.finish {
     color: #333;
 }
 
+.ordertimeline-handle-detail {
+    border: 1px solid #eee;
+}
+
 .ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status, .ordertimeline-unsubscribe {
     width: 13%;
 }
@@ -256,7 +261,17 @@ ordertimeline-time-icon.finish {
     color: #333;
 }
 
-.ordertimeline-unsubscribe button{
-    background-color: red;
-    color: white;
+
+.ordertimeline-unsubscribe button {
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 20px;
+    text-align: center;
+    outline: 0;
+    background-color: #0089dc;
+    color: #fff;
 }

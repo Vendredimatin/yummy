@@ -25,7 +25,8 @@
                 success: function (data) {
                     console.log(data);
                     alert(data["message"]);
-                    window.location.href = "canteenInfo.html";
+                    if (data['success'])
+                        window.location.href = "canteenInfo.html";
                 },
                 fail:function (data) {
                     alert("fail")

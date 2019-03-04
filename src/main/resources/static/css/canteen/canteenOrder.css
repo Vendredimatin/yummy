@@ -30,6 +30,7 @@ body {
 .profile-panelcontent {
     display: inline-block;
     width: 100%;
+    margin-top: 40px;
 }
 
 .profileinfo {
@@ -110,7 +111,7 @@ td, th {
 }
 
 .ordertimeline-time p:first-child {
-    font-size: 12px;
+    font-size: 15px;
 }
 
 thead {
@@ -136,7 +137,7 @@ tr {
 
 .order-list td, .order-list th {
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 caption, th {
@@ -231,6 +232,10 @@ ordertimeline-time-icon.finish {
     line-height: 24px;
     margin: 5px 0;
     color: #333;
+}
+
+.ordertimeline-handle-detail {
+    border: 1px solid #eee;
 }
 
 .ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status {

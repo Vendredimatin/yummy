@@ -17,11 +17,11 @@
 <header class="topbar">
     <div class="container clearfix">
         <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
-        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        <a href="/canteenDisplay" hardjump="" class="topbar-item topbar-homepage focus">首页
         </a>
 
-        <a href="/profile/order" class="topbar-item">我的订单</a>
-        <a href="/profile/order" class="topbar-item">个人信息</a>
+        <a href="/memberOrderDisplay" class="topbar-item">我的订单</a>
+        <a href="/memberInfo" class="topbar-item">个人信息</a>
 
         <span class="topbar-member-area">
             <span class="topbar-member-name">111</span>
@@ -33,42 +33,45 @@
         </span>
     </div>
 </header>
+<div class="main-panel">
 <div class="container">
-    <div class="checkout-cart">
-        <div class="checkoutcart-container">
-            <div class="checkoutcart-title">
-                <h2>订单详情</h2>
-                <a>返回商家修改</a>
-            </div>
 
-            <div class="checkoutcart-tablerow tablehead">
-                <div class="cell itemname">商品</div>
-                <div class="cell itemquantity">份数</div>
-                <div class="cell itemtotal">小计</div>
+        <div class="checkout-cart">
+            <div class="checkoutcart-container">
+                <div class="checkoutcart-title">
+                    <h2>订单详情</h2>
+                    <a>返回商家修改</a>
+                </div>
 
-            </div>
+                <div class="checkoutcart-tablerow tablehead">
+                    <div class="cell itemname">商品</div>
+                    <div class="cell itemquantity">份数</div>
+                    <div class="cell itemtotal">小计</div>
 
-            <dl class="checkoutcart-group">
-                <dt class="checkoutcart-grouptitle">套餐</dt>
-            </dl>
-            <div class="checkoutcart-total color-stress">
-                ￥<span class="num">0</span>
+                </div>
+
+                <dl class="checkoutcart-group">
+                    <dt class="checkoutcart-grouptitle">套餐</dt>
+                </dl>
+                <div class="checkoutcart-total color-stress">
+                    ￥<span class="num">0</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="checkout-content">
-        <div class="checkout-select">
-            <h2>收货地址</h2>
-            <select class="address-list">
-                <option attr-address-id="1">
-                    <span>卢思宇</span>
-                    <span>16600250641</span>
-                    <p>dajsdhaskdjkasjdka</p>
-                </option>
-            </select>
+        <div class="checkout-content">
+            <div class="checkout-select">
+                <h2>收货地址</h2>
+                <select class="address-list">
+                    <option attr-address-id="1">
+                        <span>卢思宇</span>
+                        <span>16600250641</span>
+                        <p>dajsdhaskdjkasjdka</p>
+                    </option>
+                </select>
+            </div>
+            <button class="confirm btn-stress btn-lg">确认下单</button>
         </div>
-        <button class="confirm btn-stress btn-lg">确认下单</button>
     </div>
 </div>
 

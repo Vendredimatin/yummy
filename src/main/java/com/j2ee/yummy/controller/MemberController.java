@@ -29,6 +29,8 @@ public class MemberController {
     @GetMapping("/member/info")
     public String init(){return "memberInfo.html";}
 
+    @GetMapping("/memberInfo")
+    public String initInfo(){return "memberInfo.html";}
 
     @PostMapping(value = "/member/info")
     @ResponseBody

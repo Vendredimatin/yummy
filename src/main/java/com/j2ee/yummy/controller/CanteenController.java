@@ -7,6 +7,8 @@ import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.UnauditedCanInfo;
 import com.j2ee.yummy.service.CanteenService;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -26,6 +29,9 @@ import java.util.*;
 
 @Controller
 public class CanteenController {
+    private static final Logger log = LoggerFactory.getLogger(CanteenController.class);
+
+
     @Autowired
     CanteenService canteenService;
 
@@ -98,12 +104,20 @@ public class CanteenController {
         long id = jsonObject.getLong("id");
         String password = jsonObject.getString("password");
 
-        Canteen canteen = canteenService.login(id, password);
-        session.setAttribute("canteenID", canteen.getId());
-
         Map<String, Object> map = new HashMap<>();
-        map.put("success", true);
-        map.put("message", "登录成功");
+        try {
+            Canteen canteen = canteenService.login(id, password);
+            session.setAttribute("canteenID", canteen.getId());
+            map.put("success", true);
+            map.put("message", "登录成功");
+        }catch (NullPointerException e){
+            log.info("时间：" + LocalDateTime.now()+", 餐厅帐号不存在", LocalDateTime.now());
+            map.put("success", false);
+            map.put("message", "帐号/密码失败");
+        }
+
+
+
         return map;
     }
 
