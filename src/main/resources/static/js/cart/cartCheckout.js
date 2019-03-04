@@ -1,10 +1,12 @@
-
 window.onload = function () {
     let metersPerHour = 30000;
     let maxTime = 60;
     let canteenAddress;
     let addresses;
     let deliveringTime;
+    let cart;
+    let combos;
+    let dishes;
     init();
 
     $(document).on('click', '.minus', function () {
@@ -20,7 +22,8 @@ window.onload = function () {
 
     $(document).on('click', '.plus', function () {
         let quantity = parseInt($(this).siblings(".quantity").val());
-        quantity = quantity + 1;
+        let max = parseInt($(this).siblings(".quantity").attr("max"));
+        quantity = (quantity >= max) ? (max) : (quantity + 1);
         $(this).siblings(".quantity").val(quantity);
         let singlePrice = parseFloat($(this).parent().siblings(".cell.itemtotal").children(".subTotal-price").attr('attr-single-price'));
         let subTotal = singlePrice * quantity;
@@ -28,6 +31,8 @@ window.onload = function () {
         $(this).parent().siblings(".cell.itemtotal").children(".subTotal-price").text(subTotal);
         caculateTotal();
     });
+
+    //限制超卖,选择的数量不能大于商品的数量
 
 
     //选择地址时判断是否可行
@@ -72,7 +77,7 @@ window.onload = function () {
 
                         if (time > maxTime)
                             alert("距离太远，无法送到，请更换地址");
-                        else{
+                        else {
                             deliveringTime = time;
                             alert("距离为" + distance + "米,需要时间" + time + "分钟");
                         }
@@ -187,6 +192,9 @@ window.onload = function () {
 
                 canteenAddress = data['canteenAddress'];
                 addresses = data['addresses'];
+                cart = data['cart'];
+                combos = cart['combos'];
+                dishes = cart['dishes'];
 
                 initCart(data['cart']);
                 initAddress(data['addresses']);
@@ -210,8 +218,9 @@ window.onload = function () {
                 '                        <div class="cell itemname">' + combo['name'] + '</div>\n' +
                 '                        <div class="cell itemquantity">\n' +
                 '                            <button class="minus">-</button>\n' +
-                '                            <input value="1" class="quantity combo">\n' +
+                '                            <input value="1" class="quantity combo" max="' + combo['remnants'] + '">\n' +
                 '                            <button class="plus">+</button>\n' +
+                '                            <span>最多'+ combo['remnants'] +'</span>' +
                 '                        </div>\n' +
                 '                        <div class="cell itemtotal">\n' +
                 '                            <span>￥</span>\n' +
@@ -233,8 +242,9 @@ window.onload = function () {
                 '                        <div class="cell itemname">' + dish['name'] + '</div>\n' +
                 '                        <div class="cell itemquantity">\n' +
                 '                            <button class="minus">-</button>\n' +
-                '                            <input value="1" class="quantity dish">\n' +
+                '                            <input value="1" class="quantity dish" max="' + dish['remnants'] + '">\n' +
                 '                            <button class="plus">+</button>\n' +
+                '                            <span>最多'+ dish['remnants'] +'</span>' +
                 '                        </div>\n' +
                 '                        <div class="cell itemtotal">\n' +
                 '                            <span>￥</span>\n' +

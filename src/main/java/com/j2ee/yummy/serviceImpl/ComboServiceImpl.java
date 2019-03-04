@@ -26,4 +26,10 @@ public class ComboServiceImpl {
     public List<Combo> getCombosByIDs(List<Long> ids){
         return comboDao.getCombosByIDs(ids);
     }
+
+    public void sell(long comboID,int num){
+        Combo combo = comboDao.getComboByID(comboID);
+        combo.setRemnants(combo.getRemnants() - num);
+        comboDao.update(combo);
+    }
 }

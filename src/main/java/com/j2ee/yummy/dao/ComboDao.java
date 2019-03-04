@@ -35,4 +35,8 @@ public class ComboDao {
     public Combo getComboByID(long id){
         return comboRepository.getOne(id);
     }
+
+    public Combo update(Combo combo){
+        return comboRepository.saveAndFlush(combo);
+    }
 }

@@ -25,4 +25,10 @@ public class DishServiceImpl {
     public List<Dish> getDishesByIDs(List<Long> ids){
         return dishDao.getDishesByIDs(ids);
     }
+
+    public void sell(long dishID,int num){
+        Dish dish = dishDao.getDishByID(dishID);
+        dish.setRemnants(dish.getRemnants() - num);
+        dishDao.update(dish);
+    }
 }

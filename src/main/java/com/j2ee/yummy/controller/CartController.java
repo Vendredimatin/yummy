@@ -8,6 +8,8 @@ import com.j2ee.yummy.model.canteen.Combo;
 import com.j2ee.yummy.model.canteen.Dish;
 import com.j2ee.yummy.service.AddressService;
 import com.j2ee.yummy.service.CanteenService;
+import com.j2ee.yummy.serviceImpl.ComboServiceImpl;
+import com.j2ee.yummy.serviceImpl.DishServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @program: yummy
@@ -30,6 +33,10 @@ public class CartController {
     AddressService addressService;
     @Autowired
     CanteenService canteenService;
+    @Autowired
+    ComboServiceImpl comboService;
+    @Autowired
+    DishServiceImpl dishService;
 
     @PostMapping(value = "/member/cart/add")
     @ResponseBody
@@ -101,12 +108,21 @@ public class CartController {
         long scanCanteenID = (long) session.getAttribute("scanCanteenID");
         session.setAttribute("checkoutCanID",scanCanteenID);
         Set<Cart> carts = (Set<Cart>) session.getAttribute("carts");
-
         Cart cart = null;
         for (Cart tmp: carts) {
             if (tmp.getCanteenID() == scanCanteenID)
                 cart = tmp;
         }
+
+        List<Long> dishesID = cart.getDishes().stream().map(Dish::getId).collect(Collectors.toList());
+        List<Long> combosID = cart.getCombos().stream().map(Combo::getId).collect(Collectors.toList());
+
+        //为了防止超卖
+        List<Dish> dishes = dishService.getDishesByIDs(dishesID);
+        List<Combo> combos = comboService.getCombosByIDs(combosID);
+
+        cart.setDishes(dishes);
+        cart.setCombos(combos);
 
         List<Address> addresses = addressService.getAddressesByMemberID((Long) session.getAttribute("memberID"));
 

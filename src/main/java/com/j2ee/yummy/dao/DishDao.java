@@ -35,4 +35,8 @@ public class DishDao {
     public List<Dish> getDishesByIDs(List<Long> ids){
         return dishRepository.findAllById(ids);
     }
+
+    public Dish update(Dish dish){
+        return dishRepository.saveAndFlush(dish);
+    }
 }

@@ -25,6 +25,8 @@ public class OrderServiceImpl {
     OrderDao orderDao;
     @Autowired
     BalanceDao balanceDao;
+    @Autowired
+    MenuServiceImpl menuService;
 
     public static final double CAN_DISCOUNT = 0.8;
     public static final double YUMMY_DISCOUNT = 1 - CAN_DISCOUNT;
@@ -89,6 +91,9 @@ public class OrderServiceImpl {
         //yummy结算
         balanceDao.updateBalance(yummyBalance);
         balanceDao.updateBalance(canteenBalance);
+
+        //此外，还要从商家的商品中减去相应的数量
+        menuService.sell(order.getOrderItems());
     }
 
     @Transactional
