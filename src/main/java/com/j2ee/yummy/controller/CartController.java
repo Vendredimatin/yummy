@@ -3,9 +3,11 @@ package com.j2ee.yummy.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Cart;
+import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.Combo;
 import com.j2ee.yummy.model.canteen.Dish;
 import com.j2ee.yummy.service.AddressService;
+import com.j2ee.yummy.service.CanteenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +28,8 @@ import java.util.*;
 public class CartController {
     @Autowired
     AddressService addressService;
+    @Autowired
+    CanteenService canteenService;
 
     @PostMapping(value = "/member/cart/add")
     @ResponseBody
@@ -105,9 +109,14 @@ public class CartController {
         }
 
         List<Address> addresses = addressService.getAddressesByMemberID((Long) session.getAttribute("memberID"));
+
+        Canteen canteen = canteenService.getCanteenByID(scanCanteenID);
+        Address canteenAddress = canteen.getAddress();
+
         Map<String,Object> map = new HashMap<>();
         map.put("cart",cart);
         map.put("addresses",addresses);
+        map.put("canteenAddress",canteenAddress);
 
         return map;
     }

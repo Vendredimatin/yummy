@@ -1,7 +1,7 @@
 package com.j2ee.yummy.model.converter;
 
 import com.alibaba.fastjson.JSON;
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 
 
 import javax.persistence.AttributeConverter;

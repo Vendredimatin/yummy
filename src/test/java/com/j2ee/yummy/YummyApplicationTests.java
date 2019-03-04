@@ -8,7 +8,7 @@ import com.j2ee.yummy.model.order.MessageOrder;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

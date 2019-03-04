@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2KMdTST8p1VY2mkUe4T6Xj70maCIfsti"></script>
+    <title>地址解析</title>
+</head>
+<body>
+<div id="allmap" style="display: none"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");//创建一个map实例，allmap表示地图容器
+    var point = new BMap.Point(116.331398,39.897445);//创建点坐标
+    map.centerAndZoom(point,12);//初始化地图，设置地图的中心点坐标和缩放级别
+
+    // 创建地址解析器实例
+    /* Geocoder类用于获取用户的地址解析。
+    * 构造函数：Geocoder() 创建一个地址解析器的实例
+    *方法：getPoint(address: String, callback: Function, city: String) 对指定的地址进行解析。
+    *如果地址定位成功，则以地址所在的坐标点Point为参数调用回调函数。否则，回调函数的参数为null。
+    *city为地址所在的城市名，例如“北京市”。
+    */
+    var myGeo = new BMap.Geocoder();
+    // 将地址解析结果显示在地图上,并调整地图视野
+
+    myGeo.getPoint("江苏省南京市鼓楼区", function(point){
+        if (point) {
+            map.centerAndZoom(point, 16);
+            console.log(point);
+
+            myGeo.getPoint("江苏省南京市江宁区",function (point2) {
+                if (point2){
+                    console.log(map.getDistance(point,point2));
+                    console.log(parseInt(map.getDistance(point,point2)));
+                }
+            },"南京市")
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+    }, "南京市");//注：该方法存在3个参数，最后一个参数“城市名”别忘了！
+
+</script>

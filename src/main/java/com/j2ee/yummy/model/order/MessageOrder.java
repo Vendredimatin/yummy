@@ -1,6 +1,6 @@
 package com.j2ee.yummy.model.order;
 
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import lombok.Getter;
 import lombok.Setter;
 

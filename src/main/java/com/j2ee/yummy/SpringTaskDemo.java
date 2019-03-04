@@ -3,7 +3,7 @@ package com.j2ee.yummy;
 import com.j2ee.yummy.model.order.MessageOrder;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

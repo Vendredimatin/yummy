@@ -1,12 +1,9 @@
 package com.j2ee.yummy.serviceImpl;
 
-import com.j2ee.yummy.SpringTaskDemo;
 import com.j2ee.yummy.dao.BalanceDao;
 import com.j2ee.yummy.dao.OrderDao;
-import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.order.Order;
-import com.j2ee.yummy.yummyEnum.OrderState;
-import com.j2ee.yummy.yummyEnum.UserType;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

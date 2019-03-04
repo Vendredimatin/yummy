@@ -2,7 +2,7 @@ package com.j2ee.yummy.dao;
 
 import com.j2ee.yummy.Repository.OrderRepository;
 import com.j2ee.yummy.model.order.Order;
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

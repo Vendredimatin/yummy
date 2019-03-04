@@ -1,7 +1,7 @@
 package com.j2ee.yummy.Repository;
 
 import com.j2ee.yummy.model.order.Order;
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

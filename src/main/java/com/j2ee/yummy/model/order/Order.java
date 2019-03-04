@@ -3,17 +3,14 @@ package com.j2ee.yummy.model.order;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.converter.EntityConverter;
-import com.j2ee.yummy.model.converter.EnumConverter;
 import com.j2ee.yummy.model.converter.OrderStateConverter;
-import com.j2ee.yummy.yummyEnum.OrderState;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -58,6 +55,10 @@ public class Order {
     public Order() {
     }
 
+//    public double unsubscribe(){
+//        return orderState.unsubscribe(totalPrice);
+//    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -73,4 +74,6 @@ public class Order {
                 ", orderItems=" + orderItems.toString() +
                 '}';
     }
+
+
 }
