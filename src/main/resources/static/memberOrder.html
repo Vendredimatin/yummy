@@ -62,6 +62,32 @@
         <h3 class="profile-paneltitle">
             <span class="ng-binding">近三个月订单</span>
         </h3>
+
+        <div class="search-area">
+            <div class="time-area">
+                <input type="date" class="start-time" placeholder="开始时间">－
+                <input type="date" class="end-time" placeholder="结束时间">
+            </div>
+            <div class="price-area">
+                <input type="text" class="min-price" placeholder="起始金额">－
+                <input type="text" class="max-price" placeholder="最大金额">
+            </div>
+            <div class="canteen-area">
+                <input type="text" placeholder="输入商家点名.......">
+            </div>
+            <div class="state-area">
+                <select>
+                    <option selected>所有</option>
+                    <option>未支付</option>
+                    <option>取消</option>
+                    <option>退货</option>
+                    <option>完成</option>
+                    <option>派送中</option>
+                </select>
+            </div>
+            <a class="place-search-btn icon-search"></a>
+        </div>
+
         <div class="profile-panelcontent" id="profile-panelcontent">
             <table class="order-list">
                 <thead>
@@ -105,6 +131,9 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="pages">
+                <span current-page="1">下一页</span>
+            </div>
         </div>
     </div>
 </div>

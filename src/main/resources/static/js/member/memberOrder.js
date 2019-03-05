@@ -28,6 +28,65 @@ window.onload = function () {
       }
   });
 
+  //搜索
+  $(".place-search-btn").click(function () {
+      console.log("@@@");
+      let d = {};
+      d.startTime = $(".start-time").val();
+      d.endTime = $('.end-time').val();
+      d.maxPrice = $(".max-price").val();
+      d.maxPrice = (d.maxPrice == '')?-1:d.maxPrice;
+      d.minPrice = $(".min-price").val();
+      d.minPrice = (d.minPrice == '')?-1:d.minPrice;
+      d.canteenName = $('.canteen-area input').val();
+      d.canteenName = (d.canteenName == '')?"null":d.canteenName;
+      d.orderState =  $('.state-area select option:selected').text();
+
+      $.ajax({
+          url:"/member/order/search",
+          type:'post',
+          data:JSON.stringify(d),
+          contentType: "application/json;charset=utf-8",
+          success: function (orders) {
+              console.log(orders);
+              initHtml(orders);
+          },
+          fail: function (data) {
+              alert("fail");
+          }
+      })
+  });
+
+  //下一页
+  $(".pages span").click(function () {
+      let currentPage = parseInt($(this).attr("current-page"));
+
+      let d = {};
+      d.startTime = $(".start-time").val();
+      d.endTime = $('.end-time').val();
+      d.maxPrice = $(".max-price").val();
+      d.maxPrice = (d.maxPrice == '')?-1:d.maxPrice;
+      d.minPrice = $(".min-price").val();
+      d.minPrice = (d.minPrice == '')?-1:d.minPrice;
+      d.canteenName = $('.canteen-area input').val();
+      d.canteenName = (d.canteenName == '')?"null":d.canteenName;
+      d.orderState =  $('.state-area select option:selected').text();
+      d.nextPage = currentPage + 1;
+      $.ajax({
+          url:"/member/order/page",
+          type:'post',
+          data:JSON.stringify(d),
+          contentType: "application/json;charset=utf-8",
+          success: function (orders) {
+              console.log(orders);
+              initHtml(orders);
+          },
+          fail: function (data) {
+              alert("fail");
+          }
+      })
+  });
+
 
   function init() {
       $.ajax({
@@ -45,6 +104,7 @@ window.onload = function () {
   }
 
   function initHtml(orders) {
+      $(".timeline").remove();
 
       for (let i = 0; i < orders.length; i++) {
           let order = orders[i];

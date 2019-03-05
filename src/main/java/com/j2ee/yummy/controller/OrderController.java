@@ -16,6 +16,7 @@ import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.ItemCategory;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static com.j2ee.yummy.StaticFinalVariable.PAGE_SIZE;
 
 /**
  * @program: yummy
@@ -147,7 +151,7 @@ public class OrderController {
 
         List<Order> orders = orderService.getOrdersByMemID(memberID);
 
-        return orders;
+        return orders.subList(0,PAGE_SIZE);
     }
 
     @PostMapping(value = "/canteen/order/history")
@@ -194,6 +198,53 @@ public class OrderController {
         map.put("message", "退订成功");
         map.put("returnFee", returnFee);
         return map;
+    }
+
+    @PostMapping(value = "/member/order/search")
+    @ResponseBody
+    public List<Order> memberSearch(@RequestBody JSONObject jsonObject, HttpSession session){
+        System.out.println("进入 OrderController memberSearch....................");
+
+        long memberID = (long) session.getAttribute("memberID");
+        LocalDate startTime = jsonObject.getObject("startTime",LocalDate.class);
+        LocalDate endTime = jsonObject.getObject("endTime",LocalDate.class);
+        double maxPrice = jsonObject.getObject("maxPrice",Double.class);
+        double minPrice = jsonObject.getObject("minPrice",Double.class);
+        String canteenName = jsonObject.getString("canteenName");
+        String orderState = jsonObject.getString("orderState");
+
+        System.out.println(startTime);
+        System.out.println(endTime);
+        System.out.println(maxPrice);
+        System.out.println(minPrice);
+        System.out.println(canteenName);
+        Page<Order> orders = orderService.memberSearch(memberID,startTime,endTime,maxPrice,minPrice,canteenName,orderState,1);
+
+        return orders.getContent();
+    }
+
+    @PostMapping(value = "/member/order/page")
+    @ResponseBody
+    public List<Order> memberPage(@RequestBody JSONObject jsonObject, HttpSession session){
+        System.out.println("进入 OrderController memberSearch....................");
+
+        long memberID = (long) session.getAttribute("memberID");
+        LocalDate startTime = jsonObject.getObject("startTime",LocalDate.class);
+        LocalDate endTime = jsonObject.getObject("endTime",LocalDate.class);
+        double maxPrice = jsonObject.getObject("maxPrice",Double.class);
+        double minPrice = jsonObject.getObject("minPrice",Double.class);
+        String canteenName = jsonObject.getString("canteenName");
+        String orderState = jsonObject.getString("orderState");
+        int pageIndex = jsonObject.getInteger("nextPage");
+
+        System.out.println(startTime);
+        System.out.println(endTime);
+        System.out.println(maxPrice);
+        System.out.println(minPrice);
+        System.out.println(canteenName);
+        Page<Order> orders = orderService.memberSearch(memberID,startTime,endTime,maxPrice,minPrice,canteenName,orderState,pageIndex);
+
+        return orders.getContent();
     }
 
 

@@ -3,8 +3,11 @@ package com.j2ee.yummy.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.Member;
+import com.j2ee.yummy.model.order.Order;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import com.j2ee.yummy.service.MemberService;
 import com.j2ee.yummy.serviceImpl.BalanceServiceImpl;
+import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +34,8 @@ public class MemberController {
     MemberService memberService;
     @Autowired
     BalanceServiceImpl balanceService;
+    @Autowired
+    OrderServiceImpl orderService;
 
     @GetMapping("/member/info")
     public String init() {
@@ -97,10 +103,15 @@ public class MemberController {
         long memberID = (long) session.getAttribute("memberID");
 
         Balance balance = balanceService.getBalance(memberID, UserType.Member);
+        List<Order> orders = orderService.getOrdersByMemID(memberID);
+        double totalCost = orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).mapToDouble(Order::getTotalPrice).sum();
+        int totalOrderNums = (int) orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).count();
 
         Map<String, Object> map = new HashMap<>();
         map.put("message", "获取成功");
         map.put("balance", balance);
+        map.put("totalCost",totalCost);
+        map.put("totalNums",totalOrderNums);
         return map;
     }
 }

@@ -7,10 +7,18 @@ import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.j2ee.yummy.StaticFinalVariable.PAGE_SIZE;
 
 /**
  * @program: yummy
@@ -120,5 +128,11 @@ public class OrderServiceImpl {
         balanceDao.updateBalance(canteenBalance);
 
         return returnFee;
+    }
+
+    public Page<Order> memberSearch(long memberID, LocalDate startTime, LocalDate endTime, double maxPrice, double minPrice, String canteenName, String orderState, int pageIndex){
+
+        Pageable pageable = PageRequest.of(pageIndex-1,PAGE_SIZE);
+        return orderDao.findByConditions(memberID,startTime,endTime,maxPrice,minPrice,canteenName,orderState,pageable);
     }
 }

@@ -14,4 +14,5 @@ public class StaticFinalVariable {
     //支付时间,单位秒
     public static final int PAY_TIME = 2 * MINUTE;
 
+    public static final int PAGE_SIZE = 5;
 }

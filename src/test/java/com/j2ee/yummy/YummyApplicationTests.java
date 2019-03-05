@@ -1,5 +1,6 @@
 package com.j2ee.yummy;
 
+import com.j2ee.yummy.Repository.OrderRepository;
 import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Balance;
@@ -9,16 +10,17 @@ import com.j2ee.yummy.model.canteen.Menu;
 import com.j2ee.yummy.model.order.MessageOrder;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
-import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -42,6 +44,8 @@ public class YummyApplicationTests {
     BalanceDao balanceDao;
     @Autowired
     ManagerDao managerDao;
+    @Autowired
+    OrderRepository orderRepository;
 
     @Test
     public void contextLoads() {
@@ -137,6 +141,16 @@ public class YummyApplicationTests {
         manager.setPassword("123");
         manager.setName("经理1");
         managerDao.insert(manager);
+    }
+
+    @Test
+    public void selectOrders(){
+        long memberID = 4;
+        LocalDate startTime = LocalDate.of(2019,3,3);
+        LocalDate endTime = LocalDate.of(2019,3,5);
+        Page<Order> orders = orderService.memberSearch(4,startTime,endTime,200,0,"null", "所有",2);
+        //List<Order> orders = orderRepository.findAllByMemberIDAndTimeBetween(memberID,startTime,endTime);
+        System.out.println(orders.getContent());
     }
 }
 

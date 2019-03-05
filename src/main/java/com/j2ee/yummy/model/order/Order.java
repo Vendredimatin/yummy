@@ -33,6 +33,8 @@ public class Order {
     @Column(nullable = false)
     protected long canteenID;
     @Column(nullable = false)
+    protected String canteenName;
+    @Column(nullable = false)
     protected String memberName;
     @Column(nullable = false)
     protected String memberPhone;
@@ -69,12 +71,12 @@ public class Order {
                 ", canteenID=" + canteenID +
                 ", memberName='" + memberName + '\'' +
                 ", memberPhone='" + memberPhone + '\'' +
-                ", memberAddress=" + memberAddress +
                 ", time=" + time +
+                ", memberAddress=" + memberAddress +
                 ", totalPrice=" + totalPrice +
                 ", orderState=" + orderState +
                 ", orderItems=" + orderItems.toString() +
-                '}';
+                '}'+'\n';
     }
 
 
