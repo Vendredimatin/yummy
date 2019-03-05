@@ -42,6 +42,7 @@ public class OrderDao {
         return orderRepository.findAllByMemberID(memberID);
     }
 
+
     public List<Order> getOrdersByCanID(long canteenID){
         return orderRepository.findAllByCanteenID(canteenID);
     }

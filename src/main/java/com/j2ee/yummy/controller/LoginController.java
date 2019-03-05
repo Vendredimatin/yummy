@@ -37,8 +37,7 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     @ResponseBody
-    public String login(@RequestBody String json,HttpSession session){
-        JSONObject jsonObject = JSONObject.parseObject(json);
+    public String login(@RequestBody JSONObject jsonObject,HttpSession session){
 
         String email = (String) jsonObject.get("email");
         String password = (String) jsonObject.get("password");

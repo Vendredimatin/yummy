@@ -44,6 +44,8 @@ public class OrderServiceImpl {
         return orderDao.insert(order);
     }
 
+    public Order getOrderByID(long orderID){return orderDao.getOrderByID(orderID);}
+
     public List<Order> getOrdersByMemID(long memberID) {
         return orderDao.getOrdersByMemID(memberID);
     }
@@ -140,4 +142,5 @@ public class OrderServiceImpl {
         Pageable pageable = PageRequest.of(pageIndex-1,PAGE_SIZE);
         return orderDao.findByConditionsForCan(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,pageable);
     }
+
 }

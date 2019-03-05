@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <script src="js/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--<script src="js/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <script src="js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <div id="login-panel">
-    <input v-model="account" ref="account" placeholder="输入用户名">
-    <input v-model="password" placeholder="输入用户名">
-    <button v-on:click="submit"></button>
+    <input class="email" placeholder="输入用户名">
+    <input class="password" placeholder="输入用户名">
+    <button class="submit"></button>
 </div>
 
 <script>
+/*
     var vm = new Vue({
         el: "#login-panel",
         data: {
@@ -38,6 +40,26 @@
             }
         }
     })
+*/
+$(".submit").click(function () {
+    let d = {};
+    d.email = $(".email").val();
+    d.password = $(".password").val();
+    $.ajax({
+        url:"/login",
+        type:"post",
+        contentType: "application/json;charset=utf-8",
+        data:JSON.stringify(d),
+        success: function (data) {
+            console.log(data);
+            window.location.href = "canteenDisplay.html";
+        },
+        fail: function (data) {
+            alert("fail");
+        }
+    })
+});
+
 </script>
 </body>
 </html>

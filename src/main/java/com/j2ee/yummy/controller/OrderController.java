@@ -59,6 +59,14 @@ public class OrderController {
     @GetMapping(value = "/canteenOrderHistory")
     public String intiCanteenOrder(){ return "canteenOrder.html";}
 
+    @GetMapping(value = "/canteenOrderDetail")
+    public String intiCanOrderDetail(){ return "canteenOrderDetail.html";}
+
+    @GetMapping(value = "/memberOrderHistory")
+    public String intiMemOrderDetail() {
+        return "memberOrderDetail.html";
+    }
+
     @PostMapping(value = "/member/order/checkout")
     @ResponseBody
     public Object checkout(@RequestBody JSONObject jsonObject, HttpSession httpSession){
@@ -272,6 +280,30 @@ public class OrderController {
         Page<Order> orders = orderService.canteenSearch(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,pageIndex);
 
         return orders.getContent();
+    }
+
+    @PostMapping(value = "/order/detail/check")
+    @ResponseBody
+    public Object orderDetaile(@RequestBody JSONObject jsonObject, HttpSession session){
+        System.out.println("进入 OrderController detail....................");
+
+        long orderID = jsonObject.getLong("orderID");
+        session.setAttribute("orderID",orderID);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "支付成功");
+        return map;
+    }
+
+    @PostMapping(value = "/order/detail/get")
+    @ResponseBody
+    public Order orderDetaile(HttpSession session){
+        System.out.println("进入 OrderController detail....................");
+
+        long orderID = (long) session.getAttribute("orderID");
+        Order order = orderService.getOrderByID(orderID);
+        return order;
     }
 
 }

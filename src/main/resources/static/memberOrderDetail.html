@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/profile-sidebar.css">
+    <link rel="stylesheet" href="css/orderDetail.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/orderDetail.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="container clearfix">
+        <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
+        <a href="/canteenDisplay" hardjump="" class="topbar-item topbar-homepage focus">首页
+        </a>
+
+        <a href="/memberOrderDisplay" class="topbar-item">我的订单</a>
+        <a href="/memberInfo" class="topbar-item">个人信息</a>
+
+        <span class="topbar-member-area">
+            <span class="topbar-member-name">111</span>
+            <span class="caret"></span>
+            <ul class="user-menu" style="display: none;">
+                    <li><a href="javascript:void 0">查看天气</a></li>
+                    <li><a href="javascript:void 0">退出</a></li>
+                </ul>
+        </span>
+    </div>
+</header>
+<div class="main-area">
+
+    <ul class="profile-sidebar" role="navigation">
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的订单</h2>
+            <ul>
+                <li class="active"><a href="/memberOrderDisplay">近三个月订单</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
+            <ul>
+                <li class="active"><a href="/member/info">个人资料</a></li>
+                <li><a href="/memberAddress">地址管理</a></li>
+            </ul>
+        </li>
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资产</h2>
+            <ul>
+                <li class="active"><a href="/memberBalance">我的余额</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="profile-panel" role="main">
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">订单详情</span>
+        </h3>
+        <div class="profile-panelcontent" id="profile-panelcontent">
+            <div class="ng-isolate-scope">
+                <div class="orderprogress-rstinfo">
+                    <div class="orderprogress-rstgrid">
+                        <h4 class="orderprogress-rstname">
+                            <a class="inherit" class="order-canteen-name">增和记蒙自米线（华侨路店）</a>
+                        </h4>
+                        <div class="orderprogress-rstextra">
+                            <span>订单号：<b class="order-id">2104830314356439292</b></span>
+                            <span>商家电话：<b class="order-canteen-phone">18012984830 / 025-84731292</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="orderprogress-cardtable">
+                <div class="orderprogress-cardcell">
+                    <div class="orderprogress-total">
+                        <div class="orderprogress-totalrow orderprogress-totaltitle">
+                            <span class="cell name">菜品</span>
+                            <span class="cell quantity">数量</span>
+                            <span class="cell price">小计（元）</span>
+                        </div>
+                        <div>
+                            <div class="orderprogress-totalrow">
+                                <span class="cell name item">举人过桥米线</span>
+                                <span class="cell quantity item">1</span>
+                                <span class="cell price item">28.00</span>
+                            </div>
+                        </div>
+                        <div class="orderprogress-baseline"></div>
+                        <div class="orderprogress-totalactual">实际支付：
+                            <span class="order-totalPrice">31.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="orderprogress-cardcell rightside">
+                    <div class="orderprogress-deliveryinfo">
+                        <h5 class="orderprogress-deliverytitle">配送信息</h5>
+                        <div class="orderprogress-deliverygroup">
+                            <p><span class="orderprogress-deliverykey">送达时间：</span>
+                                <span class="order-deliveringTime">尽快送出</span>
+                            </p>
+                        </div>
+                        <div class="orderprogress-deliverygroup">
+                            <p><span class="orderprogress-deliverykey">联 系 人：</span>
+                                <span class="order-member-name">刘汉乙(先生)</span>
+                            </p>
+                            <p><span class="orderprogress-deliverykey">联系电话：</span>
+                                <span class="order-member-phone">13218027718</span></p>
+                            <p><span class="orderprogress-deliverykey">收货地址：</span>
+                                <span class="order-member-address">南京大学鼓楼校区陶园2舍</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

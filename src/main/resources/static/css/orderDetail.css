@@ -1,0 +1,235 @@
+ol, ul {
+    list-style: none;
+}
+
+body {
+    background: #f7f7f7;
+    padding-right: 35px;
+}
+
+
+.profile-panel {
+    margin-left: 170px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    min-height: 680px;
+    padding: 20px 18px;
+}
+
+.profile-paneltitle {
+    border-bottom: 2px solid #f4f4f4;
+    padding: 0 20px 11px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.profile-panelcontent {
+    display: inline-block;
+    width: 100%;
+}
+
+.profileinfo {
+    margin-top: 39px;
+    margin-left: 42px;
+}
+
+.profileinfo-item {
+    margin-bottom: 20px;
+}
+
+.profileinfo-label {
+    margin-right: 15px;
+    width: 65px;
+    text-align: right;
+}
+
+.profileinfo-label, .profileinfo-value {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.profileinfo-face {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+}
+
+.profileinfo-face > img {
+    width: 100%;
+}
+
+.profile-panel-btn {
+    margin-left: 150px;
+}
+
+.orderprogress-rstinfo {
+    position: relative;
+    padding: 18px 30px 16px;
+    background-color: #f8f8f6;
+    border: 1px solid #eee;
+}
+
+.orderprogress-rstgrid {
+    line-height: 1;
+}
+
+.orderprogress-rstgrid, .orderprogress-rstimg {
+    height: 44px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.orderprogress-rstname {
+    padding-top: 2px;
+    font-size: 16px;
+    color: #333;
+}
+
+a.inherit {
+    color: inherit;
+}
+
+.orderprogress-rstextra {
+    padding-top: 12px;
+    font-size: 14px;
+    color: #999;
+}
+
+.orderprogress-rstextra span:first-child {
+    max-width: 250px;
+    padding-right: 50px;
+}
+
+.orderprogress-rstextra span {
+    max-width: 593px;
+}
+
+.orderprogress-rstextra span {
+    display: inline-block;
+    max-width: 375px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.orderprogress-cardtable {
+    display: table;
+    width: 100%;
+}
+
+.orderprogress-cardcell {
+    width: 538px;
+}
+.orderprogress-cardcell {
+    display: table-cell;
+    background-color: #f8f8f8;
+    border-left: 1px solid #eee;
+    vertical-align: top;
+    width: 438px;
+}
+
+.orderprogress-total {
+    padding-bottom: 32px;
+}
+
+.orderprogress-totalrow.orderprogress-totaltitle {
+    padding: 20px 0 16px;
+    font-weight: 700;
+    border-bottom: 1px solid #eee;
+}
+.orderprogress-totalrow {
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    color: #666;
+    padding-top: 24px;
+    line-height: 1;
+}
+
+.orderprogress-totalrow .cell.name {
+    padding-left: 30px;
+    width: 60%;
+    text-align: left;
+}
+.orderprogress-totalrow .cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.orderprogress-totalrow .cell.quantity {
+    width: 10%;
+    text-align: center;
+}
+
+.orderprogress-totalrow .cell.price {
+    padding-right: 30px;
+    width: 30%;
+    text-align: right;
+}
+
+.orderprogress-baseline {
+    width: 100%;
+    padding-top: 20px;
+    margin-bottom: -4px;
+    border-bottom: 1px solid #eee;
+}
+
+.orderprogress-totalactual {
+    padding-top: 20px;
+    line-height: 1;
+    padding-right: 30px;
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 100px;
+}
+
+.orderprogress-totalactual span {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f74342;
+}
+
+.orderprogress-cardcell.rightside {
+    background-color: #fff;
+    border-right: 1px solid #eee;
+    width: auto;
+}
+
+.orderprogress-deliveryinfo {
+    padding: 0 30px;
+}
+
+.orderprogress-deliverytitle {
+    padding: 20px 0 4px;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.orderprogress-deliverygroup {
+    border-bottom: 1px dashed #eee;
+}
+
+.orderprogress-deliverygroup span {
+    display: table-cell;
+    vertical-align: top;
+    line-height: 18px;
+    word-break: break-word;
+}
+.orderprogress-deliverykey {
+    overflow: hidden;
+    width: 5em;
+    text-align: justify;
+    -moz-text-align-last: justify;
+    text-align-last: justify;
+}
+
+.orderprogress-deliverygroup p {
+    display: table;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
