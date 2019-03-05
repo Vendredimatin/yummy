@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<input class="manager-id" placeholder="id">
+<input class="manager-password" placeholder="密码">
+<button class="manager-login">登录</button>
+</body>
+<script>
+    window.onload=function () {
+        $(".manager-login").click(function () {
+            var d = {};
+            d.id = $(".manager-id").val();
+            d.password = $(".manager-password").val();
+
+            $.ajax({
+                url:"/manager/login",
+                type:"post",
+                data:JSON.stringify(d),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    alert(data["message"]);
+                    if (data['success'])
+                        window.location.href = "/managerAudit";
+                },
+                fail:function (data) {
+                    alert("fail")
+                }
+            });
+        });
+    }
+</script>
+</html>

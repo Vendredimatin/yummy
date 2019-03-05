@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/profile-sidebar.css">
+    <link rel="stylesheet" href="css/manager/managerAudit.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/manager/managerAudit.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="container clearfix">
+        <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
+        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        </a>
+
+        <a href="/profile/order" class="topbar-item">我的订单</a>
+        <a href="/profile/order" class="topbar-item">个人信息</a>
+
+        <span class="topbar-member-area">
+            <span class="topbar-member-name">111</span>
+            <span class="caret"></span>
+            <ul class="user-menu" style="display: none;">
+                    <li><a href="javascript:void 0">查看天气</a></li>
+                    <li><a href="javascript:void 0">退出</a></li>
+                </ul>
+        </span>
+    </div>
+</header>
+
+<div class="main-area">
+
+    <ul class="profile-sidebar" role="navigation">
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>审批</h2>
+            <ul>
+                <li class="active"><a href="/canteenOrderHistory">餐厅申请</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>统计信息</h2>
+            <ul>
+                <li class="active"><a href="/canteenInfo">餐厅资料</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="profile-panel" role="main">
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">未审批的餐厅申请</span>
+        </h3>
+        <div class="profile-panelcontent" id="profile-panelcontent">
+            <div class="profileinfo">
+                <p class="profileinfo-item">
+                    <span class="profileinfo-label">头像
+                    </span>
+                    <span class="profileinfo-face"><img
+                            ng-src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"
+                            alt="313db18c6"
+                            src="https://shadow.elemecdn.com/faas/desktop/media/img/default-avatar.38e40d.png?imageMogr2/format/webp/quality/85"></span>
+                </p>
+                <input type="hidden" class="profileinfo-value id">
+                <p class="profileinfo-item"><span class="profileinfo-label">餐厅名</span>
+
+                    <input class="profileinfo-value name" disabled/>
+
+                </p>
+                <p class="profileinfo-item"><span class="profileinfo-label">联系人</span>
+                    <input class="profileinfo-value landlordName" disabled/>
+                </p>
+                <p class="profileinfo-item"><span class="profileinfo-label">联系电话</span>
+                    <input class="profileinfo-value phone" disabled/></p>
+                <p class="profileinfo-item"><span class="profileinfo-label">门店分类</span>
+                    <input class="profileinfo-value category" disabled/>
+                </p>
+                <p class="profileinfo-item display">
+                    <span class="profileinfo-label">地址</span>
+                    <input class="profileinfo-value province" placeholder="省份" disabled/>
+                    <input class="profileinfo-value city" placeholder="城市" disabled/>
+                    <input class="profileinfo-value district" placeholder="区／县" disabled/>
+                </p>
+
+                <div class="profile-panel-btn">
+                    <button class="canteen-info-pass">通过</button>
+                    <button class="canteen-info-reject">拒绝</button>
+                </div>
+            </div>
+
+            <div class="unauditedInfo-list">
+                <table>
+                    <tr>
+                        <th>餐厅编号</th>
+                        <th>餐厅名字</th>
+                        <th>申请时间</th>
+                        <th>审批</th>
+                    </tr>
+                    <tr>
+                        <td class="canteen-id">1</td>
+                        <td class="canteen-time">保安人员</td>
+                        <td class="check"><button>审批</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
