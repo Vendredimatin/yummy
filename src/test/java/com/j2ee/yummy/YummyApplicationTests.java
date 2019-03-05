@@ -3,6 +3,7 @@ package com.j2ee.yummy;
 import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Balance;
+import com.j2ee.yummy.model.Manager;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.Menu;
 import com.j2ee.yummy.model.order.MessageOrder;
@@ -39,6 +40,9 @@ public class YummyApplicationTests {
     OrderServiceImpl orderService;
     @Autowired
     BalanceDao balanceDao;
+    @Autowired
+    ManagerDao managerDao;
+
     @Test
     public void contextLoads() {
     }
@@ -66,12 +70,9 @@ public class YummyApplicationTests {
         address.setCity("南京市");
         address.setDistrict("鼓楼区");
         canteen.setAddress(address);
-        List<CanteenCategory> canteenCategories = new ArrayList<>();
-        canteenCategories.add(CanteenCategory.云南菜);
-        canteenCategories.add(CanteenCategory.川菜);
-        canteenCategories.add(CanteenCategory.江苏菜);
 
-        canteen.setCategories(canteenCategories);
+
+        canteen.setCategories("云南菜");
 
         canteenDao.insert(canteen);
     }
@@ -128,6 +129,14 @@ public class YummyApplicationTests {
         balance.setBalance(1000);
         balance.setUserType(UserType.Canteen);
         balanceDao.insert(balance);
+    }
+
+    @Test
+    public void insertManager(){
+        Manager manager = new Manager();
+        manager.setPassword("123");
+        manager.setName("经理1");
+        managerDao.insert(manager);
     }
 }
 

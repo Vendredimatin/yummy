@@ -91,11 +91,11 @@ public class CanteenController {
         canteen.setPhone(phone);
         canteen.setAddress(address);
 
-        CanteenCategory canteenCategory = CanteenCategory.valueOf(categories);
+       /* CanteenCategory canteenCategory = CanteenCategory.valueOf(categories);
         List<CanteenCategory> canteenCategories = new ArrayList<>();
-        canteenCategories.add(canteenCategory);
+        canteenCategories.add(canteenCategory);*/
 
-        canteen.setCategories(canteenCategories);
+        canteen.setCategories(categories);
 
         canteen = canteenService.register(canteen);
 
@@ -153,27 +153,37 @@ public class CanteenController {
         return canteen;
     }
 
-    @PostMapping(value = "/canteen/modify")
+    @PostMapping(value = "/canteen/info/modify")
     @ResponseBody
     public String modify(@RequestBody String json, HttpSession session) {
         System.out.println("进入 canteenModifyInfo................");
 
         JSONObject jsonObject = JSON.parseObject(json);
-        long id = (long) session.getAttribute("canteenID");
-        String password = (String) jsonObject.get("password");
-        String canteenName = (String) jsonObject.get("canteenName");
+        long canteenID = (long) session.getAttribute("canteenID");
+        String canteenName = (String) jsonObject.get("name");
         String landlordName = (String) jsonObject.get("landlordName");
         String phone = (String) jsonObject.get("phone");
+        String category = jsonObject.getString("category");
+
         //地址
-        Address address = (Address) jsonObject.get("address");
+        String province = jsonObject.getString("province");
+        String city = jsonObject.getString("city");
+        String district = jsonObject.getString("district");
+
+        Address address = new Address();
+        address.setProvince(province);
+        address.setCity(city);
+        address.setDistrict(district);
 
         UnauditedCanInfo unauditedCanInfo = new UnauditedCanInfo();
-        unauditedCanInfo.setId(id);
-        unauditedCanInfo.setPassword(password);
+        unauditedCanInfo.setCanteenID(canteenID);
         unauditedCanInfo.setCanteenName(canteenName);
         unauditedCanInfo.setLandlordName(landlordName);
         unauditedCanInfo.setPhone(phone);
+        unauditedCanInfo.setCategories(category);
         unauditedCanInfo.setAddress(address);
+
+        System.out.println(unauditedCanInfo);
 
         //观察者模式，提供给经理审批
         return canteenService.modify(unauditedCanInfo) ? "success" : "fail";

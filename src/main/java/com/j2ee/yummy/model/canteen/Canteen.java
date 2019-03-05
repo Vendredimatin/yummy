@@ -1,13 +1,17 @@
 package com.j2ee.yummy.model.canteen;
 
 import com.j2ee.yummy.model.Address;
+import com.j2ee.yummy.model.Manager;
 import com.j2ee.yummy.model.converter.EntityConverter;
 import com.j2ee.yummy.model.converter.ListConverter;
 import com.j2ee.yummy.observer.Observer;
+import com.j2ee.yummy.observer.Subject;
+import com.j2ee.yummy.serviceImpl.ManagerServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Proxy;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,21 +39,13 @@ public class Canteen{
     @Convert(converter = EntityConverter.class)
     protected Address address;
     private String profile = "";
-    @Convert(converter = ListConverter.class)
-    private List<CanteenCategory> categories;
-    //存入数据库时，这个需要被忽略
-    @Transient
-    private List<Observer> observers;
+    private String categories;
 
-   /* @Transient
-    @Autowired
-    ManagerServiceImpl managerService;*/
 
     public Canteen() {
-        //attachAll();
     }
 
-    public Canteen(long id, String password, String canteenName, String landlordName, String phone, Address address, String profile,List<CanteenCategory> canteenCategories) {
+    public Canteen(long id, String password, String canteenName, String landlordName, String phone, Address address, String profile,String canteenCategories) {
         this.id = id;
         this.password = password;
         this.canteenName = canteenName;
@@ -59,10 +55,9 @@ public class Canteen{
         this.profile = profile;
         this.categories = canteenCategories;
 
-        //attachAll();
     }
 
-    public Canteen(String password, String canteenName, String landlordName, String phone, Address address, String profile,List<CanteenCategory> canteenCategories) {
+    public Canteen(String password, String canteenName, String landlordName, String phone, Address address, String profile,String canteenCategories) {
         this.password = password;
         this.canteenName = canteenName;
         this.landlordName = landlordName;
@@ -71,7 +66,6 @@ public class Canteen{
         this.profile = profile;
         this.categories = canteenCategories;
 
-       // attachAll();
     }
 
     @Override
@@ -88,23 +82,5 @@ public class Canteen{
                 '}';
     }
 
-    /* public void attachAll(){
-        //这里的话应该能在数据库层优化自动实现，多对多
-        List<Manager> managers = managerService.getAllMs();
-        observers.addAll(managers);
-    }
-
-    @Override
-    public void attach(Observer observer) {
-        observers.add(observer);
-    }
-
-
-    @Override
-    public void notify(UnauditedCanInfo canteenInfo) {
-        for (Observer observer:observers) {
-            observer.update(canteenInfo);
-        }
-    }*/
 }
 

@@ -2,10 +2,20 @@ package com.j2ee.yummy.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.j2ee.yummy.model.Manager;
+import com.j2ee.yummy.model.canteen.UnauditedCanInfo;
+import com.j2ee.yummy.serviceImpl.ManagerServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @program: yummy
@@ -16,16 +26,57 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ManagerController {
+    @Autowired
+    ManagerServiceImpl managerService;
+
+    @GetMapping(value = "/managerLogin")
+    public String init(){
+        return "managerLogin.html";
+    }
+
+    @GetMapping(value = "/managerAudit")
+    public String initInfo(){
+        return "managerAudit.html";
+    }
 
     @PostMapping(value = "/manager/login")
     @ResponseBody
-    public void login(@RequestBody String json){
+    public Object login(@RequestBody JSONObject jsonObject, HttpSession httpSession){
         System.out.println("进入 manger login....................");
 
-        JSONObject jsonObject = JSON.parseObject(json);
-        long id = (long) jsonObject.get("id");
-        String password = (String) jsonObject.get("password");
+        long id =  jsonObject.getLong("id");
+        String password = jsonObject.getString("password");
+        Manager manager = managerService.login(id,password);
 
+        httpSession.setAttribute("managerID",manager.getId());
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "登录成功");
+        return map;
+    }
+
+    @PostMapping(value = "/manager/unauditedInfo/list")
+    @ResponseBody
+    public List<UnauditedCanInfo> unauditedCanInfoList(){
+        System.out.println("进入 manger unauditedInfo list....................");
+
+        List<UnauditedCanInfo> unauditedCanInfos = managerService.getAllUnaudited();
+
+        return unauditedCanInfos;
+    }
+
+    @PostMapping(value = "/manager/pass")
+    @ResponseBody
+    public Object pass(@RequestBody JSONObject jsonObject){
+        System.out.println("进入 manger pass....................");
+
+        long canteenID =  jsonObject.getLong("canteenID");
+        managerService.pass(canteenID);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "成功");
+        return map;
     }
 }
