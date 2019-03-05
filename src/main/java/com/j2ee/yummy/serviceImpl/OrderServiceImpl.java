@@ -135,4 +135,9 @@ public class OrderServiceImpl {
         Pageable pageable = PageRequest.of(pageIndex-1,PAGE_SIZE);
         return orderDao.findByConditions(memberID,startTime,endTime,maxPrice,minPrice,canteenName,orderState,pageable);
     }
+
+    public Page<Order> canteenSearch(long canteenID, LocalDate startTime, LocalDate endTime, double maxPrice, double minPrice, String memberName, String orderState, int pageIndex) {
+        Pageable pageable = PageRequest.of(pageIndex-1,PAGE_SIZE);
+        return orderDao.findByConditionsForCan(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,pageable);
+    }
 }

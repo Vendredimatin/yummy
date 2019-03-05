@@ -1,6 +1,65 @@
 window.onload = function () {
     init();
 
+    //搜索
+    $(".place-search-btn").click(function () {
+        console.log("@@@");
+        let d = {};
+        d.startTime = $(".start-time").val();
+        d.endTime = $('.end-time').val();
+        d.maxPrice = $(".max-price").val();
+        d.maxPrice = (d.maxPrice == '')?-1:d.maxPrice;
+        d.minPrice = $(".min-price").val();
+        d.minPrice = (d.minPrice == '')?-1:d.minPrice;
+        d.memberName = $('.member-area input').val();
+        d.memberNameName = (d.memberName == '')?"null":d.memberName;
+        d.orderState =  $('.state-area select option:selected').text();
+
+        $.ajax({
+            url:"/canteen/order/search",
+            type:'post',
+            data:JSON.stringify(d),
+            contentType: "application/json;charset=utf-8",
+            success: function (orders) {
+                console.log(orders);
+                initHtml(orders);
+            },
+            fail: function (data) {
+                alert("fail");
+            }
+        })
+    });
+
+    //下一页
+    $(".pages span").click(function () {
+        let currentPage = parseInt($(this).attr("current-page"));
+
+        let d = {};
+        d.startTime = $(".start-time").val();
+        d.endTime = $('.end-time').val();
+        d.maxPrice = $(".max-price").val();
+        d.maxPrice = (d.maxPrice == '')?-1:d.maxPrice;
+        d.minPrice = $(".min-price").val();
+        d.minPrice = (d.minPrice == '')?-1:d.minPrice;
+        d.memberName = $('.member-area input').val();
+        d.memberName = (d.memberName == '')?"null":d.memberName;
+        d.orderState =  $('.state-area select option:selected').text();
+        d.nextPage = currentPage + 1;
+        $.ajax({
+            url:"/canteen/order/page",
+            type:'post',
+            data:JSON.stringify(d),
+            contentType: "application/json;charset=utf-8",
+            success: function (orders) {
+                console.log(orders);
+                initHtml(orders);
+            },
+            fail: function (data) {
+                alert("fail");
+            }
+        })
+    });
+
     function init() {
         $.ajax({
             url:"/canteen/order/history",
@@ -17,6 +76,7 @@ window.onload = function () {
     }
 
     function initHtml(orders) {
+        $(".timeline").remove();
 
         for (let i = 0; i < orders.length; i++) {
             let order = orders[i];
@@ -43,7 +103,7 @@ window.onload = function () {
                 '                        <h3 class="end">'+ order['orderState'] +'</h3>\n' +
                 '                    </td>\n' +
                 '                    <td class="ordertimeline-handle">\n' +
-                '                        <a class="ordertimeline-handle-detail">订单详情</a>\n' +
+                '                        <a class="ordertimeline-handle-detail" order-id="'+ order['id'] +'">订单详情</a>\n' +
                 '                    </td>\n' +
                 '                </tr>';
 

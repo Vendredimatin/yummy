@@ -131,7 +131,7 @@ window.onload = function () {
               '                        <h3 class="end">'+ order['orderState'] +'</h3>\n' +
               '                    </td>\n' +
               '                    <td class="ordertimeline-handle">\n' +
-              '                        <a class="ordertimeline-handle-detail">订单详情</a>\n' +
+              '                        <a class="ordertimeline-handle-detail" order-id="'+ order['id'] +'">订单详情</a>\n' +
               '                    </td>\n' +
               '                    <td class="ordertimeline-unsubscribe" order-id="'+ order['id'] +'">\n';
           if (order['orderState'] == "完成")

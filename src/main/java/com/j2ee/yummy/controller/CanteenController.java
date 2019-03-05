@@ -6,8 +6,11 @@ import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.UnauditedCanInfo;
+import com.j2ee.yummy.model.order.Order;
+import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import com.j2ee.yummy.service.CanteenService;
 import com.j2ee.yummy.serviceImpl.BalanceServiceImpl;
+import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.slf4j.Logger;
@@ -22,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static com.j2ee.yummy.StaticFinalVariable.CANTEEN_PROFIT_PERCENT;
 
 /**
  * @program: yummy
@@ -39,6 +44,8 @@ public class CanteenController {
     CanteenService canteenService;
     @Autowired
     BalanceServiceImpl balanceService;
+    @Autowired
+    OrderServiceImpl orderService;
 
     @GetMapping(value = "/canteenRegister")
     public String initRegister() {
@@ -197,10 +204,16 @@ public class CanteenController {
         long canteenID = (long) session.getAttribute("canteenID");
 
         Balance balance = balanceService.getBalance(canteenID, UserType.Canteen);
+        List<Order> orders = orderService.getOrdersByCanID(canteenID);
+        double totalProfit = orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).mapToDouble(Order::getTotalPrice).sum();
+        int totalOrderNums = (int) orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).count();
+
 
         Map<String, Object> map = new HashMap<>();
         map.put("message", "获取成功");
         map.put("balance", balance);
+        map.put("totalProfit",totalProfit * CANTEEN_PROFIT_PERCENT);
+        map.put("totalNums",totalOrderNums);
         return map;
     }
 }

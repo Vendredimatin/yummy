@@ -163,7 +163,7 @@ public class OrderController {
 
         List<Order> orders = orderService.getOrdersByCanID(canteenID);
 
-        return orders;
+        return orders.subList(0,PAGE_SIZE);
     }
 
 
@@ -213,11 +213,6 @@ public class OrderController {
         String canteenName = jsonObject.getString("canteenName");
         String orderState = jsonObject.getString("orderState");
 
-        System.out.println(startTime);
-        System.out.println(endTime);
-        System.out.println(maxPrice);
-        System.out.println(minPrice);
-        System.out.println(canteenName);
         Page<Order> orders = orderService.memberSearch(memberID,startTime,endTime,maxPrice,minPrice,canteenName,orderState,1);
 
         return orders.getContent();
@@ -237,15 +232,46 @@ public class OrderController {
         String orderState = jsonObject.getString("orderState");
         int pageIndex = jsonObject.getInteger("nextPage");
 
-        System.out.println(startTime);
-        System.out.println(endTime);
-        System.out.println(maxPrice);
-        System.out.println(minPrice);
-        System.out.println(canteenName);
         Page<Order> orders = orderService.memberSearch(memberID,startTime,endTime,maxPrice,minPrice,canteenName,orderState,pageIndex);
 
         return orders.getContent();
     }
 
+    @PostMapping(value = "/canteen/order/search")
+    @ResponseBody
+    public List<Order> canteenSearch(@RequestBody JSONObject jsonObject, HttpSession session){
+        System.out.println("进入 OrderController canteenSearch....................");
+
+        long canteenID = (long) session.getAttribute("canteenID");
+        LocalDate startTime = jsonObject.getObject("startTime",LocalDate.class);
+        LocalDate endTime = jsonObject.getObject("endTime",LocalDate.class);
+        double maxPrice = jsonObject.getObject("maxPrice",Double.class);
+        double minPrice = jsonObject.getObject("minPrice",Double.class);
+        String memberName = jsonObject.getString("memberName");
+        String orderState = jsonObject.getString("orderState");
+
+        Page<Order> orders = orderService.canteenSearch(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,1);
+
+        return orders.getContent();
+    }
+
+    @PostMapping(value = "/canteen/order/page")
+    @ResponseBody
+    public List<Order> canteenPage(@RequestBody JSONObject jsonObject, HttpSession session){
+        System.out.println("进入 OrderController canteenSearch....................");
+
+        long canteenID = (long) session.getAttribute("canteenID");
+        LocalDate startTime = jsonObject.getObject("startTime",LocalDate.class);
+        LocalDate endTime = jsonObject.getObject("endTime",LocalDate.class);
+        double maxPrice = jsonObject.getObject("maxPrice",Double.class);
+        double minPrice = jsonObject.getObject("minPrice",Double.class);
+        String memberName = jsonObject.getString("memberName");
+        String orderState = jsonObject.getString("orderState");
+        int pageIndex = jsonObject.getInteger("nextPage");
+
+        Page<Order> orders = orderService.canteenSearch(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,pageIndex);
+
+        return orders.getContent();
+    }
 
 }

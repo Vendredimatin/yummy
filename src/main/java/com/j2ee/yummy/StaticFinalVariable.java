@@ -15,4 +15,6 @@ public class StaticFinalVariable {
     public static final int PAY_TIME = 2 * MINUTE;
 
     public static final int PAGE_SIZE = 5;
+
+    public static final double CANTEEN_PROFIT_PERCENT = 0.8;
 }
