@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/profile-sidebar.css">
+    <link rel="stylesheet" href="css/manager/managerStatistics.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/Chart.min.js"></script>
+    <script type="text/javascript" src="js/manager/managerStatistics.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="container clearfix">
+        <h1><a href="/" class="topbar-logo icon-logo"><span>Yummy</span></a></h1>
+        <a href="/" hardjump="" class="topbar-item topbar-homepage focus">首页
+        </a>
+
+        <a href="/profile/order" class="topbar-item">我的订单</a>
+        <a href="/profile/order" class="topbar-item">个人信息</a>
+
+        <span class="topbar-member-area">
+            <span class="topbar-member-name">111</span>
+            <span class="caret"></span>
+            <ul class="user-menu" style="display: none;">
+                    <li><a href="javascript:void 0">查看天气</a></li>
+                    <li><a href="javascript:void 0">退出</a></li>
+                </ul>
+        </span>
+    </div>
+</header>
+
+<div class="main-area">
+
+    <ul class="profile-sidebar" role="navigation">
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>审批</h2>
+            <ul>
+                <li class="active"><a href="/canteenOrderHistory">餐厅申请</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile-sidebar-section">
+            <h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>统计信息</h2>
+            <ul>
+                <li class="active"><a href="/managerStatistics">统计</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="profile-panel" role="main">
+        <h3 class="profile-paneltitle">
+            <span class="ng-binding">统计</span>
+        </h3>
+        <div class="profile-panelcontent" id="profile-panelcontent">
+            <div class="balance-summary index">
+                <p class="balance-tip"><span class="balance-summary-title">共赚取利润：</span>
+                    <b class="balance-number">0</b>元</p>
+            </div>
+            <div class="chart">
+                <span>会员和餐厅数量统计</span>
+                <canvas id="chart1" width="500" height="300"></canvas>
+            </div>
+            <div class="chart">
+                <span>会员消费统计</span>
+                <canvas id="chart2" width="500" height="300"></canvas>
+            </div>
+            <div class="chart">
+                <span>餐厅销售订单统计</span>
+                <canvas id="chart3" width="500" height="300"></canvas>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

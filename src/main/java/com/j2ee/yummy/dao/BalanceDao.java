@@ -6,6 +6,8 @@ import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: 余额的dao层
@@ -24,6 +26,10 @@ public class BalanceDao {
 
     public Balance getBalance(long userID){
         return balanceRepository.findBalanceByUserID(userID);
+    }
+
+    public List<Balance> getBalancesByUserType(UserType userType){
+        return balanceRepository.findAllByUserType(userType);
     }
 
     public void updateBalance(Balance balance){

@@ -61,6 +61,10 @@ public class CanteenServiceImpl implements CanteenService {
         return canteenDao.getAll();
     }
 
+    public long count(){
+        return canteenDao.getExistNum();
+    }
+
     private long getID(long id) {
         return id+START;
     }

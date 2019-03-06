@@ -8,6 +8,8 @@ import com.j2ee.yummy.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -48,5 +50,19 @@ public class MemberServiceImpl implements MemberService {
         Member member = POVOChanger.toMember(memberPO);
 
         return member;
+    }
+
+    public List<Member> getAll(){
+        List<Member> members = new ArrayList<>();
+        List<MemberPO> memberPOS = memberDao.getAll();
+        for (MemberPO m:memberPOS         ) {
+            members.add(POVOChanger.toMember(m));
+        }
+
+        return members;
+    }
+
+    public long count(){
+        return memberDao.getExistNum();
     }
 }

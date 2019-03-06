@@ -54,6 +54,10 @@ public class OrderServiceImpl {
         return orderDao.getOrdersByCanID(canteenID);
     }
 
+    public List<Order> getAll(){
+        return orderDao.getAll();
+    }
+
     /**
      * 支付后，钱会先到平台上，确认后才会分给商家
      *

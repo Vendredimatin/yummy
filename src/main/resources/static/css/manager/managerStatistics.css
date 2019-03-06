@@ -33,3 +33,39 @@ body {
     margin-left: 42px;
     display: none;
 }
+
+.chart{
+    height: 300px;
+    width: 500px;
+    float: left;
+}
+
+
+.balance-summary.index {
+    padding-left: 126px;
+}
+
+.balance-summary {
+    margin: 12px 0 24px;
+    padding: 19px;
+    background-color: #fafafa;
+    border: 1px solid #f3f3f3;
+}
+
+.balance-tip {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.balance-summary-title {
+    margin-left: -100px;
+    width: 100px;
+}
+
+.balance-number {
+    margin-right: 8px;
+    font-weight: 700;
+    color: #f74342;
+    font-size: 24px;
+    font-family: arial;
+}

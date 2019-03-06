@@ -6,6 +6,8 @@ import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: 余额的业务逻辑类
@@ -23,5 +25,9 @@ public class BalanceServiceImpl {
 
     public Balance getBalance(long userID, UserType userType){
         return balanceDao.getBalance(userID,userType);
+    }
+
+    public List<Balance> getBalances(UserType userType){
+        return balanceDao.getBalancesByUserType(userType);
     }
 }

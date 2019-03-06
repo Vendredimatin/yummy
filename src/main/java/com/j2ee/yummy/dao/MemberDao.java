@@ -6,6 +6,8 @@ import com.j2ee.yummy.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @program: yummy
  * @description: 会员类的数据逻辑类
@@ -17,6 +19,14 @@ import org.springframework.stereotype.Repository;
 public class MemberDao {
     @Autowired
     MemberRepository memberRepository;
+
+    public List<MemberPO> getAll(){
+        return memberRepository.findAll();
+    }
+
+    public long getExistNum(){
+        return memberRepository.count();
+    }
 
     public MemberPO login(String email,String password){
         MemberPO member = memberRepository.findByEmailAndPassword(email,password);

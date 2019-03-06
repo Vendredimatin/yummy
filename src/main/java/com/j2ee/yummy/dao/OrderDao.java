@@ -3,6 +3,7 @@ package com.j2ee.yummy.dao;
 import com.j2ee.yummy.Repository.OrderRepository;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,10 @@ public class OrderDao {
 
     public List<Order> getOrdersByCanID(long canteenID){
         return orderRepository.findAllByCanteenID(canteenID);
+    }
+
+    public List<Order> getAll(){
+        return orderRepository.findAll();
     }
 
     public boolean updateOrderState(OrderState orderState,long orderID){

@@ -39,6 +39,11 @@ public class ManagerController {
         return "managerAudit.html";
     }
 
+    @GetMapping(value = "/managerStatistics")
+    public String initStatistics() {
+        return "managerStatistics.html";
+    }
+
     @PostMapping(value = "/manager/login")
     @ResponseBody
     public Object login(@RequestBody JSONObject jsonObject, HttpSession httpSession){
@@ -77,6 +82,17 @@ public class ManagerController {
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("message", "成功");
+        return map;
+    }
+
+    @PostMapping(value = "/manager/statistics")
+    @ResponseBody
+    public Object statistics(){
+        System.out.println("进入 manger statistics....................");
+
+        Map<String,Object> map = managerService.getStatistics();
+        map.put("message", "成功");
+
         return map;
     }
 }

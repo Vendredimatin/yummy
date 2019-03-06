@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MemberRepository extends JpaRepository<MemberPO,Long> {
 
     public MemberPO findByEmailAndPassword(String email,String passowrd);
+
+
 }
