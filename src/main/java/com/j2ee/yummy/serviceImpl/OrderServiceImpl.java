@@ -3,8 +3,11 @@ package com.j2ee.yummy.serviceImpl;
 import com.j2ee.yummy.dao.BalanceDao;
 import com.j2ee.yummy.dao.OrderDao;
 import com.j2ee.yummy.model.Balance;
+import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
+import com.j2ee.yummy.service.MemberService;
+import com.j2ee.yummy.yummyEnum.MemberGrade;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.j2ee.yummy.StaticFinalVariable.PAGE_SIZE;
 
@@ -35,6 +40,8 @@ public class OrderServiceImpl {
     BalanceDao balanceDao;
     @Autowired
     MenuServiceImpl menuService;
+    @Autowired
+    MemberService memberService;
 
     public static final double CAN_DISCOUNT = 0.8;
     public static final double YUMMY_DISCOUNT = 1 - CAN_DISCOUNT;
@@ -64,20 +71,37 @@ public class OrderServiceImpl {
      * @param orderID
      * @return
      */
-    public boolean pay(long orderID) {
+    public Map<String, Object> pay(long orderID) {
         Order order = orderDao.getOrderByID(orderID);
+
+        //根据会员等级进行优惠
+        Member member = memberService.getMemberByID(order.getMemberID());
+
+        double actualPrice = member.pay(order.getTotalPrice());
+        double originPrice = order.getTotalPrice();
 
         Balance memberBalance = balanceDao.getBalance(order.getMemberID(), UserType.Member);
         Balance yummyBalance = balanceDao.getBalance(0);
 
 
-        memberBalance.setBalance(memberBalance.getBalance() - order.getTotalPrice());
-        yummyBalance.setBalance(yummyBalance.getBalance() + order.getTotalPrice());
+        memberBalance.setBalance(memberBalance.getBalance() - actualPrice);
+        memberBalance.setCost(memberBalance.getCost() + actualPrice);
+
+        yummyBalance.setBalance(yummyBalance.getBalance() + actualPrice);
+
         //yummy结算
         balanceDao.updateBalance(memberBalance);
         balanceDao.updateBalance(yummyBalance);
 
-        return orderDao.updateOrderState(OrderState.派送中, orderID);
+        //更新order的状态和价格
+        order.setOrderState(OrderState.派送中);
+        order.setTotalPrice(actualPrice);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("originPrice",originPrice);
+        map.put("actualPrice",actualPrice);
+
+        return map;
     }
 
     public void cancel(long orderID) {
@@ -101,13 +125,27 @@ public class OrderServiceImpl {
         Balance yummyBalance = balanceDao.getBalance(0);
 
         canteenBalance.setBalance(canteenBalance.getBalance() + price * CAN_DISCOUNT);
+        canteenBalance.setProfit(canteenBalance.getProfit() + price * CAN_DISCOUNT);
+
         yummyBalance.setBalance(yummyBalance.getBalance() - price * CAN_DISCOUNT);
+        yummyBalance.setProfit(yummyBalance.getProfit() + price * (1-CAN_DISCOUNT));
+
         //yummy结算
         balanceDao.updateBalance(yummyBalance);
         balanceDao.updateBalance(canteenBalance);
 
         //此外，还要从商家的商品中减去相应的数量
         menuService.sell(order.getOrderItems());
+
+        //然后判断用户的用户等级是否可以升级
+        Balance memberBalance = balanceDao.getBalance(order.getMemberID(),UserType.Member);
+        Member member = memberService.getMemberByID(order.getMemberID());
+
+        MemberGrade memberGrade = member.checkLevel(price,memberBalance.getCost());
+        //说明消费足够，进行升级
+        if (!member.getMemberLevel().getMemberGrade().equals(memberGrade)){
+            member.setMemberGrade(memberGrade);
+        }
     }
 
     @Transactional

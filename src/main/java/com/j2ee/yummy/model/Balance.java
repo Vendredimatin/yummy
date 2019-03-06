@@ -24,6 +24,8 @@ public class Balance {
     protected long userID;
     protected double balance;
     protected String password;
+    protected double cost;
+    protected double profit;
     @Convert(converter = UserTypeConverter.class)
     protected UserType userType;
 

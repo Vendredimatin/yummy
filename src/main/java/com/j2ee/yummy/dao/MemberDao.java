@@ -1,6 +1,5 @@
 package com.j2ee.yummy.dao;
 
-import com.j2ee.yummy.PO.MemberPO;
 import com.j2ee.yummy.Repository.MemberRepository;
 import com.j2ee.yummy.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class MemberDao {
     @Autowired
     MemberRepository memberRepository;
 
-    public List<MemberPO> getAll(){
+    public List<Member> getAll(){
         return memberRepository.findAll();
     }
 
@@ -28,14 +27,14 @@ public class MemberDao {
         return memberRepository.count();
     }
 
-    public MemberPO login(String email,String password){
-        MemberPO member = memberRepository.findByEmailAndPassword(email,password);
+    public Member login(String email,String password){
+        Member member = memberRepository.findByEmailAndPassword(email,password);
         assert member!=null:"member 为空 ！";
 
         return member;
     }
 
-    public Boolean update(MemberPO member){
+    public Boolean update(Member member){
         try {
             memberRepository.save(member);
         }catch (Exception e){
@@ -46,7 +45,7 @@ public class MemberDao {
         return true;
     }
 
-    public Boolean insert(MemberPO member){
+    public Boolean insert(Member member){
         try{
             memberRepository.save(member);
         }catch (Exception e){
@@ -57,8 +56,8 @@ public class MemberDao {
         return true;
     }
 
-    public MemberPO getMemberByID(long id){
-        MemberPO memberPO = memberRepository.getOne(id);
+    public Member getMemberByID(long id){
+        Member memberPO = memberRepository.getOne(id);
 
         return memberPO;
     }

@@ -182,12 +182,10 @@ public class OrderController {
 
         long unpayedOrderID = (long) session.getAttribute("unpayedOrderID");
         springTaskDemo.changeOrderState(unpayedOrderID,OrderState.派送中);
-        orderService.pay(unpayedOrderID);
-
-
-        Map<String, Object> map = new HashMap<>();
+        Map<String,Object> map = orderService.pay(unpayedOrderID);
         map.put("success", true);
         map.put("message", "支付成功");
+
         return map;
     }
 

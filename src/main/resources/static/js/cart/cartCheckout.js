@@ -160,7 +160,7 @@ window.onload = function () {
             data: JSON.stringify(d),
             contentType: "application/json;charset=utf-8",
             success: function (data) {
-                alert(data['message']);
+                alert("支付成功！原订单"+data['originPrice']+"元,实际支付"+data['actualPrice']+"元");
                 $(".pay-dialog").css('display', 'none');
             },
             fail: function (data) {
