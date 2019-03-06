@@ -28,5 +28,24 @@ window.onload = function () {
 
       let orderItems = order['orderItems'];
 
+      $(".order-canteen-name").text(canteenName);
+      $('.order-id').text(orderID);
+      $('.order-deliveringTime').text(deliveringTime);
+      $('.order-member-name').text(memberName);
+      $('.order-member-phone').text(memberPhone);
+      $('.order-member-address').text(addressStr);
+      $('.order-totalPrice').text(totalPrice);
+
+      for (let i = 0; i < orderItems.length; i++) {
+          let orderItem = orderItems[i];
+          let html = '<div class="orderprogress-totalrow">\n' +
+              '                                <span class="cell name item">'+ orderItem['name'] +'</span>\n' +
+              '                                <span class="cell quantity item">'+ orderItem['num'] +'</span>\n' +
+              '                                <span class="cell price item">'+ orderItem['subtotal'] + '</span>\n' +
+              '                            </div>';
+
+          $('.order-items').append(html);
+      }
+
   }
 };

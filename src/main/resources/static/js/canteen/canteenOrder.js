@@ -60,6 +60,23 @@ window.onload = function () {
         })
     });
 
+    $(document).on('click','.ordertimeline-handle-detail',function () {
+        let d = {};
+        d.orderID = $(this).attr('order-id');
+        $.ajax({
+            url:"/order/detail/check",
+            type:'post',
+            data:JSON.stringify(d),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                window.location.href = "/canteenOrderDetail.html";
+            },
+            fail: function (data) {
+                alert("fail");
+            }
+        })
+    });
+
     function init() {
         $.ajax({
             url:"/canteen/order/history",
