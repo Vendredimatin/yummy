@@ -7,6 +7,7 @@ import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import com.j2ee.yummy.service.MemberService;
 import com.j2ee.yummy.serviceImpl.BalanceServiceImpl;
+import com.j2ee.yummy.serviceImpl.MemberServiceImpl;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ import java.util.Map;
 @Controller
 public class MemberController {
     @Autowired
-    MemberService memberService;
+    MemberServiceImpl memberService;
     @Autowired
     BalanceServiceImpl balanceService;
     @Autowired
@@ -59,6 +60,7 @@ public class MemberController {
 
         long userID = (long) session.getAttribute("memberID");
         Member member = memberService.getMemberByID(userID);
+        System.out.println(member);
 
         return member;
     }

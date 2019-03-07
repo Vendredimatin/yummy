@@ -3,6 +3,11 @@ window.onload = function () {
         let d = {};
         d.email = $(".member-email").val();
         d.password = $(".member-password").val();
+
+        if (d.email == '' || d.password == ''){
+            alert("邮箱密码不得为空");
+            return;
+        }
         console.log(d);
         $.ajax({
             url:"/member/login",
@@ -26,6 +31,12 @@ window.onload = function () {
         let d = {};
         d.account = $(".manager-account").val();
         d.password = $(".manager-password").val();
+
+        if (d.account == '' || d.password == ''){
+            alert("帐号密码不得为空");
+            return;
+        }
+
         $.ajax({
             url:"/manager/login",
             type:"post",
@@ -47,6 +58,11 @@ window.onload = function () {
         let d = {};
         d.account = $(".canteen-account").val();
         d.password = $(".canteen-password").val();
+
+        if (d.account == '' || d.password == ''){
+            alert("帐号密码不得为空");
+            return;
+        }
         $.ajax({
             url:"/canteen/login",
             type:"post",

@@ -31,6 +31,12 @@ window.onload = function () {
         d.email = $('.member-email').val();
         d.password = $(".member-password").val();
         d.phone = $(".member-phone").val();
+
+        if (d.name == '' || d.password == '' || d.email == '' || d.phone == ''){
+            alert("注册的所有信息不允许为空！");
+            return;
+        }
+
         $.ajax({
             url: "/member/register",
             type: "post",

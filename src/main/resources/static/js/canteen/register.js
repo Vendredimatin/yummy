@@ -12,6 +12,13 @@ window.onload = function () {
         d.district = $('#cmbArea option:selected').val();
         d.detail = $(".canteen-info-detail").val();
 
+        if (d.canteenName == '' || d.password == '' || d.landlordName == '' || d.phone == '' ||
+            d.categories == '' || d.province == '' || d.city == '' || d.detail == ''){
+            alert("注册的所有信息不允许为空！")
+            return;
+        }
+
+
         $.ajax({
             url:"/canteen/register",
             type:"post",

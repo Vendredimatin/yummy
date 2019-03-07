@@ -56,7 +56,7 @@ public class Member extends User {
         return "Member{" + super.toString() + '\'' +
                 "email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", memberLevel=" + memberLevel +
+                ", memberLevel=" + memberLevel.toString() +
                 ", addresses=" + addresses +
                 ", profile='" + profile + '\'' +
                 '}';

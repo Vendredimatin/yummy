@@ -4,7 +4,6 @@ window.onload = function (ev) {
 
     $(".modify").click(function () {
         $(".profileinfo-value.name").attr("disabled",false);
-        $(".profileinfo-value.email").attr("disabled",false);
         $(".profileinfo-value.phone").attr("disabled",false);
     });
 
@@ -83,7 +82,7 @@ function init() {
             $(".profileinfo-value.name").val(name);
             $(".profileinfo-value.email").val(email);
             $(".profileinfo-value.phone").val(phone);
-            $(".profileinfo-value.memberLevel").val(memberLevel);
+            $(".profileinfo-value.memberLevel").val(memberLevel['memberGrade']);
         },
         fail:function (data) {
             alert("fail");

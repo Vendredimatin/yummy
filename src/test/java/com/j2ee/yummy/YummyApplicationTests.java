@@ -1,5 +1,6 @@
 package com.j2ee.yummy;
 
+import com.j2ee.yummy.Repository.MemberRepository;
 import com.j2ee.yummy.Repository.OrderRepository;
 import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
@@ -31,6 +32,10 @@ public class YummyApplicationTests {
     @Autowired
     UserDao userDao;
     @Autowired
+    MemberDao memberDao;
+    @Autowired
+    MemberRepository memberRepository;
+    @Autowired
     AddressDao addressDao;
     @Autowired
     CanteenDao canteenDao;
@@ -57,7 +62,7 @@ public class YummyApplicationTests {
 
     @Test
     public void testUser(){
-        System.out.println(userDao.findOne(1));
+        System.out.println(memberRepository.getOne(Long.valueOf(1)));
     }
 
     @Test
