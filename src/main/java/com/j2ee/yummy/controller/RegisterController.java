@@ -1,6 +1,7 @@
 package com.j2ee.yummy.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.j2ee.yummy.serviceImpl.CancelledMemberServiceImpl;
 import com.j2ee.yummy.serviceImpl.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class RegisterController {
     @Autowired
     MemberServiceImpl memberService;
+    @Autowired
+    CancelledMemberServiceImpl cancelledMemberService;
 
     @GetMapping(value = "/memberRegister")
     public String init(){
@@ -53,12 +56,20 @@ public class RegisterController {
     public Object identifyCode(@RequestBody JSONObject jsonObject){
 
         String email = jsonObject.getString("email");
-        String identifyCode = memberService.sendEmail(email);
 
         Map<String,Object> map = new HashMap<>();
-        map.put("success", true);
-        map.put("message", "发送成功");
-        map.put("identifyCode",identifyCode);
+
+        if (memberService.isExists(email)){
+            map.put("success", false);
+            map.put("message", "邮箱已被注册，请重新填写邮箱");
+        }else {
+            String identifyCode = memberService.sendEmail(email);
+            map.put("success", true);
+            map.put("message", "发送成功");
+            map.put("identifyCode",identifyCode);
+        }
+
+
         return map;
     }
 }

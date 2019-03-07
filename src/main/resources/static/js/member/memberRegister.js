@@ -11,7 +11,8 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 alert(data["message"]);
-                identifyCode = data['identifyCode'];
+                if (data['success'])
+                    identifyCode = data['identifyCode'];
             },
             fail:function (data) {
                 alert("fail");

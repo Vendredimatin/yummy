@@ -8,6 +8,7 @@ import com.j2ee.yummy.yummyEnum.MemberGrade;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.Convert;
 import javax.persistence.Converter;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Proxy(lazy = false)
 @Table(name = "member")
 @Entity
 public class Member extends User {

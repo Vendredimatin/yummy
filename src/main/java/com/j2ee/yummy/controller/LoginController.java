@@ -6,6 +6,7 @@ import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.service.CancelledMemberService;
 import com.j2ee.yummy.service.MemberService;
+import com.j2ee.yummy.serviceImpl.CancelledMemberServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class LoginController {
     @Autowired
     MemberService memberService;
     @Autowired
-    CancelledMemberService cancelledMemberService;
+    CancelledMemberServiceImpl cancelledMemberService;
 
     @GetMapping(value = "/login")
     public String init() {
@@ -50,12 +51,17 @@ public class LoginController {
         String password =  jsonObject.getString("password");
 
         System.out.println(email+"@"+password);
-       /* //已注销的用户无法再登录，但是保留数据库中的数据
-        if (cancelledMemberService.isCancelled(member.getId()))
-            return "已注销！";*/
 
 
         Map<String, Object> map = new HashMap<>();
+        //已注销的用户无法再登录，但是保留数据库中的数据
+        if (cancelledMemberService.isCancelled(email)){
+            map.put("success", false);
+            map.put("message", "该帐号已被注销");
+            return map;
+        }
+
+
         try {
             Member member = memberService.login(email, password);
             session.setAttribute("memberID", member.getId());
@@ -67,6 +73,20 @@ public class LoginController {
             map.put("message", "帐号/密码失败");
         }
 
+        return map;
+    }
+
+    @PostMapping(value = "/member/logoff")
+    @ResponseBody
+    public Object logoff(HttpSession session){
+        long memberID = (long) session.getAttribute("memberID");
+
+        Member member = memberService.getMemberByID(memberID);
+        cancelledMemberService.add(member);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "注销成功");
         return map;
     }
 }

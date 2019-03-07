@@ -1,7 +1,8 @@
 package com.j2ee.yummy.serviceImpl;
 
-import com.j2ee.yummy.dao.CancelledMemberDao;
+import com.j2ee.yummy.Repository.CancelledMemberRepository;
 import com.j2ee.yummy.model.CancelledMember;
+import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.service.CancelledMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class CancelledMemberServiceImpl implements CancelledMemberService {
     @Autowired
-    CancelledMemberDao cancelledMemberDao;
+    CancelledMemberRepository cancelledMemberRepository;
 
     @Override
-    public boolean add(CancelledMember cancelledMember) {
-        return cancelledMemberDao.add(cancelledMember);
+    public CancelledMember add(Member member) {
+        CancelledMember cancelledMember = new CancelledMember();
+        cancelledMember.setMemberID(member.getId());
+        cancelledMember.setEmail(member.getEmail());
+        return cancelledMemberRepository.save(cancelledMember);
     }
 
     @Override
-    public boolean isCancelled(long id) {
-        return cancelledMemberDao.isExist(id);
+    public boolean isCancelled(String email) {
+        return cancelledMemberRepository.existsByEmail(email);
     }
 }

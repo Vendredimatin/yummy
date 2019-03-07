@@ -62,5 +62,8 @@ public class MemberDao {
         return memberPO;
     }
 
+    public boolean isExists(String email){
+        return memberRepository.existsByEmail(email);
+    }
 
 }

@@ -7,5 +7,5 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 
     public Member findByEmailAndPassword(String email,String passowrd);
 
-
+    public boolean existsByEmail(String email);
 }

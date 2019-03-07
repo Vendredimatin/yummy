@@ -92,4 +92,8 @@ public class MemberServiceImpl implements MemberService {
         return sb.toString();
 
     }
+
+    public boolean isExists(String email){
+        return memberDao.isExists(email);
+    }
 }
