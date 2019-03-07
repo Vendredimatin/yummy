@@ -1,43 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
-
-    <script src="js/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Title</title>
+    <link rel="stylesheet" href="css/member/memberRegister.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/member/memberRegister.js"></script>
 </head>
 <body>
-<h1>注册</h1>
-<div id="register-panel">
-    <input v-model="email" ref="email" placeholder="输入邮箱">
-    <input v-model="password" placeholder="输入密码">
-    <button v-on:click="submit"></button>
+<div class="bg">
+    <div class="wel">会员注册</div>
+    <div class="user">
+        <div class="yonghu" style="">姓名:</div>
+        <input class="member-name"/>
+    </div>
+    <div class="email">
+        <div class="yonghu" style="">邮箱:</div>
+        <input class="member-email"/>
+        <button class="send-email">发送邮件</button>
+    </div>
+    <div class="password">
+        <div class="yonghu">密&nbsp;&nbsp;&nbsp;码:</div>
+        <input class="member-password"/></p>
+    </div>
+
+    <div class="phone">
+        <div class="yonghu" style="">联系电话:</div>
+        <input class="member-phone"/>
+    </div>
+    <div class="identify-code">
+        <div class="yonghu">验证码:</div>
+        <input class="member-identify-code"/></p>
+    </div>
+    <input class="btn member-register-submit" type="button" name="登录" value="注册"/>
 </div>
-
-<script>
-    var vm = new Vue({
-        el:"#register-panel",
-        data:{
-            email:"",
-            password:"",
-        },
-        methods: {
-            submit: function () {
-                axios.post("/register", {
-                    email: this.email,
-                    password: this.password
-                }).then(function (data) {
-                    alert("success");
-                    console.log(data);
-                    console.log(data['data']);
-                }).catch(function (reason) {
-                    alert(reason);
-                });
-            }
-        }
-    });
-</script>
-
 </body>
 </html>

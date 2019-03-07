@@ -3,30 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/canteen/canteenRegister.css">
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/zcity.js"></script>
+
     <script src="js/canteen/register.js"></script>
 </head>
 <body>
-<h1>餐厅注册申请</h1>
-<div id="canteen-register-panel">
-    <p class="profileinfo-item"><span class="profileinfo-label">餐厅名</span>
+<div class="bg">
+    <div class="wel">餐厅注册申请</div>
+    <div class="user">
+        <div class="yonghu" style="">餐厅名:</div>
         <input class="canteen-info-canteenName"/>
-    </p>
-    <p class="profileinfo-item"><span class="profileinfo-label">密码</span>
+    </div>
+    <div class="password">
+        <div class="yonghu">密&nbsp;&nbsp;&nbsp;码:</div>
         <input class="canteen-info-password"/></p>
-    <p class="profileinfo-item"><span class="profileinfo-label">联系人姓名</span>
-        <input class="canteen-info-landlordName"/></p>
-    <p class="profileinfo-item"><span class="profileinfo-label">联系电话</span>
-        <input class="canteen-info-phone"/></p>
-    <p class="profileinfo-item"><span class="profileinfo-label">门店分类</span>
-        <input class="canteen-info-category"/></p>
-    <p class="profileinfo-item"><span class="profileinfo-label">地址</span>
-        <input class="canteen-info-province" placeholder="省份"/>
-        <input class="canteen-info-city" placeholder="城市"/>
-        <input class="canteen-info-district" placeholder="区／县"/>
-    </p>
-    <button class="canteen-register-submit">提交</button>
-</div>
+    </div>
+    <div class="landlordName">
+        <div class="yonghu" style="">联系人姓名:</div>
+        <input class="canteen-info-landlordName"/>
+    </div>
+    <div class="phone">
+        <div class="yonghu" style="">联系电话:</div>
+        <input class="canteen-info-phone"/>
 
+    </div>
+    <div class="category">
+        <div class="yonghu" style="">门店分类:</div>
+        <input class="canteen-info-category"/>
+
+    </div>
+    <div class="address">
+        <div class="yonghu" style="">地址:</div>
+        <select class="form-control" id="cmbProvince" name="cmbProvince" ></select>
+        <select class="form-control" id="cmbCity" name="cmbCity" ></select>
+        <select class="form-control" id="cmbArea" name="cmbArea" ></select>
+    </div>
+    <div class="detail">
+        <div class="yonghu" style="">详细地址:</div>
+        <input class="canteen-info-detail"/>
+
+    </div>
+
+    <input class="btn canteen-register-submit" type="button" name="登录" value="注册"/>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+    })
+</script>
 </body>
 </html>

@@ -49,7 +49,7 @@ public class ManagerController {
     public Object login(@RequestBody JSONObject jsonObject, HttpSession httpSession){
         System.out.println("进入 manger login....................");
 
-        long id =  jsonObject.getLong("id");
+        long id =  jsonObject.getLong("account");
         String password = jsonObject.getString("password");
         Manager manager = managerService.login(id,password);
 

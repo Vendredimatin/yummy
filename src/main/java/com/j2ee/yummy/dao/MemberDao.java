@@ -47,7 +47,7 @@ public class MemberDao {
 
     public Boolean insert(Member member){
         try{
-            memberRepository.save(member);
+            memberRepository.saveAndFlush(member);
         }catch (Exception e){
             e.printStackTrace();
             return false;

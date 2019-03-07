@@ -3,6 +3,7 @@ package com.j2ee.yummy.model;
 import com.j2ee.yummy.model.converter.ListConverter2;
 import com.j2ee.yummy.model.converter.MemberLevelCOnverter;
 import com.j2ee.yummy.stateDesignPattern.MemberLevel;
+import com.j2ee.yummy.stateDesignPattern.OrdinaryLevel;
 import com.j2ee.yummy.yummyEnum.MemberGrade;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Member extends User {
     private String profile;
 
     public Member() {
+        memberLevel = new OrdinaryLevel();
     }
 
     public Member(long id, String password, String name, String email, String phone, MemberLevel memberLevel, List<Address> addresses, String profile) {

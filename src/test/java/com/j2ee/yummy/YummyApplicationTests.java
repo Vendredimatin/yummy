@@ -17,6 +17,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
@@ -46,6 +48,8 @@ public class YummyApplicationTests {
     ManagerDao managerDao;
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @Test
     public void contextLoads() {
@@ -151,6 +155,17 @@ public class YummyApplicationTests {
         Page<Order> orders = orderService.memberSearch(4,startTime,endTime,200,0,"null", "所有",2);
         //List<Order> orders = orderRepository.findAllByMemberIDAndTimeBetween(memberID,startTime,endTime);
         System.out.println(orders.getContent());
+    }
+
+    @Test
+    public void sendSimpleMail() throws Exception {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("2860957268@qq.com");
+        message.setTo("2860957268@qq.com");
+        message.setSubject("主题：简单邮件");
+        message.setText("测试邮件内容");
+
+        javaMailSender.send(message);
     }
 }
 

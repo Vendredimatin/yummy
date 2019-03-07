@@ -7,9 +7,10 @@ window.onload = function () {
         d.landlordName = $(".canteen-info-password").val();
         d.phone = $(".canteen-info-phone").val();
         d.categories = $(".canteen-info-category").val();
-        d.province = $(".canteen-info-province").val();
-        d.city = $(".canteen-info-city").val();
-        d.district = $(".canteen-info-district").val();
+        d.province = $('#cmbProvince option:selected').val();
+        d.city = $('#cmbCity option:selected').val();
+        d.district = $('#cmbArea option:selected').val();
+        d.detail = $(".canteen-info-detail").val();
 
         $.ajax({
             url:"/canteen/register",
@@ -19,6 +20,7 @@ window.onload = function () {
             success: function (data) {
                 console.log(data);
                 alert(data["message"]+"登录帐号为："+data["canteenID"]);
+                window.location.href = "canteenInfo.html";
             },
             fail:function (data) {
                 alert("fail")

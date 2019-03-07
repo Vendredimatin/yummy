@@ -8,7 +8,7 @@ public interface MemberService {
 
     public String update(Member member);
 
-    public String register(String email,String password);
+    public String register(String email, String password, String name, String phone);
 
     public Member getMemberByID(long id);
 }

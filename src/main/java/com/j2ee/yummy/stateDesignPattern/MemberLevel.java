@@ -23,4 +23,12 @@ public abstract class MemberLevel {
     //用户支付订单的时候就要调用
     public abstract double pay(double totalPrice);
 
+    @Override
+    public String toString() {
+        return "MemberLevel{" +
+                "maxPrice=" + maxPrice +
+                ", memberGrade=" + memberGrade +
+                ", discount=" + discount +
+                '}';
+    }
 }

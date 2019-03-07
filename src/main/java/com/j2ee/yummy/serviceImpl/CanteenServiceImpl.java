@@ -29,7 +29,7 @@ public class CanteenServiceImpl implements CanteenService {
     @Override
     public Canteen register(Canteen canteen) {
         canteen = canteenDao.insert(canteen);
-        canteen.setId(getID(canteen.getId()));
+        canteen.setAccount(getID(canteen.getId()));
         return canteen;
     }
 

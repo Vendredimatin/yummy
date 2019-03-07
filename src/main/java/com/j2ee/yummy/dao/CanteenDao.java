@@ -27,8 +27,8 @@ public class CanteenDao {
        return canteenRepository.save(canteen);
     }
 
-    public Canteen login(long id, String password){
-        return canteenRepository.findCanteenByIdAndPassword(id,password);
+    public Canteen login(long account, String password){
+        return canteenRepository.findCanteenByAccountAndPassword(account,password);
     }
 
     public boolean update(Canteen canteen){

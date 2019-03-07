@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CanteenRepository extends JpaRepository<Canteen,Long> {
 
-    public Canteen findCanteenByIdAndPassword(long id,String password);
+    public Canteen findCanteenByAccountAndPassword(long account,String password);
 }

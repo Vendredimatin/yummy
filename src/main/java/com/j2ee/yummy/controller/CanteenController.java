@@ -85,11 +85,13 @@ public class CanteenController {
         String province = jsonObject.getString("province");
         String city = jsonObject.getString("city");
         String district = jsonObject.getString("district");
+        String detail = jsonObject.getString("detail");
 
         Address address = new Address();
         address.setProvince(province);
         address.setCity(city);
         address.setDistrict(district);
+        address.setDetail(detail);
 
         Canteen canteen = new Canteen();
         canteen.setPassword(password);
@@ -97,11 +99,6 @@ public class CanteenController {
         canteen.setLandlordName(landlordName);
         canteen.setPhone(phone);
         canteen.setAddress(address);
-
-       /* CanteenCategory canteenCategory = CanteenCategory.valueOf(categories);
-        List<CanteenCategory> canteenCategories = new ArrayList<>();
-        canteenCategories.add(canteenCategory);*/
-
         canteen.setCategories(categories);
 
         canteen = canteenService.register(canteen);
@@ -109,7 +106,7 @@ public class CanteenController {
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
         map.put("message", "申请成功");
-        map.put("canteenID", canteen.getId());
+        map.put("canteenID", canteen.getAccount());
         return map;
     }
 
@@ -118,7 +115,7 @@ public class CanteenController {
     public Object login(@RequestBody JSONObject jsonObject, HttpSession session) {
         System.out.println("进入 canteenLogin....................");
 
-        long id = jsonObject.getLong("id");
+        long id = jsonObject.getLong("account");
         String password = jsonObject.getString("password");
 
         Map<String, Object> map = new HashMap<>();

@@ -1,13 +1,16 @@
 package com.j2ee.yummy.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.j2ee.yummy.service.MemberService;
+import com.j2ee.yummy.serviceImpl.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: yummy
@@ -18,25 +21,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class RegisterController {
     @Autowired
-    MemberService memberService;
+    MemberServiceImpl memberService;
 
-    @GetMapping(value = "/register")
+    @GetMapping(value = "/memberRegister")
     public String init(){
         return "register.html";
     }
 
 
 
-    @PostMapping(value = "/register")
+    @PostMapping(value = "/member/register")
     @ResponseBody
-    public String register(@RequestBody String json){
-        JSONObject jsonObject = JSONObject.parseObject(json);
-
+    public Object register(@RequestBody JSONObject jsonObject){
+        String name = jsonObject.getString("name");
         String email = (String) jsonObject.get("email");
         String password = (String) jsonObject.get("password");
+        String phone = jsonObject.getString("phone");
 
         System.out.println(email);
         System.out.println(password);
-        return memberService.register(email,password);
+
+        memberService.register(email,password,name,phone);
+        Map<String,Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "注册成功");
+        return map;
+    }
+
+    @PostMapping(value = "/member/register/identifyCode")
+    @ResponseBody
+    public Object identifyCode(@RequestBody JSONObject jsonObject){
+
+        String email = jsonObject.getString("email");
+        String identifyCode = memberService.sendEmail(email);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "发送成功");
+        map.put("identifyCode",identifyCode);
+        return map;
     }
 }

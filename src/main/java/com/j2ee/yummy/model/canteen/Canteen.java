@@ -32,6 +32,7 @@ public class Canteen{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
+    protected long account;
     protected String password;
     protected String canteenName;
     protected String landlordName;

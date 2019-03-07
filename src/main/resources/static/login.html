@@ -3,63 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <!--<script src="js/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <link rel="stylesheet" href="css/login.css">
     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/login.js"></script>
 </head>
 <body>
-<div id="login-panel">
-    <input class="email" placeholder="输入用户名">
-    <input class="password" placeholder="输入用户名">
-    <button class="submit"></button>
+
+<div class="tab">
+    <button class="tablinks active" onclick="openCity(event, 'London')">会员</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">餐厅</button>
+    <button class="tablinks" onclick="openCity(event, 'Tokyo')">经理</button>
+    <div id="London" class="tabcontent" style="display: block;">
+        <div class="bg">
+            <div class="wel">Yummy</div>
+            <div class="user">
+                <div class="yonghu" style="">用户名</div>
+                <input class="member-email" type="text" name="用户"  value="admin" />
+            </div>
+            <div class="password" >
+                <div class="yonghu">密&nbsp;&nbsp;&nbsp;码</div>
+                <input class="member-password" type="password" name="密码" value="......" />
+            </div>
+            <div class="fg" >
+                <div style="font-size: 11px;margin-top: 11px;">
+                    <a style="font-size: 11px;" href="/memberRegister">注册</a>
+                </div>
+            </div>
+            <input class="btn member-login" type="button" name="登录" value="登录" />
+        </div>
+    </div>
+
+    <div id="Paris" class="tabcontent">
+        <div class="bg">
+            <div class="wel">Yummy</div>
+            <div class="user">
+                <div class="yonghu" style="">用户名</div>
+                <input class="canteen-account" type="text" name="用户"  value="admin" />
+            </div>
+            <div class="password" >
+                <div class="yonghu">密&nbsp;&nbsp;&nbsp;码</div>
+                <input class="canteen-password" type="password" name="密码" value="......" />
+            </div>
+            <div class="fg" >
+                <div style="font-size: 11px;margin-top: 11px;">
+                    <a style="font-size: 11px;" href="/canteenRegister">注册</a>
+                </div>
+            </div>
+            <input class="btn canteen-login" type="button" name="登录" value="登录" />
+        </div>
+    </div>
+
+    <div id="Tokyo" class="tabcontent">
+        <div class="bg">
+            <div class="wel">Yummy</div>
+            <div class="user">
+                <div class="yonghu" style="">用户名</div>
+                <input class="manager-account" type="text" name="用户"  value="admin" />
+            </div>
+            <div class="password" >
+                <div class="yonghu">密&nbsp;&nbsp;&nbsp;码</div>
+                <input class="manager-password" type="password" name="密码" value="......" />
+            </div>
+
+            <input class="btn manager-login" type="button" name="登录" value="登录" />
+        </div>
+    </div>
+
 </div>
 
-<script>
-/*
-    var vm = new Vue({
-        el: "#login-panel",
-        data: {
-            account: "",
-            password: ""
-        },
-        methods: {
-            submit: function () {
-                axios.post("/login", {
-                    email: this.account,
-                    password: this.password
-                }).then(function (data) {
-                    alert("success");
-                    console.log(data);
-                    console.log(data['data']);
-
-                    window.location.href = "canteenDisplay.html";
-                }).catch(function (reason) {
-                        alert(reason);
-                });
-            }
-        }
-    })
-*/
-$(".submit").click(function () {
-    let d = {};
-    d.email = $(".email").val();
-    d.password = $(".password").val();
-    $.ajax({
-        url:"/login",
-        type:"post",
-        contentType: "application/json;charset=utf-8",
-        data:JSON.stringify(d),
-        success: function (data) {
-            console.log(data);
-            window.location.href = "canteenDisplay.html";
-        },
-        fail: function (data) {
-            alert("fail");
-        }
-    })
-});
-
-</script>
 </body>
 </html>
