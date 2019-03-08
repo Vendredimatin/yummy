@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @program: yummy
@@ -28,12 +30,22 @@ public class MenuServiceImpl {
     @Autowired
     DishServiceImpl dishService;
 
+    public Menu getMenuByID(long menuID){
+        return menuDao.getMenuByID(menuID);
+    }
+
     public Menu save(Menu menu){
         return menuDao.insert(menu);
     }
 
     public List<Menu> getMenusByCanteenID(long canteenID){
-        return menuDao.getMenusByCanID(canteenID);
+        List<Menu> menus = menuDao.getMenusByCanID(canteenID);
+        menus = menus.stream().filter(menu -> {
+            boolean equal = menu.getTime().isEqual(LocalDate.now());
+            boolean after = menu.getTime().isAfter(LocalDate.now());
+            return  equal||after;
+        }).collect(Collectors.toList());
+        return menus;
     }
 
     public void sell(Set<OrderItem> orderItems){

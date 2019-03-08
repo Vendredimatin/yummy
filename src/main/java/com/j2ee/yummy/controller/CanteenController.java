@@ -10,6 +10,7 @@ import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
 import com.j2ee.yummy.service.CanteenService;
 import com.j2ee.yummy.serviceImpl.BalanceServiceImpl;
+import com.j2ee.yummy.serviceImpl.CanteenServiceImpl;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.yummyEnum.CanteenCategory;
 import com.j2ee.yummy.yummyEnum.UserType;
@@ -41,7 +42,7 @@ public class CanteenController {
 
 
     @Autowired
-    CanteenService canteenService;
+    CanteenServiceImpl canteenService;
     @Autowired
     BalanceServiceImpl balanceService;
     @Autowired
@@ -115,12 +116,12 @@ public class CanteenController {
     public Object login(@RequestBody JSONObject jsonObject, HttpSession session) {
         System.out.println("进入 canteenLogin....................");
 
-        long id = jsonObject.getLong("account");
+        long account = jsonObject.getLong("account");
         String password = jsonObject.getString("password");
-
+        System.out.println(account+"!"+password);
         Map<String, Object> map = new HashMap<>();
         try {
-            Canteen canteen = canteenService.login(id, password);
+            Canteen canteen = canteenService.login(account, password);
             session.setAttribute("canteenID", canteen.getId());
             map.put("success", true);
             map.put("message", "登录成功");

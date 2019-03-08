@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/zcity.js"></script>
     <script type="text/javascript" src="js/member/address.js"></script>
 </head>
 <body>
@@ -98,15 +99,10 @@
                     <div>
                         <div class="addressformfield"><label>姓名</label><input class="add_name" placeholder="请输入您的姓名">
                         </div>
-                        <div class="addressformfield sexfield"><label>性别</label>
-                            <div><input id="sexfield-1-male" name="sex" type="radio" value="先生"><label for="sexfield-1-male">先生</label>
-                                <input id="sexfield-1-female" type="radio" name="sex" value="女士"><label for="sexfield-1-female">女士</label>
-                            </div>
-                        </div>
                         <div class="addressformfield addressfield"><label>位置</label>
-                            <input class="add_province" placeholder="省份">
-                            <input class="add_city" placeholder="城市">
-                            <input class="add_district" placeholder="区/县">
+                            <select class="form-control" id="cmbProvince" name="cmbProvince" ></select>
+                            <select class="form-control" id="cmbCity" name="cmbCity" ></select>
+                            <select class="form-control" id="cmbArea" name="cmbArea" ></select>
                         </div>
                         <div class="addressformfield"><label>详细地址</label>
                             <input class="add_detail" placeholder="单元、门牌号">
@@ -133,16 +129,11 @@
                     <div>
                         <input class="modify-id" type="hidden">
                         <div class="addressformfield"><label>姓名</label><input class="modify-name" placeholder="请输入您的姓名">
-                        </div>
-                        <div class="addressformfield sexfield"><label>性别</label>
-                            <div><input name="modify-sex" type="radio" value="先生"><label for="sexfield-1-male">先生</label>
-                                <input type="radio" name="modify-sex" value="女士"><label for="sexfield-1-female">女士</label>
-                            </div>
-                        </div>
+                    </div>
                         <div class="addressformfield addressfield"><label>位置</label>
-                            <input class="modify-province" placeholder="省份">
-                            <input class="modify-city" placeholder="城市">
-                            <input class="modify-district" placeholder="区/县">
+                            <select class="form-control" id="cmbProvince-modify" name="cmbProvince" ></select>
+                            <select class="form-control" id="cmbCity-modify" name="cmbCity" ></select>
+                            <select class="form-control" id="cmbArea-modify" name="cmbArea" ></select>
                         </div>
                         <div class="addressformfield"><label>详细地址</label>
                             <input class="modify-detail" placeholder="单元、门牌号">
@@ -165,5 +156,11 @@
 
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+        addressInit('cmbProvince-modify', 'cmbCity-modify', 'cmbArea-modify');
+    })
+</script>
 </body>
 </html>

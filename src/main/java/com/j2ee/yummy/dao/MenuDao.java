@@ -25,6 +25,10 @@ public class MenuDao {
         return menuRepository.save(menu);
     }
 
+    public Menu getMenuByID(long menuID){
+        return menuRepository.getOne(menuID);
+    }
+
     public List<Menu> getMenusByCanID(long canteenID){
         return menuRepository.findAllByCanteenID(canteenID);
     }

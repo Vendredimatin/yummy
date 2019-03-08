@@ -1,17 +1,20 @@
 package com.j2ee.yummy;
 
 import com.j2ee.yummy.Repository.MemberRepository;
+import com.j2ee.yummy.Repository.MenuRepository;
 import com.j2ee.yummy.Repository.OrderRepository;
 import com.j2ee.yummy.dao.*;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.Manager;
-import com.j2ee.yummy.model.canteen.Canteen;
-import com.j2ee.yummy.model.canteen.Menu;
+import com.j2ee.yummy.model.Member;
+import com.j2ee.yummy.model.canteen.*;
 import com.j2ee.yummy.model.order.MessageOrder;
 import com.j2ee.yummy.model.order.Order;
+import com.j2ee.yummy.serviceImpl.MenuServiceImpl;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
+import com.j2ee.yummy.stateDesignPattern.OrdinaryLevel;
 import com.j2ee.yummy.yummyEnum.UserType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -63,6 +67,13 @@ public class YummyApplicationTests {
     @Test
     public void testUser(){
         System.out.println(memberRepository.getOne(Long.valueOf(1)));
+    }
+
+    @Test
+    public void updateMember(){
+        Member member = memberRepository.getOne(1l);
+        member.setMemberLevel(new OrdinaryLevel());
+        memberRepository.saveAndFlush(member);
     }
 
     @Test
@@ -131,15 +142,17 @@ public class YummyApplicationTests {
         balance.setBalance(0);
         balance.setPassword("123");
         balance.setUserType(UserType.Yummy);
+        balance.setCost(0);
+        balance.setProfit(0);
         balanceDao.insert(balance);
     }
 
     @Test
     public void insertBalance(){
         Balance balance = new Balance();
-        balance.setUserID(4);
+        balance.setUserID(2);
         balance.setPassword("123");
-        balance.setBalance(1000);
+        balance.setBalance(0);
         balance.setUserType(UserType.Canteen);
         balanceDao.insert(balance);
     }
@@ -172,6 +185,56 @@ public class YummyApplicationTests {
 
         javaMailSender.send(message);
     }
+
+    @Autowired
+    MenuServiceImpl menuService;
+    @Test
+    public void createMenu(){
+        Menu menu = new Menu();
+        Preference preference = new Preference();
+        List<Double> targets = List.of(10.0);
+        List<Double> discounts = List.of(5.0);
+        preference.setTargetSums(targets);
+        preference.setDiscountSums(discounts);
+
+        Dish dish1 = new Dish("1","2",2,"3",4,menu);
+        Dish dish2 = new Dish("2","3",4,"5",6,menu);Set<Dish> dishes = Set.of(dish1,dish2);
+
+        Combo combo = new Combo();
+        combo.setName("1");
+        combo.setRemnants(1);
+        combo.setPrice(1);
+        combo.setDescription("1");
+        combo.setMenu(menu);
+        Set<Combo> combos = Set.of(combo);
+
+        menu.setCanteenID(1);
+        menu.setPreference(preference);
+        menu.setTime(LocalDate.now());
+        menu.setCombos(combos);
+        menu.setDishes(dishes);
+
+        menuService.save(menu);
+    }
+
+    @Autowired
+    MenuRepository menuRepository;
+    @Test
+    public void changeTime(){
+        Menu menu = menuRepository.getOne(5l);
+        menu.setTime(LocalDate.of(2019,3, 8));
+        menuRepository.saveAndFlush(menu);
+        menuRepository.flush();
+    }
+
+
+    @Test
+    public void getMenus(){
+        List<Menu> menus = menuService.getMenusByCanteenID(1);
+        System.out.println(menus);
+    }
+
+
 }
 
 

@@ -1,10 +1,11 @@
 window.onload = function () {
     var timeToMenus = {};
-
+    let currentMenuID;
     init();
 
     $(document).on('click', '.shop-cartbutton', function () {
         let d = {};
+        d.menuID = currentMenuID;
         d.kind = $(this).siblings(".shopmenu-food-kind").text();
         d.id = $(this).siblings(".shopmenu-food-id").text();
         d.name = $(this).siblings(".shopmenu-food-name").text();
@@ -30,14 +31,25 @@ window.onload = function () {
         window.location.href = "cartCheckout.html";
     });
 
+    //换时间查看
+    $(document).on('click','.shopnav-tab',function () {
+        let time = $(this).text();
+        $(".shopmenu-nav").empty();
+        $(".shopmenu-main").empty();
+        initHtmlByDate(time);
+
+    });
+
     function init() {
         $.ajax({
             url: "/canteen/menu/display",
             type: "post",
             contentType: "application/json;charset=utf-8",
             success: function (data) {
-                alert("success");
                 console.log(data);
+                if (data['menus'].length == 0){
+                    alert("商家还未发布订单");
+                }
                 initFirst(data['menus']);
             },
             fail: function (data) {
@@ -58,13 +70,17 @@ window.onload = function () {
             var menu = data[i];
             var time = menu['time'];
             timeToMenus[time] = menu;
-            var html = '<a class="shopnav-tab">' + time + '</a>';
+            var html = '<a class="shopnav-tab" menu-id="'+ menu['id'] +'">' + time + '</a>';
             $(".shopnav-left").append(html);
         }
     }
 
     function initHtmlByDate(time) {
         var menu = timeToMenus[time];
+
+        //要修改当前ｍｅｎｕ的id
+        currentMenuID =menu['id'];
+
         var dishes = menu['dishes'];
 
         console.log(menu);

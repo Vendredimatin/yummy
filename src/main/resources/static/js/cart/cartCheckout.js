@@ -7,11 +7,19 @@ window.onload = function () {
     let cart;
     let combos;
     let dishes;
+    let preference;
+    let memberLevel;
     init();
 
     $(document).on('click', '.minus', function () {
         let quantity = $(this).siblings(".quantity").val();
-        quantity = (quantity == 0) ? 0 : (quantity - 1);
+        quantity = quantity -1;
+        if (quantity == 0){
+            let ok = confirm("要删除该项菜品吗？");
+            if (ok){
+                $(this).parents('dd').remove();
+            } else quantity = 1;
+        }
         $(this).siblings(".quantity").val(quantity);
         let singlePrice = parseFloat($(this).parent().siblings(".cell.itemtotal").children(".subTotal-price").attr('attr-single-price'));
         let subTotal = singlePrice * quantity;
@@ -92,7 +100,7 @@ window.onload = function () {
     //下订单
     $(".confirm").click(function () {
         let addressID = $('.address-list option:selected').attr("attr-address-id");
-        let totalPrice = $('.num').text();
+        let totalPrice = $('.num-discount').text();
         let dishIDs = [];
         $(".dish-item-id").each(function () {
             dishIDs.push($(this).text());
@@ -152,7 +160,7 @@ window.onload = function () {
     $(".pay-btn").click(function () {
         let d = {};
         d.password = $(".pay-password").val();
-        d.totalPrice = $(".num").text();
+        d.totalPrice = $(".num-discount").text();
 
         $.ajax({
             url: "/member/order/pay",
@@ -160,8 +168,9 @@ window.onload = function () {
             data: JSON.stringify(d),
             contentType: "application/json;charset=utf-8",
             success: function (data) {
-                alert("支付成功！原订单"+data['originPrice']+"元,实际支付"+data['actualPrice']+"元");
+                alert("支付成功！实际支付"+data['totalPrice']+"元");
                 $(".pay-dialog").css('display', 'none');
+                window.location.href="canteenDisplay.html";
             },
             fail: function (data) {
                 alert("fail");
@@ -178,6 +187,23 @@ window.onload = function () {
         });
 
         $(".num").text(totals);
+        caculateDiscount(totals);
+    }
+
+    function caculateDiscount(totals) {
+        let targetSums = preference['targetSums'];
+        let discountSums = preference['discountSums'];
+
+        for (let i = targetSums.length-1; i >=0 ; i--) {
+            if (totals > targetSums[i]){
+                totals -= discountSums[i];
+                break;
+            }
+        }
+
+        totals *= memberLevel['discount'];
+
+        $(".num-discount").text(totals);
     }
 
     function init() {
@@ -195,9 +221,12 @@ window.onload = function () {
                 cart = data['cart'];
                 combos = cart['combos'];
                 dishes = cart['dishes'];
+                memberLevel = cart['memberLevel'];
+                preference = cart['preference'];
 
                 initCart(data['cart']);
                 initAddress(data['addresses']);
+                initOther(memberLevel,preference);
             },
             fail: function (data) {
                 alert("fail");
@@ -255,6 +284,8 @@ window.onload = function () {
                 '                </dd>';
             $(".checkoutcart-group").append(html);
         }
+
+        caculateTotal();
     }
 
     function initAddress(addresses) {
@@ -268,5 +299,19 @@ window.onload = function () {
 
             $(".address-list").append(html);
         }
+    }
+
+    function initOther(memberLevel,preference) {
+        let preStr = '';
+        let targetSums = preference['targetSums'];
+        let discountSums = preference['discountSums'];
+        for (let i = 0; i < targetSums.length; i++) {
+            preStr += "满"+targetSums[i]+"减"+discountSums[i]+";";
+        }
+
+        $('.preference span').text(preStr);
+
+        let memberStr = memberLevel['memberGrade']+',可打'+memberLevel['discount']*100+'%;';
+        $(".memberLevel span").text(memberStr);
     }
 }

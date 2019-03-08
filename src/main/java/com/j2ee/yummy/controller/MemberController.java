@@ -67,7 +67,7 @@ public class MemberController {
 
     @PostMapping(value = "/member/modifyInfo")
     @ResponseBody
-    public String modifyInfo(@RequestBody JSONObject jsonObject, HttpSession session) {
+    public Object modifyInfo(@RequestBody JSONObject jsonObject, HttpSession session) {
         System.out.println("进入 modifyInfo............");
 
         String email = jsonObject.getString("email");
@@ -82,7 +82,10 @@ public class MemberController {
         member.setName(name);
         System.out.println(member);
 
-        return memberService.update(member);
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "修改成功");
+        map.put("success", true);
+        return map;
     }
 
     @PostMapping(value = "/member/scanCanteen")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @program: yummy
@@ -24,7 +25,7 @@ public class ComboDao {
         return comboRepository.save(combo);
     }
 
-    public List<Combo> insert(List<Combo> combos){
+    public List<Combo> insert(Set<Combo> combos){
         return comboRepository.saveAll(combos);
     }
 

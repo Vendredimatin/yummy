@@ -51,6 +51,6 @@ public class Menu {
                 ", dishes=" + dishes +
                 ", combos=" + combos +
                 ", preference=" + preference +
-                '}';
+                '}'+'\n';
     }
 }

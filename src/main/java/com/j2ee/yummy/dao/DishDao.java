@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @program: yummy
@@ -24,7 +25,7 @@ public class DishDao {
         return dishRepository.save(dish);
     }
 
-    public List<Dish> insert(List<Dish> dishes){
+    public List<Dish> insert(Set<Dish> dishes){
         return dishRepository.saveAll(dishes);
     }
 

@@ -3,52 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        /*表格样式*/
-         table {
-            width: 90%;
-            background: #ccc;
-            margin: 10px auto;
-            border-collapse: collapse;
-        }
-
-        /*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*/
-         th, td {
-            height: 25px;
-            line-height: 25px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-
-         th {
-            background: #eee;
-            font-weight: normal;
-        }
-
-         tr {
-            background: #fff;
-        }
-
-         tr:hover {
-            background: #cc0;
-        }
-
-         td a {
-            color: #06f;
-            text-decoration: none;
-        }
-
-         td a:hover {
-            color: #06f;
-            text-decoration: underline;
-        }
-
-         
-
-    </style>
+    <script src="js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-
+<select id="a">
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+</select>
+<button class="btn"></button>
+<script>
+    $(".btn").click(function () {
+        let area = 'b';
+        $("#a option[value='" + area + "']").attr("selected", true);
+    });
+</script>
 
 </body>
 </html>

@@ -45,15 +45,8 @@ public class MemberDao {
         return true;
     }
 
-    public Boolean insert(Member member){
-        try{
-            memberRepository.saveAndFlush(member);
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
+    public Member insert(Member member){
+            return memberRepository.saveAndFlush(member);
     }
 
     public Member getMemberByID(long id){

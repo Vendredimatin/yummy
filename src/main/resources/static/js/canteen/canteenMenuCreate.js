@@ -1,4 +1,4 @@
-function dish(dishName,dishCategory,dishPrice,dishRemnants,dishDescription) {
+function dish(dishName, dishCategory, dishPrice, dishRemnants, dishDescription) {
     this.name = dishName;
     this.dishCategory = dishCategory;
     this.price = dishPrice;
@@ -6,7 +6,7 @@ function dish(dishName,dishCategory,dishPrice,dishRemnants,dishDescription) {
     this.description = dishDescription;
 }
 
-function combo(dishNames,dishRemnants,comboName,comboPrice,comboRemnants,comboDescription) {
+function combo(dishNames, dishRemnants, comboName, comboPrice, comboRemnants, comboDescription) {
     this.dishNames = dishNames;
     this.dishRemnants = dishRemnants;
     this.name = comboName;
@@ -15,25 +15,30 @@ function combo(dishNames,dishRemnants,comboName,comboPrice,comboRemnants,comboDe
     this.description = comboDescription;
 }
 
-function Preference(targetSums,discountSums){
+function Preference(targetSums, discountSums) {
     this.targetSums = targetSums;
     this.discountSums = discountSums;
 }
 
 
 window.onload = function () {
-    var menu={};
-    var dishes=[];
+    var menu = {};
+    var dishes = [];
     var combos = [];
 
     //添加新菜
     $("#addblock").click(function () {
         console.log("!!!");
-        $(".menudialog").css("display","block");
+        $(".menudialog").css("display", "block");
+        $(".dish-name").val("");
+        $(".dish-category").val("");
+        $(".dish-price").val("");
+        $(".dish-remnants").val("");
+        $(".dish-description").val("");
     });
 
     $(".dish-cancel").click(function () {
-       $(".menudialog").css("display","none");
+        $(".menudialog").css("display", "none");
     });
 
     //创建新菜
@@ -44,34 +49,37 @@ window.onload = function () {
         var dishRemnants = $(".dish-remnants").val();
         var dishDescription = $(".dish-description").val();
 
-        var newDish = new dish(dishName,dishCategory,dishPrice,dishRemnants,dishDescription);
+        var newDish = new dish(dishName, dishCategory, dishPrice, dishRemnants, dishDescription);
         dishes.push(newDish);
 
         addDish(newDish);
-        $(".menudialog").css("display","none");
+        $(".menudialog").css("display", "none");
     });
 
     //添加新套餐
     $("#addCombo").click(function () {
-       $(".combodialog").css("display","block");
+        $(".combodialog").css("display", "block");
+        $(".combo-name").val("");
+        $(".combo-price").val("");
+        $(".combo-remnants").val("");
+        $(".combo-description").val("");
     });
 
     $(".combo-cancel").click(function () {
-        $(".combodialog").css("display","none");
+        $(".combodialog").css("display", "none");
     });
 
     //在套餐中添加菜品
     $(".add-combo-dish").click(function () {
-       var html = '<div class="add-dish">\n' +
-           '                                <div class="menuformfield">\n' +
-           '                                    <label>菜名及数量</label>\n' +
-           '                                    <input class="add-dish-name" placeholder="请输入菜名">\n' +
-           '                                    <input class="add-dish-remnants" placeholder="数量">\n' +
-           '                                </div>\n' +
-           '                            </div>';
-       $(".add-dish-list").append(html);
+        var html = '<div class="add-dish">\n' +
+            '                                <div class="menuformfield">\n' +
+            '                                    <label>菜名及数量</label>\n' +
+            '                                    <input class="add-dish-name" placeholder="请输入菜名">\n' +
+            '                                    <input class="add-dish-remnants" placeholder="数量">\n' +
+            '                                </div>\n' +
+            '                            </div>';
+        $(".add-dish-list").append(html);
     });
-
 
 
     //创建新套餐
@@ -92,12 +100,12 @@ window.onload = function () {
         var comboRemnants = $(".combo-remnants").val();
         var comboDescription = $(".combo-description").val();
 
-        var newCombo = new combo(dishNames,dishRemnants,comboName,comboPrice,comboRemnants,comboDescription);
+        var newCombo = new combo(dishNames, dishRemnants, comboName, comboPrice, comboRemnants, comboDescription);
 
         combos.push(newCombo);
 
         addCombo(newCombo);
-        $(".combodialog").css("display","none");
+        $(".combodialog").css("display", "none");
 
         console.log(newCombo);
 
@@ -119,26 +127,29 @@ window.onload = function () {
         var discountSums = [];
 
         $(".targetSum").each(function () {
-           targetSums.push($(this).val());
+            targetSums.push($(this).val());
         });
 
         $(".discountSum").each(function () {
             discountSums.push($(this).val());
         })
 
-        var preference = new Preference(targetSums,discountSums);
+        var preference = new Preference(targetSums, discountSums);
 
         menu.dishes = dishes;
         menu.combos = combos;
         menu.preference = preference;
+        menu.time = $(".menu-time").val();
 
+        console.log(menu);
         $.ajax({
-            url:"/canteen/menu/create",
-            type:"post",
-            data:JSON.stringify(menu),
+            url: "/canteen/menu/create",
+            type: "post",
+            data: JSON.stringify(menu),
             contentType: "application/json;charset=utf-8",
             success: function (data) {
-                alert("success")
+                alert(data['message']);
+                window.location.href="/canteenMenuCreate";
             },
             fail: function (data) {
                 alert("fail");
@@ -153,11 +164,11 @@ function addDish(newDish) {
         '                    <div class="desktop-menublock-buttons">\n' +
         '                        <button class="desktop-menublock-button delete">删除</button>\n' +
         '                    </div>\n' +
-        '                    <div class="desktop-menublock-name">'+ newDish.name +'</div>\n' +
-        '                    <div class="desktop-menublock-menu description">'+ newDish.description +'\n' +
+        '                    <div class="desktop-menublock-name">' + newDish.name + '</div>\n' +
+        '                    <div class="desktop-menublock-menu description">' + newDish.description + '\n' +
         '                    </div>\n' +
-        '                    <div class="desktop-menublock-mobile ng-binding">数量:<span class="dish-remnants-display">'+ newDish.remnants +'</span></div>\n' +
-        '                    <div class="desktop-menublock-mobile ng-binding">￥<span class="dish-price-display">'+ newDish.price +'</span></div>\n' +
+        '                    <div class="desktop-menublock-mobile ng-binding">数量:<span class="dish-remnants-display">' + newDish.remnants + '</span></div>\n' +
+        '                    <div class="desktop-menublock-mobile ng-binding">￥<span class="dish-price-display">' + newDish.price + '</span></div>\n' +
         '\n' +
         '                </div>';
 
@@ -169,11 +180,11 @@ function addCombo(newCombo) {
         '                <div class="desktop-menublock-buttons">\n' +
         '                    <button class="desktop-menublock-button delete">删除</button>\n' +
         '                </div>\n' +
-        '                <div class="desktop-menublock-name combo">'+ newCombo.name +'</div>\n' +
-        '                <div class="desktop-menublock-menu combo description">'+ newCombo.description +'\n' +
+        '                <div class="desktop-menublock-name combo">' + newCombo.name + '</div>\n' +
+        '                <div class="desktop-menublock-menu combo description">' + newCombo.description + '\n' +
         '                </div>\n' +
-        '                <div class="desktop-menublock-mobile combo">数量:<span class="combo-remnants-display">'+ newCombo.remnants +'</span></div>\n' +
-        '                <div class="desktop-menublock-mobile combo">￥<span class="combo-price-display">'+ newCombo.price +'</span></div>\n' +
+        '                <div class="desktop-menublock-mobile combo">数量:<span class="combo-remnants-display">' + newCombo.remnants + '</span></div>\n' +
+        '                <div class="desktop-menublock-mobile combo">￥<span class="combo-price-display">' + newCombo.price + '</span></div>\n' +
         '\n' +
         '            </div>';
 

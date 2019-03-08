@@ -13,7 +13,6 @@ window.onload = function () {
            data:JSON.stringify(d),
            contentType: "application/json;charset=utf-8",
            success: function (data) {
-               alert("success");
                window.location.href = "canteenMenuDisplay.html";
            },
            fail:function (data) {

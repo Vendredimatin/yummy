@@ -49,6 +49,15 @@ public class Dish {
     public Dish() {
     }
 
+    public Dish(String dishCategory, String name, double price, String description, int remnants, Menu menu) {
+        this.dishCategory = dishCategory;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.remnants = remnants;
+        this.menu = menu;
+    }
+
     @Override
     public String toString() {
         return "Dish{" +
@@ -62,16 +71,5 @@ public class Dish {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dish dish = (Dish) o;
-        return id == dish.id;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

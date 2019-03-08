@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.SpringTaskDemo;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.model.Member;
+import com.j2ee.yummy.model.canteen.Canteen;
 import com.j2ee.yummy.model.canteen.Combo;
 import com.j2ee.yummy.model.canteen.Dish;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.OrderItem;
 import com.j2ee.yummy.service.AddressService;
 import com.j2ee.yummy.service.MemberService;
+import com.j2ee.yummy.serviceImpl.CanteenServiceImpl;
 import com.j2ee.yummy.serviceImpl.ComboServiceImpl;
 import com.j2ee.yummy.serviceImpl.DishServiceImpl;
 import com.j2ee.yummy.serviceImpl.OrderServiceImpl;
@@ -50,6 +52,8 @@ public class OrderController {
     OrderServiceImpl orderService;
     @Autowired
     SpringTaskDemo springTaskDemo;
+    @Autowired
+    CanteenServiceImpl canteenService;
 
     @GetMapping(value = "/memberOrderDisplay")
     public String init(){
@@ -67,6 +71,7 @@ public class OrderController {
         return "memberOrderDetail.html";
     }
 
+    //下订单
     @PostMapping(value = "/member/order/checkout")
     @ResponseBody
     public Object checkout(@RequestBody JSONObject jsonObject, HttpSession httpSession){
@@ -79,12 +84,16 @@ public class OrderController {
         String memberName = member.getName();
         String memberPhone = member.getPhone();
 
+        Canteen canteen = canteenService.getCanteenByID(canteenID);
+        String canteenName = canteen.getCanteenName();
+
         int deliveringTime = 2;//jsonObject.getInteger("deliveringTime");
 
         long addressID = jsonObject.getLong("addressID");
         Address address = addressService.getAddressByID(addressID);
 
         LocalDateTime time = LocalDateTime.now();
+        System.out.println(time);
         double totalPrice = jsonObject.getDouble("totalPrice");
         OrderState orderState = OrderState.未支付;
 
@@ -92,6 +101,7 @@ public class OrderController {
         order.setMemberID(memberID);
         order.setCanteenID(canteenID);
         order.setMemberName(memberName);
+        order.setCanteenName(canteenName);
         order.setMemberPhone(memberPhone);
         order.setMemberAddress(address);
         order.setTime(time);
@@ -159,7 +169,8 @@ public class OrderController {
 
         List<Order> orders = orderService.getOrdersByMemID(memberID);
 
-        return orders.subList(0,PAGE_SIZE);
+        int size = (orders.size()>=PAGE_SIZE)?PAGE_SIZE:orders.size();
+        return orders.subList(0,size);
     }
 
     @PostMapping(value = "/canteen/order/history")

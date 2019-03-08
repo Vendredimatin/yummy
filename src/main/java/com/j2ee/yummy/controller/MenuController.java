@@ -54,11 +54,13 @@ public class MenuController {
 
         List<Combo> combos = jsonObject.getJSONArray("combos").toJavaList(Combo.class);
         Preference preference = jsonObject.getObject("preference",Preference.class);
+        LocalDate time = jsonObject.getObject("time",LocalDate.class);
 
         Menu menu = new Menu();
         menu.setCanteenID(canteenID);
 
-        menu.setTime(LocalDate.now());
+        menu.setTime(time);
+        System.out.println(time);
         menu.setPreference(preference);
 
         for (int i = 0; i < combos.size(); i++) {

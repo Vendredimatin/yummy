@@ -55,13 +55,20 @@
     text-align: right;
 }
 
+.checkoutcart-total-discount {
+    padding: 12px 28px 10px;
+    font-size: 24px;
+    text-align: right;
+}
+
 .color-stress {
     color: #f74342;
 }
 
-.checkoutcart-total .num {
+.checkoutcart-total .num,.num-discount{
     font-size: 46px;
 }
+
 
 .checkout-content {
     padding: 25px 20px 150px 30px;
@@ -71,7 +78,7 @@
 }
 
 .checkout-select {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .checkout-content h2 {
@@ -207,9 +214,29 @@ button, input {
     display: none;
 }
 
+.pay-dialog p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 .address-list{
     width: 350px;
     height: 30px;
     background-color: white;
+}
+
+
+.preference,.memberLevel{
+    margin-bottom: 10px;
+}
+.preference span{
+    font-weight: 700;
+    color: dodgerblue;
+    font-size: 16px;
+}
+
+.memberLevel span{
+    font-weight: 700;
+    color: yellowgreen;
+    font-size: 16px;
 }

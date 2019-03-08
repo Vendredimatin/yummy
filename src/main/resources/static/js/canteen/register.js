@@ -27,7 +27,7 @@ window.onload = function () {
             success: function (data) {
                 console.log(data);
                 alert(data["message"]+"登录帐号为："+data["canteenID"]);
-                window.location.href = "canteenInfo.html";
+                window.location.href = "login.html";
             },
             fail:function (data) {
                 alert("fail")

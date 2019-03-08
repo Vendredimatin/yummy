@@ -16,10 +16,9 @@ window.onload = function () {
     $(".add_create").click(function () {
         var d = {};
         d.name = $(".add_name").val();
-        d.sex = $("input[name='sex']:checked").val();
-        d.province = $(".add_province").val();
-        d.city = $(".add_city").val();
-        d.district = $(".add_district").val();
+        d.province = $('#cmbProvince option:selected').val();
+        d.city = $('#cmbCity option:selected').val();
+        d.district = $('#cmbArea option:selected').val();
         d.detail = $(".add_detail").val();
         d.phone = $(".add_phone").val();
 
@@ -31,7 +30,7 @@ window.onload = function () {
              success:function (data) {
                  alert(data['message']);
                  $(".addressdialog").css("display","none");
-                 addAddress(data['addressID'],d.name,d.sex,d.detail,d.phone);
+                 addAddress(data['addressID'],d.name,d.province,d.city,d.district,d.detail,d.phone);
              },
              fail:function (data) {
                  alert("fail");
@@ -68,29 +67,30 @@ window.onload = function () {
 
         //点击修改地址
     $(document).on('click', '.desktop-addresslist .desktop-addressblock .desktop-addressblock-buttons .desktop-addressblock-button.modify', function () {
-        console.log("a");
         var name = $(this).parent().siblings(".desktop-addressblock-name").text().split(" ")[0];
-        var sex = $(this).parent().siblings(".desktop-addressblock-name").text().split(" ")[1];
         var detail = $(this).parent().siblings(".desktop-addressblock-address").text();
         var phone = $(this).parent().siblings(".desktop-addressblock-mobile").text();
         var id = $(this).parent().siblings(".desktop-addressblock-id").text();
+        let province = $(this).parent().siblings(".desktop-addressblock-address").attr("province");
+        let city = $(this).parent().siblings(".desktop-addressblock-address").attr("city");
+        let district = $(this).parent().siblings(".desktop-addressblock-address").attr("district");
+        console.log(province,city,district);
 
-        console.log(name, sex, detail, phone);
         $(".addressdialog-modify").css("display", "block");
 
         $(".modify-name").val(name);
 
-        if (sex == "先生")
-            $("input[name='modify-sex'][value='先生']").attr("checked", true);
-        else
-            $("input[name='modify-sex'][value='女士']").attr("checked", true);
 
         $(".modify-id").val(id);
-        $(".modify-province").val("江苏省");
-        $(".modify-city").val("南京市");
-        $(".modify-district").val("鼓楼区");
+        $("#cmbProvince-modify option[value='" + province + "']").attr("selected", true);
+        $("#cmbCity-modify option[value='" + city + "']").attr("selected", true);
+        $("#cmbArea-modify option[value='" + district + "']").attr("selected", true);
         $(".modify-detail").val(detail);
         $(".modify-phone").val(phone);
+    });
+
+    $(".modify_cancel").click(function () {
+        $(".addressdialog-modify").css("display", "none");
     });
 
     //提交修改的地址
@@ -98,10 +98,9 @@ window.onload = function () {
         var d = {};
         d.addressID = $(".modify-id").val();
         d.name = $(".modify-name").val();
-        d.sex = $("input[name='modify-sex']:checked").val();
-        d.province = $(".modify-province").val();
-        d.city = $(".modify-city").val();
-        d.district = $(".modify-district").val();
+        d.province = $('#cmbProvince-modify option:selected').val();
+        d.city = $('#cmbCity-modify option:selected').val();
+        d.district = $('#cmbArea-modify option:selected').val();
         d.detail = $(".modify-detail").val();
         d.phone = $(".modify-phone").val();
 
@@ -122,16 +121,16 @@ window.onload = function () {
     });
 }
 
-function addAddress(id, name, sex, detail, phone) {
+function addAddress(id, name,province,city,district, detail, phone) {
     var html = '<div class="desktop-addressblock" address-id="\' + id + \'">\n' +
         '                    <div class="desktop-addressblock-buttons">\n' +
         '                        <button class="desktop-addressblock-button modify">修改</button>\n' +
         '                        <button class="desktop-addressblock-button delete">删除</button>\n' +
         '                    </div>\n' +
         '                    <div class="desktop-addressblock-id" style="display: none">' + id + '</div>\n' +
-        '                    <div class="desktop-addressblock-name">' + name + ' <span class="ng-binding">' + sex + '</span></div>\n' +
+        '                    <div class="desktop-addressblock-name">' + name + '</div>\n' +
         '                    <div class="desktop-addressblock-address"\n' +
-        '                         ng-bind="address.address + \' \' + address.address_detail">' + detail + '</div>\n' +
+        '                         province="'+ province +'" city="'+city+'" district="'+district+'" >' + detail + '</div>\n' +
         '                    <div class="desktop-addressblock-mobile ng-binding">' + phone + '</div>\n' +
         '\n' +
         '                </div>';
@@ -154,7 +153,7 @@ function init() {
 
             for (var i = 0; i < addresses.length; i++){
                 var address = addresses[i];
-                addAddress(address.id,address.name,address.sex,address.detail,address.phone);
+                addAddress(address.id,address.name,address.province,address.city,address.district,address.detail,address.phone);
             }
 
             var html = '<button class="desktop-addressblock desktop-addressblock-addblock" id="addblock">\n' +

@@ -31,11 +31,11 @@ public class Combo {
     @Column(scale = 2,nullable = false)
     private double price;
 
-    @Column(length = 1000,nullable = false)
+    @Column(length = 1000)
     @Convert(converter = ListConverter2.class)
     private List<String> dishNames;
 
-    @Column(length = 1000,nullable = false)
+    @Column(length = 1000)
     @Convert(converter = ListConverter2.class)
     private List<Integer> dishRemnants;
 
@@ -51,19 +51,6 @@ public class Combo {
     private Menu menu;
 
     public Combo() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Combo combo = (Combo) o;
-        return id == combo.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
     @Override

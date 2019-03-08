@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Address;
 import com.j2ee.yummy.service.AddressService;
+import com.j2ee.yummy.serviceImpl.AddressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ import java.util.Map;
 @Controller
 public class AddressController {
     @Autowired
-    AddressService addressService;
+    AddressServiceImpl addressService;
 
     @GetMapping(value = "/memberAddress")
     public String init(){

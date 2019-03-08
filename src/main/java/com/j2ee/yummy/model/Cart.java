@@ -2,6 +2,8 @@ package com.j2ee.yummy.model;
 
 import com.j2ee.yummy.model.canteen.Combo;
 import com.j2ee.yummy.model.canteen.Dish;
+import com.j2ee.yummy.model.canteen.Preference;
+import com.j2ee.yummy.stateDesignPattern.MemberLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +22,11 @@ public class Cart {
 
     private long memberID;
     private long canteenID;
-    private List<Dish> dishes = new ArrayList<>();
-    private List<Combo> combos = new ArrayList<>();
+    private long menuID;
+    private Set<Dish> dishes = new HashSet<>();
+    private Set<Combo> combos = new HashSet<>();
+    private Preference preference;
+    private MemberLevel memberLevel;
     public Cart() {
     }
 
@@ -30,8 +35,11 @@ public class Cart {
         return "Cart{" +
                 "memberID=" + memberID +
                 ", canteenID=" + canteenID +
-                ", dishMap=" + dishes.toString() +
-                ", comboMap=" + combos.toString() +
+                ", menuID=" + menuID +
+                ", dishes=" + dishes.toString() +
+                ", combos=" + combos.toString() +
+                ", preference=" + preference +
+                ", memberLevel=" + memberLevel +
                 '}';
     }
 

@@ -73,21 +73,21 @@ public class OrderServiceImpl {
      */
     public Map<String, Object> pay(long orderID) {
         Order order = orderDao.getOrderByID(orderID);
-
+        double totalPrice = order.getTotalPrice();
         //根据会员等级进行优惠
         Member member = memberService.getMemberByID(order.getMemberID());
 
-        double actualPrice = member.pay(order.getTotalPrice());
-        double originPrice = order.getTotalPrice();
+        //double actualPrice = member.pay(order.getTotalPrice());
+        //double originPrice = order.getTotalPrice();
 
         Balance memberBalance = balanceDao.getBalance(order.getMemberID(), UserType.Member);
         Balance yummyBalance = balanceDao.getBalance(0);
 
 
-        memberBalance.setBalance(memberBalance.getBalance() - actualPrice);
-        memberBalance.setCost(memberBalance.getCost() + actualPrice);
+        memberBalance.setBalance(memberBalance.getBalance() - totalPrice);
+        memberBalance.setCost(memberBalance.getCost() + totalPrice);
 
-        yummyBalance.setBalance(yummyBalance.getBalance() + actualPrice);
+        yummyBalance.setBalance(yummyBalance.getBalance() + totalPrice);
 
         //yummy结算
         balanceDao.updateBalance(memberBalance);
@@ -95,11 +95,10 @@ public class OrderServiceImpl {
 
         //更新order的状态和价格
         order.setOrderState(OrderState.派送中);
-        order.setTotalPrice(actualPrice);
+        order.setTotalPrice(totalPrice);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("originPrice",originPrice);
-        map.put("actualPrice",actualPrice);
+        map.put("totalPrice",totalPrice);
 
         return map;
     }

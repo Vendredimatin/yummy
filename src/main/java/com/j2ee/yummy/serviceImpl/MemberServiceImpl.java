@@ -1,13 +1,17 @@
 package com.j2ee.yummy.serviceImpl;
 
 
+import com.j2ee.yummy.dao.BalanceDao;
 import com.j2ee.yummy.dao.MemberDao;
+import com.j2ee.yummy.model.Balance;
 import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.service.MemberService;
+import com.j2ee.yummy.yummyEnum.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,8 @@ public class MemberServiceImpl implements MemberService {
     MemberDao memberDao;
     @Autowired
     JavaMailSender javaMailSender;
+    @Autowired
+    BalanceDao balanceDao;
 
     @Override
     public Member login(String email, String password) {
@@ -39,14 +45,25 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public String register(String email, String password, String name, String phone) {
         Member member = new Member();
         member.setEmail(email);
         member.setPassword(password);
         member.setName(name);
         member.setPhone(phone);
-        System.out.println(member);
-        return memberDao.insert(member) ? "success" : "fail";
+        member = memberDao.insert(member);
+
+        //还要在银行中注册这个账户
+        Balance balance = new Balance();
+        balance.setUserID(member.getId());
+        balance.setPassword(member.getPassword());
+        balance.setBalance(1000);
+        balance.setProfit(0);
+        balance.setCost(0);
+        balance.setUserType(UserType.Member);
+        balanceDao.insert(balance);
+        return "success";
     }
 
     @Override
@@ -57,10 +74,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public List<Member> getAll(){
-        List<Member> members = new ArrayList<>();
         List<Member> memberPOS = memberDao.getAll();
 
-        return members;
+        return memberPOS;
     }
 
     public long count(){
