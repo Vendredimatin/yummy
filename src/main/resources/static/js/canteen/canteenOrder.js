@@ -52,7 +52,9 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (orders) {
                 console.log(orders);
-                initHtml(orders);
+                if (orders.length == 0){
+                    alert("这是最后一页了");
+                }else initHtml(orders);
             },
             fail: function (data) {
                 alert("fail");
@@ -104,6 +106,9 @@ window.onload = function () {
                 '                        <i class="ordertimeline-time-icon icon-uniE65E finish ng-scope"></i>\n' +
                 '                    </td>\n' +
                 '\n' +
+                '                    <td class="ordertimeline-memberName">\n' +
+                '                        <h3 class="ordertimeline-title ordertimeline-member-name ui-arial">'+ order['memberName'] +'</h3>\n' +
+                '                    </td>'+
                 '                    <td class="ordertimeline-info">\n' +
                 '                        <p class="ordertimeline-info-food">\n' +
                 '                            <a>\n' +

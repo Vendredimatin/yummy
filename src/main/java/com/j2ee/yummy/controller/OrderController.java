@@ -182,7 +182,8 @@ public class OrderController {
 
         List<Order> orders = orderService.getOrdersByCanID(canteenID);
 
-        return orders.subList(0,PAGE_SIZE);
+        int size = (orders.size()>=PAGE_SIZE)?PAGE_SIZE:orders.size();
+        return orders.subList(0,size);
     }
 
 

@@ -100,7 +100,9 @@ window.onload = function () {
           contentType: "application/json;charset=utf-8",
           success: function (orders) {
               console.log(orders);
-              initHtml(orders);
+              if (orders.length == 0){
+                  alert("这是最后一页了");
+              }else initHtml(orders);
           },
           fail: function (data) {
               alert("fail");

@@ -238,15 +238,15 @@ ordertimeline-time-icon.finish {
     border: 1px solid #eee;
 }
 
-.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status, .ordertimeline-unsubscribe, .ordertimeline-canteenName {
+.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status, .ordertimeline-unsubscribe, .ordertimeline-memberName {
     width: 13%;
 }
-.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status, .ordertimeline-unsubscribe, .ordertimeline-canteenName {
+.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status, .ordertimeline-unsubscribe, .ordertimeline-memberName {
     border-bottom: 1px #eee dashed;
     color: #999;
 }
 
-.ordertimeline-title.ordertimeline-price,.ordertimeline-title.ordertimeline-canteen-name {
+.ordertimeline-title.ordertimeline-price,.ordertimeline-title.ordertimeline-member-name {
     font-size: 16px;
 }
 
