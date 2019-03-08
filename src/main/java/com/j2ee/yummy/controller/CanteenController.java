@@ -126,6 +126,7 @@ public class CanteenController {
             session.setAttribute("canteenID", canteen.getId());
             map.put("success", true);
             map.put("message", "登录成功");
+            map.put("canteenName",canteen.getCanteenName());
         }catch (NullPointerException e){
             log.info("时间：" + LocalDateTime.now()+", 餐厅帐号不存在", LocalDateTime.now());
             map.put("success", false);
@@ -139,12 +140,14 @@ public class CanteenController {
 
     @PostMapping(value = "/canteen/display")
     @ResponseBody
-    public List<Canteen> display(){
+    public Object display(HttpSession session){
         System.out.println("进入　CanteenController display.............");
 
         List<Canteen> canteens = canteenService.getAll();
-
-        return canteens;
+        Map<String,Object> map = new HashMap<>();
+        map.put("canteens",canteens);
+        map.put("memberName",session.getAttribute("memberName"));
+        return map;
     }
 
     @PostMapping(value = "/canteen/info/get")
@@ -214,6 +217,7 @@ public class CanteenController {
         map.put("balance", balance);
         map.put("totalProfit",totalProfit * CANTEEN_PROFIT_PERCENT);
         map.put("totalNums",totalOrderNums);
+        map.put("canteenName",session.getAttribute("canteenName"));
         return map;
     }
 }

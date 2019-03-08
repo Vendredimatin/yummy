@@ -162,7 +162,7 @@ public class OrderController {
 
     @PostMapping(value = "/member/order/history")
     @ResponseBody
-    public List<Order> memberHistory(HttpSession session){
+    public Object memberHistory(HttpSession session){
         System.out.println("进入 OrderController history....................");
 
         long memberID = (long) session.getAttribute("memberID");
@@ -170,12 +170,16 @@ public class OrderController {
         List<Order> orders = orderService.getOrdersByMemID(memberID);
 
         int size = (orders.size()>=PAGE_SIZE)?PAGE_SIZE:orders.size();
-        return orders.subList(0,size);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("memberName",session.getAttribute("memberName"));
+        map.put("orders",orders.subList(0,size));
+        return map;
     }
 
     @PostMapping(value = "/canteen/order/history")
     @ResponseBody
-    public List<Order> canteenHistory(HttpSession session){
+    public Object canteenHistory(HttpSession session){
         System.out.println("进入 OrderController canteenHistory....................");
 
         long canteenID = (long) session.getAttribute("canteenID");
@@ -183,7 +187,10 @@ public class OrderController {
         List<Order> orders = orderService.getOrdersByCanID(canteenID);
 
         int size = (orders.size()>=PAGE_SIZE)?PAGE_SIZE:orders.size();
-        return orders.subList(0,size);
+        Map<String,Object> map = new HashMap<>();
+        map.put("canteenName",session.getAttribute("canteenName"));
+        map.put("orders",orders.subList(0,size));
+        return map;
     }
 
 

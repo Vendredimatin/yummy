@@ -25,7 +25,7 @@ window.onload = function () {
     var menu = {};
     var dishes = [];
     var combos = [];
-
+    init();
     //添加新菜
     $("#addblock").click(function () {
         console.log("!!!");
@@ -173,6 +173,40 @@ function addDish(newDish) {
         '                </div>';
 
     $("#menulist").append(html);
+
+    $(".topbar-canteen-area").mouseover(function () {
+        console.log(111);
+        $(".user-menu").css("display", "block");
+    });
+    $(".topbar-canteen-area").mouseout(function () {
+        $(".user-menu").css("display", "none");
+    });
+
+    $(".user-menu").mouseover(function () {
+        $(".user-menu").css("display", "block");
+    })
+
+    $(".user-menu").mouseout(function () {
+        $(".user-menu").css("display", "none");
+    });
+
+    $(".log-out").click(function () {
+        window.location.href = "login.html";
+    })
+}
+
+function init() {
+    $.ajax({
+        url:"/canteen/info/get",
+        type:"post",
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+            $(".topbar-canteen-name").text(data['canteenName']);
+        },
+        fail:function (data) {
+            alert("fail")
+        }
+    })
 }
 
 function addCombo(newCombo) {

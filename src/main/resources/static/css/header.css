@@ -24,6 +24,7 @@ a, ins {
     width: 105px;
     margin-right: 30px;
     line-height: inherit;
+    color: white;
 }
 
 .topbar-item, .topbar-logo, .topbar-nav-link {
@@ -31,7 +32,7 @@ a, ins {
 }
 
 
-.topbar-item, .topbar-member-area{
+.topbar-item, .topbar-member-area, .topbar-canteen-area{
     font-size: 16px;
     position: relative;
     color: #fff;
@@ -47,7 +48,7 @@ a, ins {
     width: 112px!important;
 }
 
-.topbar-member-area{
+.topbar-member-area, .topbar-canteen-area{
     float: right;
 }
 
@@ -58,6 +59,18 @@ a, ins {
 }
 
 topbar-member-area .caret {
+    position: absolute;
+    top: 39px;
+    right: 10px;
+}
+
+.topbar-canteen-area:hover .caret {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+topbar-canteen-area .caret {
     position: absolute;
     top: 39px;
     right: 10px;
@@ -88,6 +101,8 @@ topbar-member-area .caret {
     text-align: right;
     padding: 15px 26px 5px;
     text-align: center;
+    z-index: 999;
+
 }
 
 .user-menu ul, .user-menu li {

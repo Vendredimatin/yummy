@@ -117,6 +117,7 @@ public class MemberController {
         map.put("balance", balance);
         map.put("totalCost",totalCost);
         map.put("totalNums",totalOrderNums);
+        map.put("memberName",session.getAttribute("memberName"));
         return map;
     }
 }

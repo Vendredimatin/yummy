@@ -86,7 +86,8 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (orders) {
                 console.log(orders);
-                initHtml(orders);
+                $(".topbar-canteen-name").text(orders['canteenName']);
+                initHtml(orders['orders']);
             },
             fail: function (data) {
                 alert("fail");
@@ -132,4 +133,24 @@ window.onload = function () {
             $(".order-list").append(html);
         }
     }
+
+    $(".topbar-canteen-area").mouseover(function () {
+        console.log(111);
+        $(".user-menu").css("display", "block");
+    });
+    $(".topbar-canteen-area").mouseout(function () {
+        $(".user-menu").css("display", "none");
+    });
+
+    $(".user-menu").mouseover(function () {
+        $(".user-menu").css("display", "block");
+    })
+
+    $(".user-menu").mouseout(function () {
+        $(".user-menu").css("display", "none");
+    });
+
+    $(".log-out").click(function () {
+        window.location.href = "login.html";
+    })
 };

@@ -121,10 +121,18 @@ public class CartController {
         session.setAttribute("checkoutCanID",scanCanteenID);
         Set<Cart> carts = (Set<Cart>) session.getAttribute("carts");
         Cart cart = null;
-        for (Cart tmp: carts) {
-            if (tmp.getCanteenID() == scanCanteenID)
-                cart = tmp;
+        try{
+            for (Cart tmp: carts) {
+                if (tmp.getCanteenID() == scanCanteenID)
+                    cart = tmp;
+            }
+        }catch (NullPointerException e){
+            Map<String,Object> map = new HashMap<>();
+            map.put("message","还未加入购物车");
+            map.put("success",false);
+            return map;
         }
+
 
         //添加优惠条件和会员等级
         Menu menu = menuService.getMenuByID(cart.getMenuID());
@@ -152,7 +160,7 @@ public class CartController {
         map.put("cart",cart);
         map.put("addresses",addresses);
         map.put("canteenAddress",canteenAddress);
-
+        map.put("memberName",session.getAttribute("memberName"));
         return map;
     }
 }

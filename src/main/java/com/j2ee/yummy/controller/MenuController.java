@@ -95,6 +95,7 @@ public class MenuController {
 
         Map<String,Object> map = new HashMap<>();
         map.put("menus",menus);
+        map.put("memberName",session.getAttribute("memberName"));
         return map;
     }
 }

@@ -30,7 +30,6 @@ window.onload = function (ev) {
         });
     });
 
-
     $(".topbar-member-area").mouseover(function () {
         console.log(111);
         $(".user-menu").css("display", "block");
@@ -46,10 +45,10 @@ window.onload = function (ev) {
     $(".user-menu").mouseout(function () {
         $(".user-menu").css("display", "none");
     });
-    
+
     $('.log-off').click(function () {
         let res = confirm("确定注销吗？");
-        if (res ==true ){
+        if (res == true) {
             $.ajax({
                 url: "/member/logoff",
                 type: "post",
@@ -58,13 +57,19 @@ window.onload = function (ev) {
                     alert(data["message"]);
                     window.location.href = "login.html";
                 },
-                fail:function (data) {
+                fail: function (data) {
                     alert("fail");
                 }
             });
         }
     })
-    
+
+    $(".log-out").click(function () {
+        window.location.href = "login.html";
+    })
+
+
+
 };
 
 function init() {
@@ -75,6 +80,9 @@ function init() {
         success: function (data) {
             console.log(data);
             console.log(data['id']);
+
+            $(".topbar-member-name").text(data['name']);
+
             var name = data['name'];
             var email = data['email'];
             var phone = data['phone'];

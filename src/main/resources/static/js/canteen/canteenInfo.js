@@ -55,7 +55,7 @@ window.onload = function () {
             success: function (data) {
                 console.log(data);
                 console.log(data['id']);
-
+                $(".topbar-canteen-name").text(data['canteenName']);
                 oldInfo = data;
                 initCanteenInfo(oldInfo);
             },
@@ -64,6 +64,26 @@ window.onload = function () {
             }
         })
     }
+
+    $(".topbar-canteen-area").mouseover(function () {
+        console.log(111);
+        $(".user-menu").css("display", "block");
+    });
+    $(".topbar-canteen-area").mouseout(function () {
+        $(".user-menu").css("display", "none");
+    });
+
+    $(".user-menu").mouseover(function () {
+        $(".user-menu").css("display", "block");
+    })
+
+    $(".user-menu").mouseout(function () {
+        $(".user-menu").css("display", "none");
+    });
+
+    $(".log-out").click(function () {
+        window.location.href = "login.html";
+    })
 };
 
 function initCanteenInfo(data) {

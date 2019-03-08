@@ -42,7 +42,7 @@ public class AddressController {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("addresses",addresses);
-
+        jsonObject.put("memberName",session.getAttribute("memberName"));
         return jsonObject;
     }
 

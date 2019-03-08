@@ -65,6 +65,7 @@ public class LoginController {
         try {
             Member member = memberService.login(email, password);
             session.setAttribute("memberID", member.getId());
+            session.setAttribute("memberName",member.getName());
             map.put("success", true);
             map.put("message", "登录成功");
         } catch (NullPointerException e) {
