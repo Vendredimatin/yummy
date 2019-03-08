@@ -41,6 +41,26 @@ window.onload = function () {
             success: function (data) {
                 console.log(data);
                 alert(data['message']);
+                window.location.href = "/managerAudit";
+            },
+            fail: function (data) {
+                alert("fail")
+            }
+        });
+    });
+
+    $('.canteen-info-reject').click(function () {
+        let d = {};
+        d.canteenID = $('.profileinfo-value.id').val();
+        $.ajax({
+            url:'/manager/reject',
+            type:'post',
+            data:JSON.stringify(d),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                alert(data['message']);
+                window.location.href = "/managerAudit";
             },
             fail: function (data) {
                 alert("fail")
@@ -70,7 +90,7 @@ window.onload = function () {
             let html = '<tr>\n' +
                 '                        <td class="canteen-id">' + unauditedInfo['canteenID'] + '</td>\n' +
                 '                        <td class="canteen-name">' + unauditedInfo['canteenName'] + '</td>\n' +
-                '                        <td class="canteen-time">' + unauditedInfo['canteenName'] + '</td>\n' +
+                '                        <td class="canteen-time">' + unauditedInfo['time'] + '</td>\n' +
                 '                        <td class="check"><button>审批</button></td>\n' +
                 '                    </tr>';
 

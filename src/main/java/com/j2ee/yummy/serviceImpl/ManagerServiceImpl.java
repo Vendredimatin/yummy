@@ -75,6 +75,12 @@ public class ManagerServiceImpl {
         unauditedCanInfoDao.delete(unauditedCanInfo.getId());
     }
 
+    public void reject(long canteenID) {
+        UnauditedCanInfo unauditedCanInfo = unauditedCanInfoDao.getUnauditedInfoByCanID(canteenID);
+        unauditedCanInfoDao.delete(unauditedCanInfo.getId());
+
+    }
+
     public Map<String, Object> getStatistics() {
         List<Balance> memBalance = balanceService.getBalances(UserType.Member);
         double[] costTable = {100, 500, 1000, 5000};
@@ -140,4 +146,6 @@ public class ManagerServiceImpl {
 
         return res;
     }
+
+
 }

@@ -12,6 +12,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class UnauditedCanInfo implements Subject {
     protected String canteenName;
     protected String landlordName;
     protected String phone;
+    protected LocalDate time;
     @Convert(converter = EntityConverter.class)
     protected Address address;
     private String profile = "";

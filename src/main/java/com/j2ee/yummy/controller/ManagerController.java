@@ -81,7 +81,21 @@ public class ManagerController {
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
-        map.put("message", "成功");
+        map.put("message", "已批准");
+        return map;
+    }
+
+    @PostMapping(value = "/manager/reject")
+    @ResponseBody
+    public Object reject(@RequestBody JSONObject jsonObject){
+        System.out.println("进入 manger reject....................");
+
+        long canteenID =  jsonObject.getLong("canteenID");
+        managerService.reject(canteenID);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "已拒绝");
         return map;
     }
 

@@ -8,7 +8,6 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert(data['message']);
                 initChart(data);
             },
             fail: function (data) {

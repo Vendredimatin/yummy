@@ -29,7 +29,7 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 console.log(data);
-                alert(data);
+                alert("已提交，待yummy经理审批");
 
                 $(".profileinfo-item.display").css("display","block");
                 $(".profileinfo-item.select").css("display","none");

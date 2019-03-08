@@ -33,3 +33,107 @@ body {
     margin-left: 42px;
     display: none;
 }
+
+
+.profileinfo-item {
+    margin-bottom: 20px;
+}
+
+.profileinfo-label {
+    margin-right: 15px;
+    width: 65px;
+    text-align: right;
+}
+
+.profileinfo-label, .profileinfo-value {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.profileinfo-face {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+}
+
+.profileinfo-face>img {
+    width: 100%;
+}
+
+.profile-panel-btn{
+    margin-left: 150px;
+}
+
+.unauditedInfo-list{
+    margin-top: 10px;
+}
+
+table thead, table tr {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(230, 189, 189);
+    height: 40px;
+    text-align: center;
+}
+table {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(230, 189, 189);
+    width: 100%;
+}
+
+/* Padding and font style */
+table td, table th {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-family: Verdana;
+    color: rgb(177, 106, 104);
+}
+
+th{
+    border-collapse: collapse;
+    border-right:1px solid #c6c6c6 !important;
+    border-bottom:1px solid #c6c6c6 !important;
+    background-color:whitesmoke;
+    font-weight:normal;
+    text-align:center;
+}
+
+/* Alternating background colors */
+table tr:nth-child(even) {
+    background: rgb(238, 211, 210)
+}
+table tr:nth-child(odd) {
+    background: #FFF
+}
+
+.check button, .canteen-info-reject{
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 20px;
+    text-align: center;
+    outline: 0;
+    background-color: orangered;
+    color: #fff;
+}
+
+.canteen-info-pass{
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 20px;
+    text-align: center;
+    outline: 0;
+    background-color: blue;
+    color: #fff;
+}

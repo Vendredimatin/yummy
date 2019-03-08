@@ -4,20 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js/jquery-1.11.1.min.js"></script>
+    <style>
+        table thead, table tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(230, 189, 189);
+        }
+        table {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(230, 189, 189);
+        }
+
+        /* Padding and font style */
+        table td, table th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: rgb(177, 106, 104);
+        }
+
+        /* Alternating background colors */
+        table tr:nth-child(even) {
+            background: rgb(238, 211, 210)
+        }
+        table tr:nth-child(odd) {
+            background: #FFF
+        }
+    </style>
 </head>
-<body>
-<select id="a">
-    <option value="a">a</option>
-    <option value="b">b</option>
-    <option value="c">c</option>
-</select>
-<button class="btn"></button>
-<script>
-    $(".btn").click(function () {
-        let area = 'b';
-        $("#a option[value='" + area + "']").attr("selected", true);
-    });
-</script>
+<body><!-- Table goes in the document BODY -->
+<table class="gridtable" id="table">
+    <tr>
+        <th>Info Header 1</th>
+        <th>Info Header 2</th>
+        <th>Info Header 3</th>
+    </tr>
+    <tr>
+        <td>Text 1A</td>
+        <td>Text 1B</td>
+        <td>Text 1C</td>
+    </tr>
+    <tr>
+        <td>Text 2A</td>
+        <td>Text 2B</td>
+        <td>Text 2C</td>
+    </tr>
+</table>
 
 </body>
 </html>

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -187,6 +188,7 @@ public class CanteenController {
         unauditedCanInfo.setPhone(phone);
         unauditedCanInfo.setCategories(category);
         unauditedCanInfo.setAddress(address);
+        unauditedCanInfo.setTime(LocalDate.now());
 
         System.out.println(unauditedCanInfo);
 
