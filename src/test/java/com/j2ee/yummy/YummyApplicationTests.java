@@ -176,6 +176,11 @@ public class YummyApplicationTests {
     }
 
     @Test
+    public void updateOrder(){
+        orderDao.updateOrderState(OrderState.派送中,3);
+    }
+
+    @Test
     public void sendSimpleMail() throws Exception {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("2860957268@qq.com");

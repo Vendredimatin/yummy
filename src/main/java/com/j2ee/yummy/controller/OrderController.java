@@ -193,6 +193,7 @@ public class OrderController {
 
         long unpayedOrderID = (long) session.getAttribute("unpayedOrderID");
         springTaskDemo.changeOrderState(unpayedOrderID,OrderState.派送中);
+        orderService.pay(unpayedOrderID);
         Map<String,Object> map = orderService.pay(unpayedOrderID);
         map.put("success", true);
         map.put("message", "支付成功");
@@ -314,5 +315,22 @@ public class OrderController {
         Order order = orderService.getOrderByID(orderID);
         return order;
     }
+
+    @PostMapping(value = "/member/order/confirm")
+    @ResponseBody
+    public Object confirm(@RequestBody JSONObject jsonObject){
+        System.out.println("进入 OrderController confirm....................");
+
+        long orderID = jsonObject.getLong("orderID");
+
+       // springTaskDemo.removeOrder(orderID);
+        orderService.confirm(orderID);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("message", "收货成功");
+        return map;
+    }
+
 
 }

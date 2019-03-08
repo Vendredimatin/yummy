@@ -59,7 +59,7 @@ public class Order {
 
     public double unsubscribe(){
         if (orderState.equals(OrderState.派送中))
-            return totalPrice*0.8;
+            return totalPrice*0.2;
         else return 0;
     }
 

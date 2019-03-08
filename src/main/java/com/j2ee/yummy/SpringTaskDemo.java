@@ -78,6 +78,17 @@ public class SpringTaskDemo {
         log.info("添加order成功" , LocalDateTime.now());
     }
 
+    public void removeOrder(long orderID){
+        for (int i = 0; i < messageOrders.size(); i++) {
+            MessageOrder messageOrder = messageOrders.get(i);
+            if (messageOrder.getOrderID() == orderID){
+                messageOrders.remove(i);
+                break;
+            }
+        }
+        log.info("提前确认order成功" , LocalDateTime.now());
+    }
+
     public void changeOrderState(long orderID,OrderState orderState){
         for (int i = 0; i < messageOrders.size(); i++) {
             MessageOrder messageOrder = messageOrders.get(i);
@@ -90,7 +101,7 @@ public class SpringTaskDemo {
         log.info("改变order成功" , LocalDateTime.now());
     }
 
-    public static void pay(long orderID) {
+    public void pay(long orderID) {
         MessageOrder order = null;
         for (int i = 0; i < unpaidOrders.size(); i++) {
             order = unpaidOrders.get(i);

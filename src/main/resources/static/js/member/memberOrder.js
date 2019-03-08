@@ -2,7 +2,7 @@ window.onload = function () {
   init();
 
   //退订
-  $(document).on("click",".ordertimeline-unsubscribe button",function () {
+  $(document).on("click",".ordertimeline-unsubscribe button:first-child",function () {
       let orderState = $(this).parent().siblings(".ordertimeline-status").children().text();
       console.log(orderState);
       if (orderState == "完成"){
@@ -26,6 +26,27 @@ window.onload = function () {
               }
           })
       }
+  });
+
+
+  //提前收货
+  $(document).on('click',".order-confirm",function () {
+      let d ={};
+      d.orderID = $(this).parent().attr("order-id");
+      $.ajax({
+          url: "/member/order/confirm",
+          type:"post",
+          data:JSON.stringify(d),
+          contentType: "application/json;charset=utf-8",
+          success: function (data) {
+              alert(data['message']);
+              console.log(data);
+              init();
+          },
+          fail: function (data) {
+              alert("fail");
+          }
+      })
   });
 
   //搜索
@@ -132,6 +153,9 @@ window.onload = function () {
               '                        <i class="ordertimeline-time-icon icon-uniE65E finish ng-scope"></i>\n' +
               '                    </td>\n' +
               '\n' +
+              '                    <td class="ordertimeline-canteenName">\n' +
+              '                        <h3 class="ordertimeline-title ordertimeline-canteen-name ui-arial">'+ order['canteenName'] +'</h3>\n' +
+              '                    </td>'+
               '                    <td class="ordertimeline-info">\n' +
               '                        <p class="ordertimeline-info-food">\n' +
               '                            <a>\n' +
@@ -155,9 +179,10 @@ window.onload = function () {
               html +=               '                        <button order-state="complete" disabled>无操作</button>\n';
           else if (order['orderState'] == "未支付")
               html +=               '                        <button order-state="unpaid">退订</button>\n';
-          else if (order['orderState'] == "派送中")
-              html +=               '                        <button order-state="delivering">退订</button>\n';
-          else
+          else if (order['orderState'] == "派送中") {
+              html += '                        <button order-state="delivering">退订</button>\n';
+              html += '                        <button class="order-confirm">确认收货</button>\n';
+          }else
               html +=               '                        <button order-state="complete" disabled>无操作</button>\n';
 
           html += '                    </td>'+

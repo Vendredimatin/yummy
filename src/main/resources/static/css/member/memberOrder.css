@@ -238,15 +238,15 @@ ordertimeline-time-icon.finish {
     border: 1px solid #eee;
 }
 
-.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status, .ordertimeline-unsubscribe {
+.ordertimeline-amount, .ordertimeline-handle, .ordertimeline-status, .ordertimeline-unsubscribe, .ordertimeline-canteenName {
     width: 13%;
 }
-.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status, .ordertimeline-unsubscribe {
+.ordertimeline-amount, .ordertimeline-info, .ordertimeline-status, .ordertimeline-unsubscribe, .ordertimeline-canteenName {
     border-bottom: 1px #eee dashed;
     color: #999;
 }
 
-.ordertimeline-title.ordertimeline-price {
+.ordertimeline-title.ordertimeline-price,.ordertimeline-title.ordertimeline-canteen-name {
     font-size: 16px;
 }
 
@@ -262,7 +262,7 @@ ordertimeline-time-icon.finish {
 }
 
 
-.ordertimeline-unsubscribe button {
+.ordertimeline-unsubscribe button:first-child {
     display: inline-block;
     border: 0;
     cursor: pointer;
@@ -273,6 +273,21 @@ ordertimeline-time-icon.finish {
     text-align: center;
     outline: 0;
     background-color: #0089dc;
+    color: #fff;
+}
+
+.order-confirm{
+    margin-top: 5px;
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 20px;
+    text-align: center;
+    outline: 0;
+    background-color: red;
     color: #fff;
 }
 

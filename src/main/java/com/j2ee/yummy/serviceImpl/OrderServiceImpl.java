@@ -65,6 +65,8 @@ public class OrderServiceImpl {
         return orderDao.getAll();
     }
 
+
+
     /**
      * 支付后，钱会先到平台上，确认后才会分给商家
      *
@@ -160,7 +162,7 @@ public class OrderServiceImpl {
 
         //先从账户上扣完全款
         yummyBalance.setBalance(yummyBalance.getBalance() - order.getTotalPrice());
-        //会员退80%
+        //会员退20%
         memberBalance.setBalance(memberBalance.getBalance() + returnFee);
         //餐厅得到剩下的80%
         canteenBalance.setBalance(canteenBalance.getBalance() + order.getTotalPrice()*(1-RETURN_DISCOUNT) * CAN_DISCOUNT);
