@@ -124,6 +124,7 @@ public class CanteenController {
         try {
             Canteen canteen = canteenService.login(account, password);
             session.setAttribute("canteenID", canteen.getId());
+            session.setAttribute("canteenName",canteen.getCanteenName());
             map.put("success", true);
             map.put("message", "登录成功");
             map.put("canteenName",canteen.getCanteenName());
@@ -218,6 +219,7 @@ public class CanteenController {
         map.put("totalProfit",totalProfit * CANTEEN_PROFIT_PERCENT);
         map.put("totalNums",totalOrderNums);
         map.put("canteenName",session.getAttribute("canteenName"));
+        System.out.println(session.getAttribute("canteenName"));
         return map;
     }
 }

@@ -331,7 +331,7 @@ public class OrderController {
 
         long orderID = jsonObject.getLong("orderID");
 
-       // springTaskDemo.removeOrder(orderID);
+        springTaskDemo.removeOrder(orderID);
         orderService.confirm(orderID);
 
         Map<String, Object> map = new HashMap<>();
