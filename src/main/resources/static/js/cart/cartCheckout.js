@@ -146,7 +146,7 @@ window.onload = function () {
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 alert(data['message']);
-                $(".pay-dialog").css('display', 'block');
+                window.location.href = "memberOrder.html";
             },
             fail: function (data) {
                 alert("fail");
@@ -156,27 +156,7 @@ window.onload = function () {
 
     });
 
-    //付款
-    $(".pay-btn").click(function () {
-        let d = {};
-        d.password = $(".pay-password").val();
-        d.totalPrice = $(".num-discount").text();
 
-        $.ajax({
-            url: "/member/order/pay",
-            type: "post",
-            data: JSON.stringify(d),
-            contentType: "application/json;charset=utf-8",
-            success: function (data) {
-                alert("支付成功！实际支付"+data['totalPrice']+"元");
-                $(".pay-dialog").css('display', 'none');
-                window.location.href="canteenDisplay.html";
-            },
-            fail: function (data) {
-                alert("fail");
-            }
-        })
-    });
 
 
     function caculateTotal() {

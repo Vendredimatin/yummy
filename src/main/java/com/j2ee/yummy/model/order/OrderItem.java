@@ -22,6 +22,7 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    //菜品的id
     @Column(nullable = false)
     private long itemID;
     @Column(nullable = false)
@@ -54,6 +55,6 @@ public class OrderItem {
                 ", price=" + price +
                 ", subtotal=" + subtotal +
                /* ", order=" + order +*/
-                '}';
+                '}'+'\n';
     }
 }

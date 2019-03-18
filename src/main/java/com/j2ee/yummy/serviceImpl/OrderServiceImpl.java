@@ -186,4 +186,8 @@ public class OrderServiceImpl {
         return orderDao.findByConditionsForCan(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,pageable);
     }
 
+    public void updateOrderState(long orderID, OrderState orderState){
+        orderDao.updateOrderState(orderState, orderID);
+    }
+
 }

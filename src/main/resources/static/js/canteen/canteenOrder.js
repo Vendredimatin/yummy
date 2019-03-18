@@ -12,8 +12,10 @@ window.onload = function () {
         d.minPrice = $(".min-price").val();
         d.minPrice = (d.minPrice == '')?-1:d.minPrice;
         d.memberName = $('.member-area input').val();
-        d.memberNameName = (d.memberName == '')?"null":d.memberName;
+        d.memberName = (d.memberName == '')?"null":d.memberName;
         d.orderState =  $('.state-area select option:selected').text();
+
+        console.log(d);
 
         $.ajax({
             url:"/canteen/order/search",

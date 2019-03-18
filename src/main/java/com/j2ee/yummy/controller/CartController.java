@@ -57,11 +57,7 @@ public class CartController {
         String name = jsonObject.getString("name");
         long menuID = jsonObject.getLong("menuID");
 
-        Set<Cart> carts;
-        //当会员重新进入另外一家店时，应该声明另外一个cart
-        if (Objects.isNull(session.getAttribute("carts"))){
-            carts = new HashSet<>();
-        }else carts = (Set<Cart>) session.getAttribute("carts");
+        Set<Cart> carts = (Set<Cart>) session.getAttribute("carts");
 
         long scanCanteenID = (Long) session.getAttribute("scanCanteenID");
 
@@ -71,13 +67,9 @@ public class CartController {
                 cart = tmp;
         }
 
-        if (cart == null){
-            cart = new Cart();
-            cart.setCanteenID(scanCanteenID);
-            cart.setMenuID(menuID);
-            cart.setMemberID((Long) session.getAttribute("memberID"));
-        }
-
+        cart.setCanteenID(scanCanteenID);
+        cart.setMenuID(menuID);
+        cart.setMemberID((Long) session.getAttribute("memberID"));
 
 
         try{

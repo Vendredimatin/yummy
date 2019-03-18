@@ -209,14 +209,14 @@ public class CanteenController {
 
         Balance balance = balanceService.getBalance(canteenID, UserType.Canteen);
         List<Order> orders = orderService.getOrdersByCanID(canteenID);
-        double totalProfit = orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).mapToDouble(Order::getTotalPrice).sum();
+        double totalProfit = balanceService.getProfit(canteenID,UserType.Canteen);//orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).mapToDouble(Order::getTotalPrice).sum();
         int totalOrderNums = (int) orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).count();
 
 
         Map<String, Object> map = new HashMap<>();
         map.put("message", "获取成功");
         map.put("balance", balance);
-        map.put("totalProfit",totalProfit * CANTEEN_PROFIT_PERCENT);
+        map.put("totalProfit",totalProfit);
         map.put("totalNums",totalOrderNums);
         map.put("canteenName",session.getAttribute("canteenName"));
         System.out.println(session.getAttribute("canteenName"));

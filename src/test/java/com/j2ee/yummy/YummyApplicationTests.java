@@ -116,8 +116,8 @@ public class YummyApplicationTests {
 
     @Test
     public void getOrders(){
-        long memberID = 4;
-        List<Order> orders = orderDao.getOrdersByMemID(4);
+        long memberID = 2;
+        List<Order> orders = orderDao.getOrdersByMemID(memberID);
         System.out.println(orders);
     }
 

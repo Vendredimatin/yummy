@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.j2ee.yummy.StaticFinalVariable.PAGE_SIZE;
 
@@ -110,7 +111,7 @@ public class OrderController {
         order.setDeliveringTime(deliveringTime);
 
         List<Long> dishIDs = jsonObject.getJSONArray("dishIDs").toJavaList(Long.class);
-        List<Long> comboIDs = jsonObject.getJSONArray("dishIDs").toJavaList(Long.class);
+        List<Long> comboIDs = jsonObject.getJSONArray("comboIDs").toJavaList(Long.class);
         List<Integer> dishQuantities = jsonObject.getJSONArray("dishQuantities").toJavaList(Integer.class);
         List<Integer> comboQuantities = jsonObject.getJSONArray("comboQuantities").toJavaList(Integer.class);
         List<Double> dishSubtotals = jsonObject.getJSONArray("dishSubtotals").toJavaList(Double.class);
@@ -168,6 +169,7 @@ public class OrderController {
         long memberID = (long) session.getAttribute("memberID");
 
         List<Order> orders = orderService.getOrdersByMemID(memberID);
+        System.out.println(orders);
 
         int size = (orders.size()>=PAGE_SIZE)?PAGE_SIZE:orders.size();
 
@@ -216,8 +218,16 @@ public class OrderController {
         System.out.println("进入 OrderController unsubscribe....................");
 
         long orderID = jsonObject.getLong("orderID");
+        OrderState orderState = jsonObject.getObject("orderState",OrderState.class);
 
-        double returnFee = orderService.unsubscribe(orderID);
+        springTaskDemo.unsubscribeOrder(orderID);
+
+        double returnFee = 0;
+        if (orderState.equals(OrderState.派送中))
+             returnFee = orderService.unsubscribe(orderID);
+        else if (orderState.equals(OrderState.未支付)){
+            orderService.updateOrderState(orderID,OrderState.退货);
+        }
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
@@ -267,7 +277,6 @@ public class OrderController {
     @ResponseBody
     public List<Order> canteenSearch(@RequestBody JSONObject jsonObject, HttpSession session){
         System.out.println("进入 OrderController canteenSearch....................");
-
         long canteenID = (long) session.getAttribute("canteenID");
         LocalDate startTime = jsonObject.getObject("startTime",LocalDate.class);
         LocalDate endTime = jsonObject.getObject("endTime",LocalDate.class);
@@ -277,6 +286,7 @@ public class OrderController {
         String orderState = jsonObject.getString("orderState");
 
         Page<Order> orders = orderService.canteenSearch(canteenID,startTime,endTime,maxPrice,minPrice,memberName,orderState,1);
+        System.out.println(orders.getContent());
 
         return orders.getContent();
     }

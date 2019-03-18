@@ -199,25 +199,7 @@ button, input {
     text-align: center;
 }
 
-.pay-dialog{
-    width: 250px;
-    height: 250px;
-    position:fixed;
-    top:45%;
-    left:45%;
-    transform:translateX(-50%) translateY(-50%);
-    background-color: whitesmoke;
-    border-color: black;
-    border-style: solid;
-    z-index: 999;
-    text-align: center;
-    display: none;
-}
 
-.pay-dialog p{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 .address-list{
     width: 350px;

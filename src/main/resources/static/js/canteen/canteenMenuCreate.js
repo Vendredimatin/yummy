@@ -140,7 +140,6 @@ window.onload = function () {
         menu.combos = combos;
         menu.preference = preference;
         menu.time = $(".menu-time").val();
-
         console.log(menu);
         $.ajax({
             url: "/canteen/menu/create",

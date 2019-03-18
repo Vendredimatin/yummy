@@ -30,4 +30,12 @@ public class BalanceServiceImpl {
     public List<Balance> getBalances(UserType userType){
         return balanceDao.getBalancesByUserType(userType);
     }
+
+    public double getCost(long userID,UserType userType){
+        return balanceDao.getBalance(userID,userType).getCost();
+    }
+
+    public double getProfit(long userID,UserType userType){
+        return balanceDao.getBalance(userID,userType).getProfit();
+    }
 }

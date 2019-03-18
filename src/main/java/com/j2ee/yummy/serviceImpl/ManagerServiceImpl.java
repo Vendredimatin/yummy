@@ -87,12 +87,16 @@ public class ManagerServiceImpl {
         String[] costKey = {"100以下","100~500","500~1000","1000~5000","5000以上"};
         Map<String, Integer> memCostMap = new HashMap<>();
 
+        for (String key:costKey) {
+            memCostMap.put(key,0);
+        }
+
         memBalance.stream().forEach(m -> {
-            double cost = INIT_BALANCE - m.getBalance();
+            double cost = m.getCost();
             boolean isAdd = false;
             for (int i = 0; i < costTable.length; i++) {
                 if (cost < costTable[i]){
-                    int num = memCostMap.getOrDefault(costKey[i],0);
+                    int num = memCostMap.get(costKey[i]);
                     memCostMap.put(costKey[i],num+1);
                     isAdd = true;
                     break;
@@ -100,7 +104,7 @@ public class ManagerServiceImpl {
             }
 
             if (!isAdd){
-                int num = memCostMap.getOrDefault(costKey[4],0);
+                int num = memCostMap.get(costKey[4]);
                 memCostMap.put(costKey[4],num+1);
             }
         });
@@ -109,6 +113,10 @@ public class ManagerServiceImpl {
         String[] sellKey = {"50以下","50~100","100~500","500以上"};
         Map<String,Integer> canSellMap = new HashMap<>();
         List<Long> canteenIDs = canteenService.getAll().stream().map(Canteen::getId).collect(Collectors.toList());
+
+        for (String key:sellKey) {
+            canSellMap.put(key,0);
+        }
 
         canteenIDs.stream().forEach(canteenID -> {
             List<Order> orders = orderService.getOrdersByCanID(canteenID);
@@ -133,7 +141,7 @@ public class ManagerServiceImpl {
        /* List<Order> orders = orderService.getAll().stream().filter(o -> o.getOrderState() == OrderState.完成).collect(Collectors.toList());
         Map<Month,List<Order>> tmp= orders.stream().collect(Collectors.groupingBy(order->order.getTime().getMonth()));
         Map<Month,>*/
-        double yummyProfit = balanceService.getBalance(0).getBalance();
+        double yummyProfit = balanceService.getBalance(0).getProfit();
 
         long memberNums = memberService.count();
         long canteenNums = canteenService.count();

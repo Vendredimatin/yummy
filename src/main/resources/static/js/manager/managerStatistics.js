@@ -30,8 +30,11 @@ window.onload = function () {
         let percentages = [];
         let backColor1 = [];
         backColor1.push('#FF6384','#36A2EB','#FFCE96','#FFCE00','#36E2EB');//,'#838B2E','#B2E6C3','#DCB4B8','#9FC3F7');
-        for(let i in memCostMap){
-            let percentage = memCostMap[i];
+
+
+        for (let i = 0; i < labels.length; i++) {
+            let label = labels[i];
+            let percentage = memCostMap[label];
             percentages.push(percentage);
         }
 
@@ -53,8 +56,10 @@ window.onload = function () {
         let percentages = [];
         let backColor1 = [];
         backColor1.push('#838B2E','#B2E6C3','#DCB4B8','#9FC3F7');//,'#838B2E','#B2E6C3','#DCB4B8','#9FC3F7');
-        for(let i in canSellMap){
-            let percentage = canSellMap[i];
+
+        for (let i = 0; i < labels.length; i++) {
+            let label = labels[i];
+            let percentage = canSellMap[label];
             percentages.push(percentage);
         }
 
@@ -80,9 +85,9 @@ window.onload = function () {
                     label: '数量',
                     data: [memberNums, canteenNums],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)'/*,
-                        'rgba(255, 206, 86, 0.6)',
+                        //'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)'/*,
                         'rgba(75, 192, 192, 0.6)',
                         'rgba(153, 102, 255, 0.6)',
                         'rgba(255, 159, 64, 0.6)',
@@ -93,7 +98,16 @@ window.onload = function () {
                         'rgba(153, 102, 255, 0.6)'*/
                     ]
                 }]
-            }
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            },
         });
 
     }

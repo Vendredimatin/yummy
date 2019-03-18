@@ -2,6 +2,7 @@ package com.j2ee.yummy.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.j2ee.yummy.model.Balance;
+import com.j2ee.yummy.model.Cart;
 import com.j2ee.yummy.model.Member;
 import com.j2ee.yummy.model.order.Order;
 import com.j2ee.yummy.model.order.stateDesignPattern.OrderState;
@@ -18,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: yummy
@@ -96,6 +95,26 @@ public class MemberController {
         long canteenID = jsonObject.getLong("canteenID");
         session.setAttribute("scanCanteenID", canteenID);
 
+        Set<Cart> carts;
+        //当会员从首页进入一家店时，应该声明一个cart
+        if (Objects.isNull(session.getAttribute("carts"))){
+            carts = new HashSet<>();
+        }else carts = (Set<Cart>) session.getAttribute("carts");
+
+        for (Cart c:carts) {
+            if (c.getCanteenID() == canteenID){
+                carts.remove(c);
+                break;
+            }
+        }
+
+        Cart cart = new Cart();
+        cart.setCanteenID(canteenID);
+        cart.setMemberID((Long) session.getAttribute("memberID"));
+        carts.add(cart);
+
+        session.setAttribute("carts",carts);
+
         Map<String, Object> map = new HashMap<>();
         return map;
     }
@@ -109,7 +128,8 @@ public class MemberController {
 
         Balance balance = balanceService.getBalance(memberID, UserType.Member);
         List<Order> orders = orderService.getOrdersByMemID(memberID);
-        double totalCost = orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).mapToDouble(Order::getTotalPrice).sum();
+        //double totalCost = orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).mapToDouble(Order::getTotalPrice).sum();
+        double totalCost = balanceService.getCost(memberID,UserType.Member);
         int totalOrderNums = (int) orders.stream().filter(order -> order.getOrderState().equals(OrderState.完成)).count();
 
         Map<String, Object> map = new HashMap<>();

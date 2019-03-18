@@ -101,6 +101,17 @@ public class SpringTaskDemo {
         log.info("改变order成功" , LocalDateTime.now());
     }
 
+    public void unsubscribeOrder(long orderID){
+        for (int i = 0; i < messageOrders.size(); i++) {
+            if (messageOrders.get(i).getOrderID() == orderID){
+                messageOrders.remove(i);
+                break;
+            }
+        }
+
+        log.info("退订order成功" , LocalDateTime.now());
+    }
+
     public void pay(long orderID) {
         MessageOrder order = null;
         for (int i = 0; i < unpaidOrders.size(); i++) {
